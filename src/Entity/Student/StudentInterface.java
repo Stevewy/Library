@@ -3,11 +3,11 @@ package Entity.Student;
 import Entity.Book.Book;
 
 public interface StudentInterface {
-    void borrow(Book book);
+    void borrowbook(Book book);
 
     void returnbook(Book book);
 
-    void look();
+    void lookbook();
 
-    void change();
+    void changepassword();
 }
