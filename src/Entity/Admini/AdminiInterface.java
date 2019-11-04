@@ -17,5 +17,5 @@ public interface AdminiInterface {
 
     void increaseBook(Book book);
 
-    void deleteBook(Book book);
+    void deleteBook(Book book);//
 }
