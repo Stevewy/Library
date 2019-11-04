@@ -26,24 +26,12 @@ public class Book implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public String getPress() {
         return press;
-    }
-
-    public void setPress(String press) {
-        this.press = press;
     }
 
     @Override
