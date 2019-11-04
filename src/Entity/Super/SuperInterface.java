@@ -1,7 +1,10 @@
 package Entity.Super;
 
-import Entity.Admini.Admini;
-
+/**
+ * @author Zengfanyu
+ * @date 2019/11/4
+ * @function
+ */
 public interface SuperInterface {
     void addadmini(Admini admini);
 
