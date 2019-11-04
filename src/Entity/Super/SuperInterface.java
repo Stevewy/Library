@@ -3,9 +3,9 @@ package Entity.Super;
 import Entity.Admini.Admini;
 
 public interface SuperInterface {
-    void addadmini(Admini admini);
+    void addAdmini(Admini admini);
 
-    void delete(Admini admini);
+    void deleteAdmini(Admini admini);
 
-    void close();
+    void closeLibrary();
 }
