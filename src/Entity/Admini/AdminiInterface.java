@@ -3,8 +3,8 @@ import Entity.Book.Book;
 import Entity.Student.Student;
 /**
  * @author Zengfanyu
- *   @date 2019/11/4
- *   @function
+ *  @date 2019/11/4
+ *  @function
  */
 public interface AdminiInterface {
     /**
@@ -17,5 +17,5 @@ public interface AdminiInterface {
 
     void increaseBook(Book book);
 
-    void deleteBook(Book book);//
+    void deleteBook(Book book);
 }
