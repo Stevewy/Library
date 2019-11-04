@@ -15,4 +15,6 @@ public interface SuperInterface {
     void deleteAdmini(Admini admini);
 
     void closeLibrary();
+
+    void openLibrary();
 }
