@@ -1,14 +1,23 @@
 package Entity.Super;
 
+import Entity.Admini.Admini;
+
 /**
- * @author Zengfanyu
+ * @author WangYao
  * @date 2019/11/4
- * @function
+ * @function 超级用户接口
  */
+
 public interface SuperInterface {
-    void addadmini(Admini admini);
+    /**
+     *
+     * @param admini
+     */
+    void addAdmini(Admini admini);
 
-    void delete(Admini admini);
+    void deleteAdmini(Admini admini);
 
-    void close();
+    void closeLibrary();
+
+    void openLibrary();
 }

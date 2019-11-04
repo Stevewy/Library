@@ -2,12 +2,19 @@ package Entity.Student;
 
 import Entity.Book.Book;
 
+/**
+ * @author WangYao
+ * @date 2019/11/4
+ * @function 学生类接口
+ */
+
 public interface StudentInterface {
-    void borrowbook(Book book);
 
-    void returnbook(Book book);
+    void borrowBook(Book book);
 
-    void lookbook();
+    void returnBook(Book book);
 
-    void changepassword();
+    void lookBook();
+
+    void changePassword();
 }
