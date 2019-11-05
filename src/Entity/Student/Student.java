@@ -6,5 +6,5 @@ package Entity.Student;
  * @function 学生实现类
  */
 
-public class Student {
+public class Student /*implements StudentInterface*/{
 }
