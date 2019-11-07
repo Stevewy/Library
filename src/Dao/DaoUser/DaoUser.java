@@ -5,5 +5,5 @@ package Dao.DaoUser;
  * @date 2019/11/4
  * @function
  */
-public class User {
+public class DaoUser {
 }
