@@ -22,6 +22,13 @@ public class Book implements Serializable {
         this.press = press;
     }
 
+    public Book(String name, String number, String press, int totalAmount) {
+        this.name = name;
+        this.number = number;
+        this.press = press;
+        this.totalAmount = totalAmount;
+    }
+
     public String getName() {
         return name;
     }
@@ -34,12 +41,16 @@ public class Book implements Serializable {
         return press;
     }
 
+    public int getTotalAmount() {
+        return totalAmount;
+    }
+
+    public int getNowAmount() {
+        return nowAmount;
+    }
+
     @Override
     public String toString() {
-        return "Book{" +
-                "name='" + name + '\'' +
-                ", number=" + number +
-                ", press='" + press + '\'' +
-                '}';
+        return "书名:" + name +"   书号:" + number + "   出版社:" + press + "   目前数量" + nowAmount + "           ";
     }
 }
