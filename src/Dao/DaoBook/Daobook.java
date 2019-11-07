@@ -92,7 +92,7 @@ public class Daobook {
 
     public static void addBook(Book book,int number){
         try{
-            int i;
+            int i;                               //注意,i要定义在外面,后面需要根据i来操作
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("book.txt"));
             ArrayList<Book> b = (ArrayList<Book>) in.readObject();
             for(i = 0;i < b.size();i++){                   //遍历书库,如果有直接加数量,没有就结束,此时i=b.size()
