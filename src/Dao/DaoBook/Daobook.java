@@ -21,8 +21,9 @@ public class Daobook {
             ArrayList<Book> b = (ArrayList<Book>) in.readObject();
             for(int i = 0;i < b.size();i++){
                 System.out.print(b.get(i)+"  ");
-                if((i+1) % 3 == 0) System.out.println();// 打印5本书后换行
+                if((i + 1) % 3 == 0&&i != b.size() - 1) System.out.println();// 打印5本书后换行
             }
+            System.out.println();
             in.close();
         }
         catch (Exception e){                            //出现问题,关闭程序
@@ -67,6 +68,10 @@ public class Daobook {
         }
     }
 
+    public static Book searchBookByKind(String kind){
+        return null;
+    }
+
 //    public static int setBook(Book book){                     //向书库中加书
 //        try{
 //            ObjectInputStream in = new ObjectInputStream(new FileInputStream("book.txt"));
@@ -102,7 +107,7 @@ public class Daobook {
                 }
             }
             if(i == b.size()){                        //书库没有,直接添加
-                book.setNumber(number);
+                book.addNumber(number);
                 b.add(book);
             }
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("book.txt"));  //写入book.txt
@@ -110,6 +115,36 @@ public class Daobook {
             in.close();
             out.close();
             System.out.println("已经为"+b.get(i).getName()+"增加了"+number+"本");
+        }catch (Exception e){
+            System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");
+            System.exit(0);
+        }
+    }
+
+    public static void deleteBook(Book book,int number){
+        try{
+            int i;                               //注意,i要定义在外面,后面需要根据i来操作
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("book.txt"));
+            ArrayList<Book> b = (ArrayList<Book>) in.readObject();
+            for(i = 0;i < b.size();i++){                   //遍历书库,如果有直接减少数量,数量不够就报错,没有就结束,此时i=b.size()
+                if(book.equals(b.get(i))){
+                    if(b.get(i).getNowAmount() < number){
+                        System.out.println("书库中已有"+book.getNowAmount()+"本,数量小于你要删除的数量,请重新输入");
+                        return;
+                    }
+                    b.get(i).addNumber(-1 * number);
+                    break;
+                }
+            }
+            if(i == b.size()){                        //书库没有,直接报错
+                System.out.println("书库中没有此书,请检查你的输入");
+                return ;
+            }
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("book.txt"));  //写入book.txt
+            out.writeObject(b);
+            in.close();
+            out.close();
+            System.out.println("已经为"+b.get(i).getName()+"删除了"+number+"本");
         }catch (Exception e){
             System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");
             System.exit(0);

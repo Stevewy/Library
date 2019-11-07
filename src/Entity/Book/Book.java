@@ -55,7 +55,7 @@ public class Book implements Serializable {
         nowAmount += number;
     }
 
-    public void setNumber(int number){
+    private void setNumber(int number){
         totalAmount = number;
         nowAmount = number;
     }
