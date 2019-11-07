@@ -1,6 +1,7 @@
 package Entity.Book;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author WangYao
@@ -48,6 +49,27 @@ public class Book implements Serializable {
     public int getNowAmount() {
         return nowAmount;
     }
+
+    public void addNumber(int number){
+        totalAmount += number;
+        nowAmount += number;
+    }
+
+    public void setNumber(int number){
+        totalAmount = number;
+        nowAmount = number;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(name, book.name) &&
+                Objects.equals(number, book.number) &&
+                Objects.equals(press, book.press) &&
+                Objects.equals(kind, book.kind);
+    }
+
 
     @Override
     public String toString() {
