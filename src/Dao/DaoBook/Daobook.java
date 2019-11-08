@@ -111,9 +111,12 @@ public class Daobook {
                 b.add(book);
             }
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("book.txt"));  //写入book.txt
+            ObjectOutputStream cout = new ObjectOutputStream(new FileOutputStream("copybook.txt"));  //写入copybook.txt
             out.writeObject(b);
+            cout.writeObject(b);
             in.close();
             out.close();
+            cout.close();
             System.out.println("已经为"+b.get(i).getName()+"增加了"+number+"本");
         }catch (Exception e){
             System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");
@@ -141,9 +144,12 @@ public class Daobook {
                 return ;
             }
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("book.txt"));  //写入book.txt
+            ObjectOutputStream cout = new ObjectOutputStream(new FileOutputStream("copybook.txt"));  //写入copybook.txt
             out.writeObject(b);
+            cout.writeObject(b);
             in.close();
             out.close();
+            cout.close();
             System.out.println("已经为"+b.get(i).getName()+"删除了"+number+"本");
         }catch (Exception e){
             System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");

@@ -16,5 +16,5 @@ public interface StudentInterface {
 
     void lookBook();
 
-    void changePassword();
+    void checkPassword();
 }
