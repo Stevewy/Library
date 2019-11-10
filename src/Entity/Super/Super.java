@@ -6,5 +6,6 @@ package Entity.Super;
  * @function 超级用户实现类
  */
 
-public class Super {
+public class Super /*implements SuperInterface*/{
+
 }

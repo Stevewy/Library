@@ -10,11 +10,11 @@ import Entity.Book.Book;
 
 public interface StudentInterface {
 
-    void borrowBook(Book book);
+    boolean borrowBook(Book book,int number);
 
     void returnBook(Book book);
 
     void lookBook();
 
-    void checkPassword();
+    boolean changePassword(String password);
 }
