@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Book implements Serializable {
     private String name;
-    private String Booknumber;
+    private String bookNumber;
     private String press;
     private int totalAmount;
     private int nowAmount;
@@ -20,7 +20,7 @@ public class Book implements Serializable {
 
     public Book(String name, String number, String press, int totalAmount,String kind) {
         this.name = name;
-        this.Booknumber = number;
+        this.bookNumber = number;
         this.press = press;
         this.totalAmount = totalAmount;
         this.nowAmount = totalAmount;
@@ -32,7 +32,7 @@ public class Book implements Serializable {
     }
 
     public String getBookNumber() {
-        return Booknumber;
+        return bookNumber;
     }
 
     public String getPress() {
@@ -44,7 +44,7 @@ public class Book implements Serializable {
     }
 
     public String getBooknumber() {
-        return Booknumber;
+        return bookNumber;
     }
 
     public int getLentAmount() {
@@ -64,16 +64,13 @@ public class Book implements Serializable {
         nowAmount += number;
     }
 
-//    private void setNumber(int number){
-//        totalAmount = number;
-//        nowAmount = number;
-//    }
-
     public boolean lentOut(int number){
         if(nowAmount < number) return false;
-        nowAmount -= number;
-        lentAmount += number;
-        return true;
+        else{
+            nowAmount -= number;
+            lentAmount += number;
+            return true;
+        }
     }
 
     public void getIn(int number){
@@ -86,13 +83,14 @@ public class Book implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
         return Objects.equals(name, book.name) &&
-                Objects.equals(Booknumber, book.getBookNumber()) &&
+                Objects.equals(bookNumber, book.getBookNumber()) &&
                 Objects.equals(press, book.press) &&
                 Objects.equals(kind, book.kind);
     }
 
     @Override
     public String toString() {
-        return "书名:" + name +"   书号:" + Booknumber + "   出版社:" + press + "   目前数量" + nowAmount + "   种类" + kind;
+        return "书名:" + name +"   书号:" + bookNumber + "   出版社:" + press +  "   种类" + kind + "   目前剩余数量" + nowAmount;
     }
+
 }

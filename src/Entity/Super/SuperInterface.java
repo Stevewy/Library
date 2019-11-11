@@ -9,15 +9,12 @@ import Entity.Admini.Admini;
  */
 
 public interface SuperInterface {
-    /**
-     *
-     * @param admini
-     */
-    void addAdmini(Admini admini);
 
-    void deleteAdmini(Admini admini);
+    boolean addAdmini(Admini admini);
 
-    void closeLibrary();
+    boolean deleteAdmini(Admini admini);
 
-    void openLibrary();
+    boolean closeLibrary();
+
+    boolean openLibrary();
 }

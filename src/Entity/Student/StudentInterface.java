@@ -12,9 +12,9 @@ public interface StudentInterface {
 
     boolean borrowBook(Book book,int number);
 
-    void returnBook(Book book);
+    void returnBook(Book book,int number);
 
-    void lookBook();
+    void lookAllBook();
 
     boolean changePassword(String password);
 }
