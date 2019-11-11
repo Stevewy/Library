@@ -1,12 +1,14 @@
 package Entity.Super;
 
+import java.io.Serializable;
+
 /**
  * @author WangYao
  * @date 2019/11/4
  * @function 超级用户实现类
  */
 
-public class Super /*implements SuperInterface*/{
+public class Super/* implements SuperInterface, Serializable */{
 
     private static boolean open = true;
 
