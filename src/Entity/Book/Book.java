@@ -13,18 +13,28 @@ public class Book implements Serializable {
     private String name;
     private String bookNumber;
     private String press;
+    private String kind;
     private int totalAmount;
     private int nowAmount;
     private int lentAmount;
-    private String kind;
+    private int price;
 
-    public Book(String name, String number, String press, int totalAmount,String kind) {
+    public Book(String name, String bookNumber, String press, String kind, int price) {
+        this.name = name;
+        this.bookNumber = bookNumber;
+        this.press = press;
+        this.kind = kind;
+        this.price = price;
+    }
+
+    public Book(String name, String number, String press, int totalAmount, String kind, int price) {
         this.name = name;
         this.bookNumber = number;
         this.press = press;
         this.totalAmount = totalAmount;
         this.nowAmount = totalAmount;
         this.kind = kind;
+        this.price = price;
     }
 
     public String getName() {
@@ -51,6 +61,14 @@ public class Book implements Serializable {
         return lentAmount;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void changePrice(int price) {
+        this.price = price;
+    }
+
     public String getKind() {
         return kind;
     }
@@ -59,22 +77,35 @@ public class Book implements Serializable {
         return nowAmount;
     }
 
-    public void addNumber(int number){
+    public void addBook(int number){                                         //添加书
         totalAmount += number;
         nowAmount += number;
     }
 
-    public boolean lentOut(int number){
+    public boolean getBook(int nummber){                                     //学生归还书
+        if(totalAmount < nowAmount + nummber) return false;
+        else {
+            nowAmount += nummber;
+            return true;
+        }
+    }
+
+    public boolean deleteBook(int number){                               //删除书
+        if(nowAmount < number) return false;
+        else{
+            nowAmount -= number;
+            totalAmount -= number;
+            return true;
+        }
+    }
+
+    public boolean lentOut(int number){                                         //学生借出书
         if(nowAmount < number) return false;
         else{
             nowAmount -= number;
             lentAmount += number;
             return true;
         }
-    }
-
-    public void getIn(int number){
-        nowAmount += number;
     }
 
     @Override
@@ -90,7 +121,11 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "书名:" + name +"   书号:" + bookNumber + "   出版社:" + press +  "   种类" + kind + "   目前剩余数量" + nowAmount;
+        return "书名:" + name +
+                "   书号:" + bookNumber +
+                "   出版社:" + press +
+                "   种类" + kind +
+                "   目前剩余数量" + nowAmount;
     }
 
 }
