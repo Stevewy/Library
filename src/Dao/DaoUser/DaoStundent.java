@@ -18,8 +18,8 @@ public class DaoStundent {
             return false;
     }
 
-    public void  revisePassword(int accountNumber,String password){
+    /*public void  revisePassword(int accountNumber,String password){
 
-    }
+    }*/
 }
 
