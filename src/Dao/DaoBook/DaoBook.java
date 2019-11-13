@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class DaoBook {
 
-    public static void lookAllBook(){                          //查看图书馆所有书籍
+    public static void lookAllBook(){                           //查看图书馆所有书籍
         try{
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("book.txt"));
             ArrayList<Book> b = (ArrayList<Book>) in.readObject();
