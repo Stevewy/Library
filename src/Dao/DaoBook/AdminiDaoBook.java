@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @date 2019/11/13
  * @function
  */
-public class AdminiDaoBook {
+public class AdminiDaoBook extends StudentDaoBook {
     public static boolean addBook(Book book, int number){        //为图书馆加书
         try{
             int i;                                         //注意,i要定义在外面,后面需要根据i来操作
@@ -30,8 +30,8 @@ public class AdminiDaoBook {
                 b.add(book);
                 book.addBook(number);
             }
-            StudentDaoBook.StorageBook(new ObjectOutputStream(new FileOutputStream("book.txt")),b);
-            StudentDaoBook.StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")),b);
+            StorageBook(new ObjectOutputStream(new FileOutputStream("book.txt")),b);
+            StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")),b);
             return true;
         }catch (Exception e){
             System.out.println("书库出问题,图书馆即将关闭");
@@ -59,8 +59,8 @@ public class AdminiDaoBook {
             if(i == b.size())                                                                                     //书库没有,直接报错
                 return false;
 
-            StudentDaoBook.StorageBook(new ObjectOutputStream(new FileOutputStream("book.txt")),b);
-            StudentDaoBook.StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")),b);
+            StorageBook(new ObjectOutputStream(new FileOutputStream("book.txt")),b);
+            StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")),b);
             return true;
         }catch (Exception e){
             System.out.println("书库出问题,图书馆即将关闭");

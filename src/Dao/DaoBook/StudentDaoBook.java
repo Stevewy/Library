@@ -20,7 +20,7 @@ public class StudentDaoBook {
             return b;
         }
         catch (Exception e){                                                             //出现问题,关闭程序
-            System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");
+            System.out.println("书库出问题,图书馆即将关闭");
             System.exit(0);
             return null;
         }
@@ -40,7 +40,7 @@ public class StudentDaoBook {
             if(books.size() != 0) return books;
             else return null;
         }catch (Exception e){
-            System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");
+            System.out.println("书库出问题,图书馆即将关闭");
             System.exit(0);
             return null;
         }
@@ -78,7 +78,7 @@ public class StudentDaoBook {
             if(books.size()!=0) return books;
             else return null;
         }catch (Exception e){
-            System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");
+            System.out.println("书库出问题,图书馆即将关闭");
             System.exit(0);
             return null;
         }
@@ -101,7 +101,7 @@ public class StudentDaoBook {
             StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")),b);
             return true;
         }catch (Exception e){
-            System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");
+            System.out.println("书库出问题,图书馆即将关闭");
             System.exit(0);
             return false;
         }
@@ -115,11 +115,9 @@ public class StudentDaoBook {
             in.close();
             for(i = 0;i < b.size();i++){                                //遍历书库,如果有直接减少数量,数量不够就报错,没有就结束,此时i=b.size()
                 if(book.equals(b.get(i))){
-                    if(b.get(i).lentOut(number)){
-                        System.out.println("书库中已有"+book.getNowAmount()+"本,数量小于你要借出的数量,请重新输入");
+                    if(b.get(i).lentOut(number))
                         return false;
-                    }
-                    break;
+                    else break;
                 }
             }
             if(i == b.size())                                                                                     //书库没有,直接报错
@@ -129,7 +127,7 @@ public class StudentDaoBook {
             StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")),b);
             return true;
         }catch (Exception e){
-            System.out.println("书库出问题,请尽快联系管理员修复问题,图书馆即将关闭");
+            System.out.println("书库出问题,图书馆即将关闭");
             System.exit(0);
             return true;
         }
@@ -141,5 +139,3 @@ public class StudentDaoBook {
     }
 
 }
-
-
