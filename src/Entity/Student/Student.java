@@ -19,6 +19,26 @@ public class Student implements StudentInterface, Serializable {
     private ArrayList<Integer> number = new ArrayList<>();
     private StudentDaoBook studentDaoBook = new StudentDaoBook();
 
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
+    }
+
+    public ArrayList<Integer> getNumber() {
+        return number;
+    }
+
+    public void setNumber(ArrayList<Integer> number) {
+        this.number = number;
+    }
+
     public Student(String account, String password) {
         this.account = account;
         this.password = password;
@@ -51,16 +71,16 @@ public class Student implements StudentInterface, Serializable {
         else return true;
     }
 
-    public void lookAllBook(){
-        printf(studentDaoBook.lookAllBook());
-    }
-
     private void printf(ArrayList<Book> b ){
         for(int i = 0;i < b.size();i++){
-                System.out.print(b.get(i)+"       ");
-                if((i + 1) % 3 == 0 || i == b.size() - 1) System.out.println();      // 打印3本书后换行
-            }
-            System.out.println();
+            System.out.print(b.get(i)+"       ");
+            if((i + 1) % 3 == 0 || i == b.size() - 1) System.out.println();      // 打印3本书后换行
+        }
+        System.out.println();
+    }
+
+    public void lookAllBook(){
+        printf(studentDaoBook.lookAllBook());
     }
 
     public boolean lookBookByKind(String kind){

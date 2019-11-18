@@ -1,5 +1,7 @@
 package Entity.Super;
 
+import Entity.Admini.Admini;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * @function 超级用户实现类
  */
 
-public class Super/* implements SuperInterface, Serializable */{
+public class Super implements SuperInterface, Serializable {
 
     private static boolean open = true;
 
@@ -24,9 +26,24 @@ public class Super/* implements SuperInterface, Serializable */{
     }
 
     public boolean openLibrary(){                    //如果图书馆已经关闭,返回ture
-        if(!open){
+        if(open){
+            return false;
+        }else {
             open = true;
             return true;
-        }else return false;
+        }
     }
+
+    public boolean addAdmini(Admini admini){
+        return false;
+    }
+
+    public boolean deleteAdmini(Admini admini){
+        return false;
+    }
+
+    public Admini searchAdmini(String Account){
+        return null;
+    }
+
 }
