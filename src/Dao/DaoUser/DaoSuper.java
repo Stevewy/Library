@@ -9,27 +9,27 @@ import java.io.IOException;
  * @function
  */
 public class DaoSuper {
-    public boolean createAdministrator(String name)throws IOException {
-        File account = new File("Administrator/"+name+".txt");
-        if (account.exists()) {
+    public static boolean createAdministrator(String account)throws IOException {
+        File administrator = new File("Administrator/"+account+".txt");
+        if (administrator.exists()) {
             return false;
         } else {
-            account.createNewFile();
+            administrator.createNewFile();
             return true;
         }
     }
 
-    public boolean deleteAdministrator(String name)throws IOException{
-        File account =new File ("Administrator/"+name+".txt");
-        if (account.exists()) {
+    public static boolean deleteAdministrator(String account)throws IOException{
+        File administrator =new File ("Administrator/"+account+".txt");
+        if (administrator.exists()) {
             return false;
         } else {
-            account.delete();
+            administrator.delete();
             return true;
         }
     }
 
-    public boolean viewAllAdministrator()throws IOException{
+    public static boolean viewAllAdministrator()throws IOException{
         File account =new File ("Administrator");
         if(account.exists())
             return true;
@@ -37,9 +37,9 @@ public class DaoSuper {
             return false;
     }
 
-    public boolean searchAdministrator(String name) {
-        File account = new File("Administrator/" + name + ".txt");
-        if (account.exists())
+    public static boolean searchAdministrator(String account) {
+        File administrator = new File("Administrator/" + account + ".txt");
+        if (administrator.exists())
             return true;
         else
             return false;
