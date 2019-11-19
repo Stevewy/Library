@@ -27,9 +27,9 @@ public class Book implements Serializable {
         this.price = price;
     }
 
-    public Book(String name, String number, String press, int totalAmount, String kind, int price) {
+    public Book(String name, String bookNumber, String press, int totalAmount, String kind, int price) {
         this.name = name;
-        this.bookNumber = number;
+        this.bookNumber = bookNumber;
         this.press = press;
         this.totalAmount = totalAmount;
         this.nowAmount = totalAmount;
@@ -77,36 +77,59 @@ public class Book implements Serializable {
         return nowAmount;
     }
 
-    public void addBook(int number){                                         //添加书
-        totalAmount += number;
-        nowAmount += number;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public boolean getBook(int nummber){                                     //学生归还书
-        if(totalAmount < nowAmount + nummber) return false;
-        else {
-            nowAmount += nummber;
-            return true;
-        }
+    public void setBookNumber(String bookNumber) {
+        this.bookNumber = bookNumber;
     }
 
-    public boolean deleteBook(int number){                               //删除书
-        if(nowAmount < number) return false;
-        else{
-            nowAmount -= number;
-            totalAmount -= number;
-            return true;
-        }
+    public void setPress(String press) {
+        this.press = press;
     }
 
-    public boolean lentOut(int number){                                         //学生借出书
-        if(nowAmount < number) return false;
-        else{
-            nowAmount -= number;
-            lentAmount += number;
-            return true;
-        }
+    public void setKind(String kind) {
+        this.kind = kind;
     }
+
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public void setNowAmount(int nowAmount) {
+        this.nowAmount = nowAmount;
+    }
+
+    public void setLentAmount(int lentAmount) {
+        this.lentAmount = lentAmount;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+//    public void addBook(int number){                                         //添加书
+//        totalAmount += number;
+//        nowAmount += number;
+//    }
+//
+//    public boolean getBook(int nummber){                                     //学生归还书
+//        if(totalAmount < nowAmount + nummber) return false;
+//        else {
+//            nowAmount += nummber;
+//            return true;
+//        }
+//    }
+//
+//    public boolean deleteBook(int number){                               //删除书
+//        if(nowAmount < number) return false;
+//        else{
+//            nowAmount -= number;
+//            totalAmount -= number;
+//            return true;
+//        }
+//    }
+//
 
     @Override
     public boolean equals(Object o) {
