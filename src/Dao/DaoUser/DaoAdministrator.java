@@ -1,7 +1,9 @@
 package Dao.DaoUser;
 
-import java.io.File;
-import java.io.IOException;
+import Entity.Student.Student;
+
+import java.io.*;
+import java.util.ArrayList;
 
 /**
  * @author Zengfanyu
@@ -9,40 +11,63 @@ import java.io.IOException;
  * @function
  */
 public class DaoAdministrator {
-    public boolean createStudent(String name)throws IOException {
-        File account = new File("Students/"+name+".txt");
-        if (account.exists()) {
+
+
+    public static boolean createStudent(String account)throws IOException {
+        File student = new File("Students/"+account+".txt");
+        if (student.exists()) {
             return false;
         } else {
-            account.createNewFile();
+            student.createNewFile();
             return true;
         }
     }
 
-    public boolean deleteStudent(String name)throws IOException{
-        File account =new File ("Students/"+name+".txt");
-        if (account.exists()) {
-            return false;
-        } else {
-            account.delete();
-            return true;
+    public static Student searchStudent(String account) {
+        File student = new File("Students/" + account + ".txt");
+        if (student.exists()){
+            try {
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream(student));
+                Student stu = (Student) in.readObject();
+                return stu;
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
+        else
+            return null;
     }
 
-    public boolean viewAllStudents()throws IOException{
+    public static Student deleteStudent(String account) {
+        File student = new File("Students/" + account + ".txt");
+        if (student.exists()){
+            try {
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream(student));
+                Student stu = (Student) in.readObject();
+                return stu;
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else
+            return null;
+    }
+
+
+  /*  public static ArrayList<Student> viewAllStudents()throws IOException{
         File account =new File ("Students");
-        if(account.exists())
-            return true;
-        else
-            return false;
-    }
+        if(account.exists()){
 
-    public boolean searchStudent(String name){
-        File account = new File("Students/"+name+".txt");
-        if (account.exists())
-            return true;
+        }
         else
-            return false;
-    }
+            return null;
+    }*/
+
 
 }

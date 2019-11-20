@@ -1,6 +1,10 @@
 package Dao.DaoUser;
 
+import Entity.Student.Student;
+
+import javax.print.DocFlavor;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -9,8 +13,8 @@ import java.util.Scanner;
  * @function
  */
 public class DaoStundent {
-
-    public boolean viewOwnStudent(String name){
+static Scanner in=new Scanner(System.in);
+    public static boolean viewOwnStudent(String name){
         File account = new File("Students/"+name+".txt");
         if (account.exists())
             return true;
@@ -18,8 +22,6 @@ public class DaoStundent {
             return false;
     }
 
-    /*public void  revisePassword(int accountNumber,String password){
 
-    }*/
 }
 

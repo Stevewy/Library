@@ -9,11 +9,11 @@ import Entity.Student.Student;
 public interface AdminiInterface {
     /**
      * @
-      * @param student
+      * @param
      */
-    void createAccount(Student student);
+    void createAccount();
 
-    void deleteAccount(Student student);
+    void deleteAccount();
 
     void increaseBook(Book book,int number);
 
