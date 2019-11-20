@@ -15,6 +15,10 @@ import java.util.ArrayList;
  */
 public class AdminiDaoBook extends StudentDaoBook {
 
+    /**
+     * 管理员手动备份书库(由于自动备份,该方法是个摆设)
+     * @return
+     */
     public boolean copyBook(){
         try{
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("book.txt"));

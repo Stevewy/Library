@@ -56,6 +56,11 @@ public class Student implements StudentInterface, Serializable {
         return books;
     }
 
+    /**
+     * 将非中文的密码存到内存
+     * @param password 新的密码
+     * @return 非中文ture 中文 false
+     */
     public boolean changePassword(String password){
         if(!isChinese(password)) {
             this.password = password;
@@ -65,12 +70,21 @@ public class Student implements StudentInterface, Serializable {
         else return false;
     }
 
+    /**
+     * 私有方法,判断是否有中文
+     * @param s
+     * @return
+     */
     private boolean isChinese(String s){
         byte[] b = s.getBytes();
         if(b.length == s.length()) return false;
         else return true;
     }
 
+    /**
+     * 打印书籍
+     * @param b 书籍
+     */
     private void printf(ArrayList<Book> b ){
         for(int i = 0;i < b.size();i++){
             System.out.print(b.get(i)+"       ");
@@ -107,6 +121,12 @@ public class Student implements StudentInterface, Serializable {
         else return false;
     }
 
+    /**
+     * 如果可以借就先修改内存,在用dao方法修改文件
+     * @param book 要借的书
+     * @param number 要借的数量
+     * @return 能借就返回ture 否则返回false
+     */
     public boolean borrowBook(Book book,int number){                                      //如果借出成功返回ture 否则返回false
         if(book.getNowAmount() > number){
             book.setNowAmount(book.getNowAmount() - number);
@@ -115,6 +135,7 @@ public class Student implements StudentInterface, Serializable {
             for(i =0; i < books.size(); i++){
                 if(books.get(i).equals(book)){
                     this.number.set(i,this.number.get(i) + number);
+                    break;
                 }
             }
             if(i == books.size()){
@@ -131,6 +152,9 @@ public class Student implements StudentInterface, Serializable {
 
     }
 
+    /**
+     * 高级用户查看学生账号
+     */
     public void superToString() {
         if(books.isEmpty()) System.out.println("学生:" + account + "  密码是:" + password + " 目前没有未还的书籍");
         else{
@@ -146,6 +170,9 @@ public class Student implements StudentInterface, Serializable {
         }
     }
 
+    /**
+     * 学生自己看自己账号
+     */
     public void studentToString() {
         if(books.isEmpty()) System.out.println("您是:" + account + "  目前没有未还的书籍");
         else{

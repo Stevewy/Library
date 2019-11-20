@@ -15,9 +15,10 @@ import java.util.ArrayList;
 public class Main {
 
     public static void studentMenu(){
-        System.out.println("1:借书                 2:还书"+
-                           "3:修改密码             4:查看目前图书馆的书籍" +
-                           "5:查看借阅图书         6:退出系统");
+        System.out.println( "1:借书                 2:还书\n"+
+                            "3:修改密码             4:查看目前图书馆的书籍\n" +
+                            "5:查看借阅图书         6:查看当前账号\n" +
+                            "7:退出系统\n");
     }
 
     public static void borrowBookMenu(){
@@ -29,8 +30,14 @@ public class Main {
     }
 
     public static void lookBookMenu(){
-        System.out.println("1:通过书名来找书      2:通过书号来找书" +
+        System.out.println("1:通过书名来找书      2:通过书号来找书\n" +
                            "3:查看所有图书        4:通过类别来找书");
+    }
+
+    public static void adminiMenu(){
+        System.out.println( "1:借书                 2:还书\n"+
+                            "3:修改密码             4:查看目前图书馆的书籍\n" +
+                            "5:查看借阅图书         6:退出系统");
     }
 
     public static void main(String[] args){
