@@ -124,7 +124,7 @@ public class StudentDaoBook {
                 return false;
 
             StorageBook(new ObjectOutputStream(new FileOutputStream("book.txt")),b);
-            StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")),b);
+//            StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")),b);
             return true;
         }catch (Exception e){
             System.out.println("书库出问题,图书馆即将关闭");
