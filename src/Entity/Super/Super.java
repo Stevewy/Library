@@ -1,5 +1,6 @@
 package Entity.Super;
 
+import Dao.DaoUser.DaoSuper;
 import Entity.Admini.Admini;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.io.Serializable;
  * @function 超级用户实现类
  */
 
-public class Super implements SuperInterface, Serializable {
+public class Super /*implements SuperInterface, Serializable*/ {
 
     private static boolean open = true;
 
@@ -34,16 +35,16 @@ public class Super implements SuperInterface, Serializable {
         }
     }
 
-    public boolean addAdmini(Admini admini){
-        return false;
-    }
-
-    public boolean deleteAdmini(Admini admini){
-        return false;
-    }
-
-    public Admini searchAdmini(String Account){
-        return null;
-    }
+//    public boolean addAdmini(Admini admini){
+//        return DaoSuper.createAdministrator(admini.getAccount());
+//    }
+//
+//    public boolean deleteAdmini(Admini admini){
+//        return DaoSuper.deleteAdministrator(admini.getAccount());
+//    }
+//
+//    public Admini searchAdmini(String Account){
+//        return DaoSuper.searchAdministrator(Account);
+//    }
 
 }

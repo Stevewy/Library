@@ -1,3 +1,4 @@
+import Dao.DaoBook.AdminiDaoBook;
 import Dao.DaoBook.StudentDaoBook;
 import Entity.Book.Book;
 import Entity.Student.Student;
@@ -5,6 +6,8 @@ import Entity.Student.Student;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author WangYao
@@ -13,6 +16,7 @@ import java.util.ArrayList;
  */
 
 public class Main {
+    private static AdminiDaoBook a = new AdminiDaoBook();
 
     public static void studentMenu(){
         System.out.println( "1:借书                 2:还书\n"+
@@ -41,6 +45,13 @@ public class Main {
     }
 
     public static void main(String[] args){
+        Timer timer = new Timer();     //每隔10000毫秒运行一次,拷贝书
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                a.copyBook();
+            }
+        },0,10000);
         Book b1 = new Book("1","1","1",2,"中国",3);
         Book b2 = new Book("15","2","1",2,"中国",1);
         Book b3 = new Book("3","3","1",2,"中国",2);

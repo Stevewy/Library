@@ -53,20 +53,12 @@ public class Book implements Serializable {
         return totalAmount;
     }
 
-    public String getBooknumber() {
-        return bookNumber;
-    }
-
     public int getLentAmount() {
         return lentAmount;
     }
 
     public int getPrice() {
         return price;
-    }
-
-    public void changePrice(int price) {
-        this.price = price;
     }
 
     public String getKind() {
@@ -108,28 +100,6 @@ public class Book implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
-//    public void addBook(int number){                                         //添加书
-//        totalAmount += number;
-//        nowAmount += number;
-//    }
-//
-//    public boolean getBook(int nummber){                                     //学生归还书
-//        if(totalAmount < nowAmount + nummber) return false;
-//        else {
-//            nowAmount += nummber;
-//            return true;
-//        }
-//    }
-//
-//    public boolean deleteBook(int number){                               //删除书
-//        if(nowAmount < number) return false;
-//        else{
-//            nowAmount -= number;
-//            totalAmount -= number;
-//            return true;
-//        }
-//    }
-//
 
     @Override
     public boolean equals(Object o) {
