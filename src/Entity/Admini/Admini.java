@@ -55,8 +55,30 @@ public class Admini   {
 
     public void addBook(Book book, int number){}
 
-    public void deleteBook(Book book,int number)throws FileNotFoundException,IOException{
+  /*  public boolean deleteBook(Book book,int number)throws FileNotFoundException,IOException{  //book是删除的书，number是数量
+             if(book.getNowAmount()>=number){      //删除的书数量不嫩超过现有的数量
+            book.setTotalAmount(book.getTotalAmount()-number);   //但是删书是从总数量里面减少 （总数量不会小于现有数量）
+              ArrayList books=DaoAdministrator.deleteBook(book,number);
+              if(books!=null){
 
+              }
+             }
+    }*/
+
+
+    public void setAccount(String account) {
+        this.account = account;
     }
-    
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

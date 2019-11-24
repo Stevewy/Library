@@ -127,7 +127,8 @@ public class Student implements StudentInterface, Serializable {
      * @param number 要借的数量
      * @return 能借就返回ture 否则返回false
      */
-    public boolean borrowBook(Book book,int number){                                      //如果借出成功返回ture 否则返回false
+
+    public boolean borrowBook(Book book,int number){                  //如果借出成功返回ture 否则返回false
         if(book.getNowAmount() > number){
             book.setNowAmount(book.getNowAmount() - number);
             book.setLentAmount(book.getLentAmount() + number);

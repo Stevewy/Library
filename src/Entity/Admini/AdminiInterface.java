@@ -15,7 +15,7 @@ public interface AdminiInterface {
 
     void deleteAccount();
 
-    void increaseBook(Book book,int number);
+    void addBook(Book book,int number);
 
     void deleteBook(Book book);
 }
