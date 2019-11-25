@@ -13,15 +13,12 @@ import java.util.Scanner;
  * @function
  */
 public class DaoStundent {
-static Scanner in=new Scanner(System.in);
-    public static boolean viewOwnStudent(String name){
-        File account = new File("Students/"+name+".txt");
-        if (account.exists())
+    public static boolean viewOwnAccount(String account){
+        File infomation = new File("Students/"+account+".txt");
+        if (infomation.exists())
             return true;
         else
             return false;
     }
-
-
 }
 

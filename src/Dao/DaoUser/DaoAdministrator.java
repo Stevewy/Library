@@ -73,17 +73,6 @@ public class DaoAdministrator {
 
     }
 
-    public static ArrayList<Book> deleteBook (Book book,int numebr){
-        try {
-            ObjectInputStream ios = new ObjectInputStream(new FileInputStream("book.txt"));
-            ArrayList<Book> books = (ArrayList<Book>)ios.readObject();
-            return books;
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return  null;
-        }
-    }
 
 
 

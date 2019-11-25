@@ -1,7 +1,9 @@
 package Dao.DaoUser;
 
-import java.io.File;
-import java.io.IOException;
+import Entity.Admini.Admini;
+import Entity.Student.Student;
+
+import java.io.*;
 
 /**
  * @author Zengfanyu
@@ -9,40 +11,62 @@ import java.io.IOException;
  * @function
  */
 public class DaoSuper {
-    public static boolean createAdministrator(String account)throws IOException {
-        File administrator = new File("Administrator/"+account+".txt");
+    public static boolean createAdministrator(Admini admini){
+        File administrator = new File("Administrator/"+admini.getAccount()+".txt");
         if (administrator.exists()) {
             return false;
-        } else {
-            administrator.createNewFile();
-            return true;
+        }
+        else {
+            try {
+                ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(administrator));
+                oos.writeObject(admini);
+                return true;
+            }
+           catch (IOException ie){
+                ie.printStackTrace();
+                return false;
+            }
         }
     }
 
-    public static boolean deleteAdministrator(String account)throws IOException{
+    public static boolean deleteAdministrator(String account){
         File administrator =new File ("Administrator/"+account+".txt");
         if (administrator.exists()) {
-            return false;
-        } else {
             administrator.delete();
             return true;
         }
+        else {
+            return false;
+        }
     }
 
-    public static boolean viewAllAdministrator()throws IOException{
-        File account =new File ("Administrator");
-        if(account.exists())
-            return true;
-        else
-            return false;
-    }
+//    public static boolean viewAllAdministrator()throws IOException{
+//        File account =new File ("Administrator");
+//        if(account.exists())
+//            return true;
+//        else
+//            return false;
+//    }
 
-    public static boolean searchAdministrator(String account) {
-        File administrator = new File("Administrator/" + account + ".txt");
-        if (administrator.exists())
-            return true;
-        else
-            return false;
+    public static Admini searchAdministrator(String account) {
+        File admini = new File("Administrator/" + account + ".txt");
+        if (admini.exists()){
+            try {
+               ObjectInputStream in = new ObjectInputStream(new FileInputStream(admini));
+               Admini adm = (Admini) in.readObject();
+               return adm;
 
+            }
+            catch (ClassNotFoundException ce){
+                 ce.printStackTrace();
+                 return null;
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else
+            return null;
     }
 }
