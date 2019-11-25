@@ -2,7 +2,6 @@ package Entity.Super;
 
 import Dao.DaoUser.DaoSuper;
 import Entity.Admini.Admini;
-
 import java.io.Serializable;
 
 /**
@@ -46,5 +45,9 @@ public class Super /*implements SuperInterface, Serializable*/ {
 //    public Admini searchAdmini(String Account){
 //        return DaoSuper.searchAdministrator(Account);
 //    }
+
+    public boolean changeAdminiPassword(String password){
+        return true;
+    }
 
 }

@@ -16,5 +16,5 @@ public interface StudentInterface {
 
     void lookAllBook();
 
-    boolean changePassword(String password);
+    boolean changePassword(String oldPassword, String nowPassword);
 }
