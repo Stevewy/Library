@@ -21,11 +21,8 @@ public class AdminiDaoBook extends StudentDaoBook {
      */
     public boolean copyBook(){
         try{
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("book.txt"));
-            ArrayList<Book> b = (ArrayList<Book>) in.readObject();
-            in.close();
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("copyBook.txt"));
-            out.writeObject(b);
+            out.writeObject(books);
             out.close();
             return true;
         }
