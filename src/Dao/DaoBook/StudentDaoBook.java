@@ -18,7 +18,6 @@ public class StudentDaoBook {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("book.txt"));
             books = (ArrayList<Book>) in.readObject();
             in.close();
-
         }
         catch (IOException e){
             System.out.println("没有找到书库");
@@ -28,7 +27,7 @@ public class StudentDaoBook {
             System.out.println("书库里面存放的书籍格式不对");
             System.exit(0);
         }
-    }
+    }//直接读到内存,方便之后操作
     /**
      * 得到书库里面所有书
      * @return 一个书的集合

@@ -15,12 +15,22 @@ import java.util.ArrayList;
 public class Student implements StudentInterface, Serializable {
     private String account;
     private String password;
+    private boolean lock;
+    private int wrongSum;
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<Integer> number = new ArrayList<>();
     private StudentDaoBook studentDaoBook = new StudentDaoBook();
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public void setLock(boolean lock) {
+        this.lock = lock;
+    }
+
+    public void setWrongSum(int wrongSum) {
+        this.wrongSum = wrongSum;
     }
 
     public void setPassword(String password) {
@@ -42,7 +52,7 @@ public class Student implements StudentInterface, Serializable {
     public Student(String account, String password) {
         this.account = account;
         this.password = password;
-    }            //测试时用,完工时删除
+    }
 
     public String getAccount() {
         return account;
@@ -58,15 +68,26 @@ public class Student implements StudentInterface, Serializable {
 
     /**
      * 将非中文的密码存到内存
-     * @param password 新的密码
+     * @param nowPassword 新的密码
      * @return 不合法ture 合法 false
      */
-    public boolean changePassword(String password){
-        if(isLegal(password)) {
-            this.password = password;
+    public boolean changePassword(String oldPassword, String nowPassword){
+        if(lock){
+            System.out.println("由于错误太多次,你不能在更改密码了");
+        }
+        else if(password != oldPassword){
+            System.out.println("密码错误");
+            wrongSum++;
+            if(wrongSum == 5)
+                lock = true;
+        }
+        else if(isLegal(password)) {
+            this.password = nowPassword;
 
             return true;
         }
+        else
+            System.out.println("密码只能输入字母与数字");
         return false;
     }
 

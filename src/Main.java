@@ -45,13 +45,13 @@ public class Main {
     }
 
     public static void main(String[] args){
-        Timer timer = new Timer();     //每隔10000毫秒运行一次,拷贝书
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                a.copyBook();
-            }
-        },0,10000);
+//        Timer timer = new Timer();     //每隔10000毫秒运行一次,拷贝书
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                a.copyBook();
+//            }
+//        },0,10000);
         Book b1 = new Book("1","1","1",2,"中国",3);
         Book b2 = new Book("15","2","1",2,"中国",1);
         Book b3 = new Book("3","3","1",2,"中国",2);
@@ -87,5 +87,7 @@ public class Main {
         if(s.borrowBook(b01,1)) System.out.println("借书成功");
         s.studentToString();
         s.lookBookByName("1");
+        s.borrowBook(new StudentDaoBook().searchBookByBookNumber("1"),2);
+        s.studentToString();
     }
 }
