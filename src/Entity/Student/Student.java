@@ -59,26 +59,57 @@ public class Student implements StudentInterface, Serializable {
     /**
      * 将非中文的密码存到内存
      * @param password 新的密码
-     * @return 非中文ture 中文 false
+     * @return 不合法ture 合法 false
      */
     public boolean changePassword(String password){
-        if(!isChinese(password)) {
+        if(isLegal(password)) {
             this.password = password;
 
             return true;
         }
-        else return false;
+        return false;
     }
 
     /**
-     * 私有方法,判断是否有中文
+     * 私有方法,判断是否有合法
      * @param s
      * @return
      */
-    private boolean isChinese(String s){
-        byte[] b = s.getBytes();
-        if(b.length == s.length()) return false;
-        else return true;
+    private boolean isLegal(String s){
+        char[] chars = s.toCharArray();
+        for(int i = 0; i < chars.length; i++){
+            if(chars[i] < '0' || (chars[i] > '9' && chars[i] < 'A') || (chars[i] > 'Z' && chars[i] < 'a') || chars[i] > 'z')
+                return false;
+        }
+        return true;
+    }
+
+    public void lookAllBook(){
+        printf(studentDaoBook.lookAllBook());
+    }
+
+    public boolean lookBookByKind(String kind){
+        if(studentDaoBook.searchBookByKind(kind) != null){
+            printf(studentDaoBook.searchBookByKind(kind));
+            return true;
+        }
+        return false;
+    }
+
+    public boolean lookBookByName(String name){                                //如果找到就返回ture 否则返回false
+        if(studentDaoBook.searchBookByName(name) != null){
+            printf(studentDaoBook.searchBookByName(name));
+            return true;
+        }
+        return false;
+    }
+
+    public boolean lookBookByBookNumber(String bookNumber){                    //如果找到就返回ture 否则返回false
+        if(studentDaoBook.searchBookByBookNumber(bookNumber) != null){
+            System.out.println(studentDaoBook.searchBookByBookNumber(bookNumber));
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -93,42 +124,13 @@ public class Student implements StudentInterface, Serializable {
         System.out.println();
     }
 
-    public void lookAllBook(){
-        printf(studentDaoBook.lookAllBook());
-    }
-
-    public boolean lookBookByKind(String kind){
-        if(studentDaoBook.searchBookByKind(kind) != null){
-            printf(studentDaoBook.searchBookByKind(kind));
-            return true;
-        }
-        else return false;
-    }
-
-    public boolean lookBookByName(String name){                                //如果找到就返回ture 否则返回false
-        if(studentDaoBook.searchBookByName(name) != null){
-            printf(studentDaoBook.searchBookByName(name));
-            return true;
-        }
-        else return false;
-    }
-
-    public boolean lookBookByBookNumber(String bookNumber){                    //如果找到就返回ture 否则返回false
-        if(studentDaoBook.searchBookByBookNumber(bookNumber) != null){
-            System.out.println(studentDaoBook.searchBookByBookNumber(bookNumber));
-            return true;
-        }
-        else return false;
-    }
-
     /**
      * 如果可以借就先修改内存,在用dao方法修改文件
      * @param book 要借的书
      * @param number 要借的数量
      * @return 能借就返回ture 否则返回false
      */
-    public boolean borrowBook(Book book,int number){                                      //如果借出成功返回ture 否则返回false
-        book = studentDaoBook.searchBookByBookNumber(book.getBookNumber());
+    public boolean borrowBook(Book book, int number){                                      //如果借出成功返回ture 否则返回false
         if(book.getNowAmount() > number){
             book.setNowAmount(book.getNowAmount() - number);
             book.setLentAmount(book.getLentAmount() + number);
@@ -146,10 +148,10 @@ public class Student implements StudentInterface, Serializable {
             studentDaoBook.updateBook(book);
             return true;
         }
-        else return false;
+        return false;
     }
 
-    public void returnBook(Book book,int number){
+    public void returnBook(Book book, int number){
 
     }
 

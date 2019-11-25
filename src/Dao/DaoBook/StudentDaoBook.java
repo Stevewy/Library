@@ -88,7 +88,7 @@ public class StudentDaoBook {
      */
     public boolean updateBook(Book book){                                            //更新书
         int i;
-        for(i = 0; i < books.size(); i++){                                           //遍历书库,如果有直接放书,没有就结束,此时i=b.size()
+        for(i = 0; i < books.size(); i++){                                           //遍历书库,如果有直接放书,没有就结束,此时i = b.size()
             if(book.equals(books.get(i))){
                 books.set(i,book);
                 break;
