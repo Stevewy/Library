@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class DaoAdministrator {
 
-
     public static boolean studentExist(String account) {
         File student = new File("Students/"+account+".txt");
         if (student.exists()) {
@@ -40,6 +39,18 @@ public class DaoAdministrator {
         }
         else
             return null;
+    }
+
+    public static String[] viewAllStudentFile(){
+        File file =new File("Students");
+        String []students=file.list();
+        return  students;
+    }
+
+    public static File[] viewAllStudentInfo(){
+        File file = new File("Students");
+        File []students=file.listFiles();
+        return students;
     }
 
     public static boolean creatStudent(Student student){
@@ -72,27 +83,5 @@ public class DaoAdministrator {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*  public static ArrayList<Student> viewAllStudents()throws IOException{
-        File account =new File ("Students");
-        if(account.exists()){
-
-        }
-        else
-            return null;
-    }*/
-
 
 }

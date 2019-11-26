@@ -18,6 +18,12 @@ public class Admini   {
     private String account;
     private String password;
 
+    /**
+     * 创建新的学生账户
+     * @param account
+     * @param password
+     * @return
+     */
     public boolean createAccount(String account,String password){
            if(!DaoAdministrator.studentExist(account)) {
                Student student = new Student(account, password);
@@ -30,7 +36,12 @@ public class Admini   {
                return false;
     }
 
-    public boolean deleteAccount(String account) {
+    /**
+     * 删除学生账户(并将学生借的书归还）
+     * @param account
+     * @return
+     */
+    public boolean deleteStudent(String account) {
         if(DaoAdministrator.studentExist(account)){
             if( DaoAdministrator.deleteStudent(account)){
                 return true;
@@ -42,24 +53,40 @@ public class Admini   {
             return false;
     }
 
-    public static void searchStudent(String account){
+    /**
+     * 找具体的一名学生
+     * @param account
+     * @return
+     */
+    public static Student searchStudent(String account){
         Student student= DaoAdministrator.searchStudent(account);
         if(student!=null){
-        System.out.println("账户信息如下");
-        System.out.println(student.getAccount()+" "+" "+student.getPassword());
-        System.out.println(student.getBooks()+" ");
-        System.out.println(student.getNumber()+" ");
+       return student;
     }
         else
-            System.out.println("该账户不存在");
+           return  null;
     }
 
+    /**
+     * 在书库中加书，并更新文件
+     * @param book
+     * @param number
+     * @return
+     */
     public static boolean addBook(Book book, int number){
         book.setNowAmount(book.getNowAmount()+number);
         book.setTotalAmount(book.getTotalAmount()+number);
+        StudentDaoBook sdb=new StudentDaoBook();
+        sdb.updateBook(book);
         return true;
     }
 
+    /**
+     * 删除总书库中的书，并更新文件
+     * @param book
+     * @param number
+     * @return
+     */
     public static boolean deleteBook(Book book,int number){//book是删除的书，number是数量
          if(book.getNowAmount()>=number){                        //删除的书数量不嫩超过现有的数量
             book.setTotalAmount(book.getTotalAmount()-number);
@@ -71,13 +98,47 @@ public class Admini   {
          return false;
     }
 
-
    // public static boolean returnBook(){}
 
-   // public static boolean deleteStudent(){}
+    /**
+     * 管理员查看所有学生的账号信息
+     */
+    public static void viewAllStudentInfo(){
+        File students[]=DaoAdministrator.viewAllStudentInfo();
+        try{
+        for(File name :students){
+            ObjectInputStream ois=new ObjectInputStream(new FileInputStream(name));
+            Student info=(Student)ois.readObject();
+            System.out.println(info);
+        }
+            }
+        catch (FileNotFoundException fe){
+            System.out.println("文件不存在");
+        }
+        catch (IOException ie){
+            System.out.println("读取错误");
+        }
+        catch (ClassNotFoundException ce){
+            System.out.println("读取错误");
+        }
+}
 
-   // public static boolean viewAllStudent(){}
+    /**
+     * 管理员查看文件下学生目录
+     */
+    public static void viewAllStudentFile(){
+        String[] students = DaoAdministrator.viewAllStudentFile();
+        for(String names:students)
+            System.out.println(names);
+    }
 
+    /**
+     * 用于管理员修改密码并返回一个bool值
+     * @param admini
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     public static boolean changeAdminPassword(Admini admini,String oldPassword,String newPassword){
        if(isLegal(newPassword)){
         if(admini.getAccount().equals(oldPassword)){
@@ -88,6 +149,12 @@ public class Admini   {
         return false;
     }
 
+    /**
+     * 用于学生修改密码并返回一个bool值
+     * @param student
+     * @param newPassword
+     * @return
+     */
     public static boolean changeStudentPassword(Student student,String newPassword) {
         if(isLegal(newPassword)){
         student.setPassword(newPassword);
@@ -96,6 +163,11 @@ public class Admini   {
         return false;
     }
 
+    /**
+     * 判断密码是否合法（大小写，数字均包含，且长度在6-16位）
+     * @param password
+     * @return
+     */
     private static boolean isLegal(String password){
         char[] temp=password.toCharArray();
         int Upper=0;
@@ -114,18 +186,14 @@ public class Admini   {
             if(Character.isDigit(temp[i]))
                 Digit++;
         }
-        if(Upper>0&&Lower>0&&Digit>0){
+        if(Upper>0&&Lower>0&&Digit>0&&(temp.length>=6&&temp.length<=16)){
             return true;
         }
         else {
-        System.out.println("密码必须同时包含大小写字母和数字");
+        System.out.println("密码长度在6-16位且必须同时包含大小写字母和数字");
         return false;
         }
     }
-
-
-
-
 
     public void setAccount(String account) {
         this.account = account;
@@ -141,5 +209,13 @@ public class Admini   {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "Admini{" +
+                "account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

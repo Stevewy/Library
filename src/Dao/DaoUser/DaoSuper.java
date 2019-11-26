@@ -40,13 +40,12 @@ public class DaoSuper {
         }
     }
 
-//    public static boolean viewAllAdministrator()throws IOException{
-//        File account =new File ("Administrator");
-//        if(account.exists())
-//            return true;
-//        else
-//            return false;
-//    }
+    public static File viewAllAdministratorInfo(){
+        File file =new File("Administrator");
+        File[]info=file.listFiles();
+        return file;
+    }
+
 
     public static Admini searchAdministrator(String account) {
         File admini = new File("Administrator/" + account + ".txt");
