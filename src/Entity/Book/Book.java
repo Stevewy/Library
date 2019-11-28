@@ -120,5 +120,4 @@ public class Book implements Serializable {
                 "   种类" + kind +
                 "   目前剩余数量" + nowAmount;
     }
-
 }
