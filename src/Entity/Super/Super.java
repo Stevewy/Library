@@ -34,17 +34,17 @@ public class Super /*implements SuperInterface, Serializable*/ {
         }
     }
 
-//    public boolean addAdmini(Admini admini){
-//        return DaoSuper.createAdministrator(admini.getAccount());
-//    }
-//
-//    public boolean deleteAdmini(Admini admini){
-//        return DaoSuper.deleteAdministrator(admini.getAccount());
-//    }
-//
-//    public Admini searchAdmini(String Account){
-//        return DaoSuper.searchAdministrator(Account);
-//    }
+    public boolean addAdmini(Admini admini){
+        return DaoSuper.createAdministrator(admini);
+    }
+
+    public boolean deleteAdmini(Admini admini){
+        return DaoSuper.deleteAdministrator(admini.getAccount());
+    }
+
+    public Admini searchAdmini(String Account){
+        return DaoSuper.searchAdministrator(Account);
+    }
 
     public boolean changeAdminiPassword(String password){
         return true;

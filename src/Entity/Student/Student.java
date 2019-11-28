@@ -2,7 +2,6 @@ package Entity.Student;
 
 import Dao.DaoBook.StudentDaoBook;
 import Entity.Book.Book;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -73,9 +72,9 @@ public class Student implements StudentInterface, Serializable {
      */
     public boolean changePassword(String oldPassword, String nowPassword){
         if(lock){
-            System.out.println("由于错误太多次,你不能在更改密码了");
+            System.out.println("由于错误太多次,密码被锁定");
         }
-        else if(password != oldPassword){
+        else if(!password.equals(oldPassword)){
             System.out.println("密码错误");
             wrongSum++;
             if(wrongSum == 5)
@@ -167,6 +166,7 @@ public class Student implements StudentInterface, Serializable {
                 this.number.add(number);
             }
             studentDaoBook.updateBook(book);
+
             return true;
         }
         return false;
