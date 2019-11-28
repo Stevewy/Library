@@ -4,6 +4,7 @@ import Entity.Admini.Admini;
 import Entity.Student.Student;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * @author Zengfanyu
@@ -29,8 +30,8 @@ public class DaoSuper {
         }
     }
 
-    public static boolean deleteAdministrator(String account){
-        File administrator =new File ("Administrator/"+account+".txt");
+    public static boolean deleteAdministrator(Admini admini){
+        File administrator =new File ("Administrator/"+admini.getAccount()+".txt");
         if (administrator.exists()) {
             administrator.delete();
             return true;
@@ -40,10 +41,29 @@ public class DaoSuper {
         }
     }
 
-    public static File viewAllAdministratorInfo(){
+    public static ArrayList<Admini> viewAllAdministratorInfo(){
         File file =new File("Administrator");
-        File[]info=file.listFiles();
-        return file;
+        String info[]=file.list();
+        ArrayList<Admini>adm=new ArrayList<>();
+        try{
+        for(String names:info){
+            ObjectInputStream ois =new ObjectInputStream(new FileInputStream("naems"));
+            adm.add((Admini)ois.readObject());
+        }
+        return adm;
+     }
+        catch (FileNotFoundException fe){
+            System.out.println("不能找到相关文件");
+            return null;
+        }
+        catch (IOException ioe){
+            System.out.println("文件读取错误");
+            return null;
+        }
+        catch (ClassNotFoundException cle){
+            System.out.println("文件读取错误");
+            return null;
+        }
     }
 
 

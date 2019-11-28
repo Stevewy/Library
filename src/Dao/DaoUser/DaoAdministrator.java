@@ -1,5 +1,6 @@
 package Dao.DaoUser;
 
+import Entity.Admini.Admini;
 import Entity.Book.Book;
 import Entity.Student.Student;
 
@@ -41,16 +42,25 @@ public class DaoAdministrator {
             return null;
     }
 
-    public static String[] viewAllStudentFile(){
-        File file =new File("Students");
-        String []students=file.list();
-        return  students;
-    }
-
-    public static File[] viewAllStudentInfo(){
+    public static ArrayList<Student> viewAllStudentInfo(){
         File file = new File("Students");
-        File []students=file.listFiles();
-        return students;
+        String[]students=file.list();
+        ArrayList<Student>names=new ArrayList<>();
+        try{
+            for(String stu:students){
+                ObjectInputStream ois =new ObjectInputStream(new FileInputStream(stu));
+                names.add((Student)ois.readObject());
+            }
+            return names;
+        }
+        catch (IOException ioe){
+            System.out.println("文件读取错误");
+            return null;
+        }
+        catch (ClassNotFoundException cle){
+            System.out.println("文件读取错误");
+            return null;
+        }
     }
 
     public static boolean creatStudent(Student student){
@@ -84,4 +94,20 @@ public class DaoAdministrator {
 
     }
 
+    public static boolean updateAdmini(Admini admini){
+        try{
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(admini.getAccount()+".txt"));
+            oos.writeObject(admini);
+            return true;
+        }
+        catch (FileNotFoundException fe){
+            System.out.println("管理员文件查找失败");
+            return false;
+        }
+        catch (IOException ioe ){
+            System.out.println("文件读取失败");
+            return false;
+        }
+    }
 }
+

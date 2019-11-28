@@ -104,22 +104,11 @@ public class Admini   {
      * 管理员查看所有学生的账号信息
      */
     public static void viewAllStudentInfo(){
-        File students[]=DaoAdministrator.viewAllStudentInfo();
-        try{
-        for(File name :students){
-            ObjectInputStream ois=new ObjectInputStream(new FileInputStream(name));
-            Student info=(Student)ois.readObject();
-            System.out.println(info);
-        }
+        ArrayList<Student>student=DaoAdministrator.viewAllStudentInfo();
+        if(student!=null){
+            for(Student stu:student){
+              stu.studentToString();
             }
-        catch (FileNotFoundException fe){
-            System.out.println("文件不存在");
-        }
-        catch (IOException ie){
-            System.out.println("读取错误");
-        }
-        catch (ClassNotFoundException ce){
-            System.out.println("读取错误");
         }
 }
 
@@ -127,9 +116,12 @@ public class Admini   {
      * 管理员查看文件下学生目录
      */
     public static void viewAllStudentFile(){
-        String[] students = DaoAdministrator.viewAllStudentFile();
-        for(String names:students)
-            System.out.println(names);
+       ArrayList<Student>student=DaoAdministrator.viewAllStudentInfo();
+        if(student!=null){
+            for(Student stu:student){
+                System.out.println(stu.getAccount());
+            }
+        }
     }
 
     /**

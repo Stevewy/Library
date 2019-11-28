@@ -13,12 +13,21 @@ import java.util.Scanner;
  * @function
  */
 public class DaoStundent {
-    public static boolean viewOwnAccount(String account){
-        File infomation = new File("Students/"+account+".txt");
-        if (infomation.exists())
-            return true;
-        else
+    public static boolean updateStudent(Student student){
+        try{
+        ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(student.getAccount()+".txt"));
+        oos.writeObject(student);
+        return true;
+        }
+        catch (FileNotFoundException fe){
+            System.out.println("学生文件查找失败");
             return false;
+        }
+        catch (IOException ioe ){
+            System.out.println("文件读取失败");
+            return false;
+        }
     }
 }
+
 
