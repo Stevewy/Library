@@ -1,5 +1,4 @@
 package Dao.DaoBook;
-
 import Entity.Book.Book;
 
 import java.io.*;
@@ -14,7 +13,7 @@ public class AdminiDaoBook extends StudentDaoBook {
 
     /**
      * 管理员手动备份书库(由于自动备份,该方法是个摆设)
-     * @return
+     * @return 复制成功则ture
      */
     public boolean copyBook(){
         try{
@@ -46,5 +45,4 @@ public class AdminiDaoBook extends StudentDaoBook {
             return false;
         }
     }
-
 }

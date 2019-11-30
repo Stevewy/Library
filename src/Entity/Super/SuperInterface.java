@@ -14,6 +14,10 @@ public interface SuperInterface {
 
     boolean deleteAdmini(Admini admini);
 
+    Admini searchAdmini(String Account);
+
+    boolean changeAdminiPassword(Admini admini, String newPassword);
+
     boolean closeLibrary();
 
     boolean openLibrary();
