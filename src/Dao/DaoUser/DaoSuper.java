@@ -2,6 +2,7 @@ package Dao.DaoUser;
 
 import Entity.Admini.Admini;
 import Entity.Student.Student;
+import Entity.Super.Super;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -87,5 +88,21 @@ public class DaoSuper {
         }
         else
             return null;
+    }
+
+    public static boolean updateSuper(Super sup){
+        try{
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(sup.getAccount()+".txt"));
+            oos.writeObject(sup);
+            return true;
+        }
+        catch (FileNotFoundException fe){
+            System.out.println("管理员文件查找失败");
+            return false;
+        }
+        catch (IOException ioe ){
+            System.out.println("文件读取失败");
+            return false;
+        }
     }
 }
