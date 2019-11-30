@@ -1,6 +1,7 @@
 package Entity.Student;
 
 import Dao.DaoBook.StudentDaoBook;
+import Dao.DaoUser.DaoStundent;
 import Entity.Book.Book;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -82,7 +83,7 @@ public class Student implements StudentInterface, Serializable {
         }
         else if(isLegal(password)) {
             this.password = nowPassword;
-
+            DaoStundent.updateStudent(this);
             return true;
         }
         else
@@ -151,7 +152,7 @@ public class Student implements StudentInterface, Serializable {
      * @return 能借就返回ture 否则返回false
      */
     public boolean borrowBook(Book book, int number){                                      //如果借出成功返回ture 否则返回false
-        if(book.getNowAmount() > number){
+        if(book.getNowAmount() >= number){
             book.setNowAmount(book.getNowAmount() - number);
             book.setLentAmount(book.getLentAmount() + number);
             int i;
@@ -166,7 +167,7 @@ public class Student implements StudentInterface, Serializable {
                 this.number.add(number);
             }
             studentDaoBook.updateBook(book);
-
+            DaoStundent.updateStudent(this);
             return true;
         }
         return false;
