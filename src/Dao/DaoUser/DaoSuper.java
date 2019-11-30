@@ -97,7 +97,7 @@ public class DaoSuper {
             return true;
         }
         catch (FileNotFoundException fe){
-            System.out.println("管理员文件查找失败");
+            System.out.println("超级管理员文件查找失败");
             return false;
         }
         catch (IOException ioe ){
