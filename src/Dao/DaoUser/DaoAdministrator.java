@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @date 2019/11/13
  * @function
  */
-public class DaoAdministrator {
+public class DaoAdministrator implements Serializable {
 
     public static boolean studentExist(String account) {
         File student = new File("Students/"+account+".txt");
@@ -25,7 +25,7 @@ public class DaoAdministrator {
     }
 
     public static Student searchStudent(String account) {
-        File student = new File("Students/" + account + ".txt");
+        File student = new File("Students" + account + ".txt");
         if (student.exists()){
             try {
                 ObjectInputStream in = new ObjectInputStream(new FileInputStream(student));
@@ -33,8 +33,12 @@ public class DaoAdministrator {
                 return stu;
 
             }
-            catch (Exception e) {
-                e.printStackTrace();
+            catch (FileNotFoundException  fe) {
+                System.out.println("找不到该文件");
+                return null;
+            }
+            catch(Exception e){
+                System.out.println("文件读取错误");
                 return null;
             }
         }
@@ -46,10 +50,12 @@ public class DaoAdministrator {
         File file = new File("Students");
         String[]students=file.list();
         ArrayList<Student>names=new ArrayList<>();
+        Student info;
         try{
             for(String stu:students){
-                ObjectInputStream ois =new ObjectInputStream(new FileInputStream(stu));
-                names.add((Student)ois.readObject());
+                ObjectInputStream ois =new ObjectInputStream(new FileInputStream("Students/"+stu));
+                info=(Student)ois.readObject();
+                names.add(info);
             }
             return names;
         }

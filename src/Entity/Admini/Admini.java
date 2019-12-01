@@ -24,15 +24,17 @@ public class Admini   {
      * @param password
      * @return
      */
-    public boolean createAccount(String account,String password){
+    public static boolean createAccount(String account,String password){
            if(!DaoAdministrator.studentExist(account)) {
                Student student = new Student(account, password);
                if(DaoAdministrator.creatStudent(student))
                    return true;
                else
+                   System.out.println("创建失败");
                    return false;
            }
            else
+               System.out.println("账户已存在");
                return false;
     }
 
@@ -41,7 +43,7 @@ public class Admini   {
      * @param account
      * @return
      */
-    public boolean deleteStudent(String account) {
+    public static boolean deleteStudent(String account) {
         if(DaoAdministrator.studentExist(account)){
             if( DaoAdministrator.deleteStudent(account)){
                 return true;
