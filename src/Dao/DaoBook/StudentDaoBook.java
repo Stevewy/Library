@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @date 2019/11/4
  * @function 用于管理书的数据,被其他类使用
  */
-public class StudentDaoBook {
+public class StudentDaoBook implements Serializable {
     protected ArrayList<Book> books;
 
     public StudentDaoBook(){

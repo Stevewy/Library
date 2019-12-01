@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @function 超级用户实现类
  */
 
-public class Super /*implements SuperInterface, Serializable*/ {
+public class Super implements SuperInterface, Serializable {
     private String account;
     private String password;
 
