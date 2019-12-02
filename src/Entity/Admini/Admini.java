@@ -139,6 +139,7 @@ public class Admini   {
        if(isLegal(newPassword)){
         if(admini.getAccount().equals(oldPassword)){
             admini.setAccount(newPassword);
+            DaoAdministrator.updateAdmini(admini);
             return true;
           }
        }

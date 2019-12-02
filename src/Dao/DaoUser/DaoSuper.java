@@ -74,15 +74,15 @@ public class DaoSuper {
             try {
                ObjectInputStream in = new ObjectInputStream(new FileInputStream(admini));
                Admini adm = (Admini) in.readObject();
+               in.close();
                return adm;
-
             }
-            catch (ClassNotFoundException ce){
-                 ce.printStackTrace();
+            catch (FileNotFoundException ce){
+                System.out.println("找不到文件");
                  return null;
             }
-            catch (IOException e) {
-                e.printStackTrace();
+            catch (Exception e) {
+                System.out.println("文件读取失败");
                 return null;
             }
         }

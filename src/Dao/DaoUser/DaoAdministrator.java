@@ -111,10 +111,11 @@ public class DaoAdministrator implements Serializable {
         try{
             ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(admini.getAccount()+".txt"));
             oos.writeObject(admini);
+            oos.close();
             return true;
         }
         catch (FileNotFoundException fe){
-            System.out.println("管理员文件查找失败");
+            System.out.println("找不到该文件");
             return false;
         }
         catch (IOException ioe ){
