@@ -11,11 +11,23 @@ public interface AdminiInterface {
      * @
       * @param
      */
-    void createAccount();
+    public  boolean createAccount();
 
-    void deleteAccount();
+    public  boolean deleteStudent();
 
-    void addBook(Book book,int number);
+    public  Student searchStudent();
 
-    void deleteBook(Book book);
+    public  boolean addBook();
+
+    public boolean deleteBook();
+
+    public  void viewAllStudentInfo();
+
+    public  void viewAllStudentFile();
+
+    public  boolean changeAdminPassword();
+
+    public  boolean changeStudentPassword();
+
+
 }
