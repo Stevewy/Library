@@ -17,7 +17,7 @@ public class AdminiDaoBook extends StudentDaoBook {
      */
     public boolean copyBook(){
         try{
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("copyBook.txt"));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Book\\copyBook.txt"));
             out.writeObject(books);
             out.close();
             return true;
@@ -29,8 +29,8 @@ public class AdminiDaoBook extends StudentDaoBook {
 
     public boolean revese(){
         try{
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("copyBook.txt"));
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("book.txt"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("Book\\copyBook.txt"));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Book\\book.txt"));
             out.writeObject((ArrayList<Book>)in.readObject());
             in.close();
             out.close();

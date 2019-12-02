@@ -15,7 +15,7 @@ public class StudentDaoBook implements Serializable {
 
     public StudentDaoBook(){
         try{
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("book.txt"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("Book\\book.txt"));
             books = (ArrayList<Book>) in.readObject();
             in.close();
         }
@@ -97,7 +97,7 @@ public class StudentDaoBook implements Serializable {
             return false;
 
         try {
-            StorageBook(new ObjectOutputStream(new FileOutputStream("book.txt")), books);
+            StorageBook(new ObjectOutputStream(new FileOutputStream("Book\\book.txt")), books);
 //        StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")), b);         //实时更新
         }
         catch (IOException e){
