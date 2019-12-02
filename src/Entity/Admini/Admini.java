@@ -2,6 +2,7 @@ package Entity.Admini;
 
 import Dao.DaoBook.StudentDaoBook;
 import Dao.DaoUser.DaoAdministrator;
+import Dao.DaoUser.DaoStundent;
 import Entity.Book.Book;
 import Entity.Student.Student;
 
@@ -34,7 +35,7 @@ public class Admini   {
                    return false;
            }
            else
-               System.out.println("账户已存在");
+               System.out.println("错误,账户已存在");
                return false;
     }
 
@@ -79,8 +80,9 @@ public class Admini   {
         book.setNowAmount(book.getNowAmount()+number);
         book.setTotalAmount(book.getTotalAmount()+number);
         StudentDaoBook sdb=new StudentDaoBook();
-        sdb.updateBook(book);
-        return true;
+       if(sdb.updateBook(book))
+            return true;
+       else return false;
     }
 
     /**
@@ -137,6 +139,7 @@ public class Admini   {
        if(isLegal(newPassword)){
         if(admini.getAccount().equals(oldPassword)){
             admini.setAccount(newPassword);
+            DaoAdministrator.updateAdmini(admini);
             return true;
           }
        }
@@ -152,6 +155,7 @@ public class Admini   {
     public static boolean changeStudentPassword(Student student,String newPassword) {
         if(isLegal(newPassword)){
         student.setPassword(newPassword);
+        DaoStundent.updateStudent(student);
         return true;
         }
         return false;
@@ -168,9 +172,10 @@ public class Admini   {
         int Lower=0;
         int Digit=0;
         for(int j=0;j<temp.length;j++){
-            if(temp[j] < '0' || (temp[j] > '9' && temp[j] < 'A') || (temp[j] > 'Z' && temp[j] < 'a') || temp[j] > 'z')
+            if(temp[j] < '0' || (temp[j] > '9' && temp[j] < 'A') || (temp[j] > 'Z' && temp[j] < 'a') || temp[j] > 'z'){
                 System.out.println("密码含有非法字符");
                 return false;
+            }
         }
         for(int i=0;i<temp.length;i++){
             if(Character.isUpperCase(temp[i]))

@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class DaoStundent {
     public static boolean updateStudent(Student student){
         try{
-        ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(student.getAccount()+".txt"));
+        ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("Students/"+student.getAccount()+".txt"));
         oos.writeObject(student);
         return true;
         }
@@ -24,7 +24,7 @@ public class DaoStundent {
             return false;
         }
         catch (IOException ioe ){
-            System.out.println("文件读取失败");
+            System.out.println("信息保存失败");
             return false;
         }
     }

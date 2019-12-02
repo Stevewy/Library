@@ -25,11 +25,12 @@ public class DaoAdministrator implements Serializable {
     }
 
     public static Student searchStudent(String account) {
-        File student = new File("Students" + account + ".txt");
+        File student = new File("Students/" + account + ".txt");
         if (student.exists()){
             try {
                 ObjectInputStream in = new ObjectInputStream(new FileInputStream(student));
                 Student stu = (Student) in.readObject();
+                in.close();
                 return stu;
 
             }
@@ -47,7 +48,7 @@ public class DaoAdministrator implements Serializable {
     }
 
     public static ArrayList<Student> viewAllStudentInfo(){
-        File file = new File("Students");
+        File file = new File("Students/");
         String[]students=file.list();
         ArrayList<Student>names=new ArrayList<>();
         Student info;
@@ -59,11 +60,11 @@ public class DaoAdministrator implements Serializable {
             }
             return names;
         }
-        catch (IOException ioe){
-            System.out.println("文件读取错误");
+        catch (FileNotFoundException fie){
+            System.out.println("找不到文件");
             return null;
         }
-        catch (ClassNotFoundException cle){
+        catch (Exception e){
             System.out.println("文件读取错误");
             return null;
         }
@@ -85,29 +86,36 @@ public class DaoAdministrator implements Serializable {
 
     public static boolean deleteStudent(String account){
         try{
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students/" +account+ ".txt"));
+            File file = new File("Students/" +account+ ".txt");
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
             Student student=(Student)ois.readObject();
             for(int i=0;i<student.getBooks().size();i++){
             student.returnBook(student.getBooks().get(i),student.getNumber().get(i));
             }
             ois.close();
-            return true;
-        }
-        catch (Exception e){
-            e.printStackTrace();
+            if(file.delete())
+                return true;
             return false;
         }
-
+        catch (FileNotFoundException fe){
+            System.out.println("找不到学生文件");
+            return false;
+        }
+        catch (Exception e){
+            System.out.println("读取学生文件失败");
+            return false;
+        }
     }
 
     public static boolean updateAdmini(Admini admini){
         try{
             ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(admini.getAccount()+".txt"));
             oos.writeObject(admini);
+            oos.close();
             return true;
         }
         catch (FileNotFoundException fe){
-            System.out.println("管理员文件查找失败");
+            System.out.println("找不到该文件");
             return false;
         }
         catch (IOException ioe ){
