@@ -89,7 +89,7 @@ public class Main {
         b.add(b9);
         b.add(b10);
         try {
-            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("book.txt"));
+            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("Book\\book.txt"));
             o.writeObject(b);
         }
         catch (Exception e){
@@ -186,23 +186,42 @@ public class Main {
             switch (x){
                 case 1:
                     studentMenu();
-                    int x1 = in.nextInt();
-                    switch (x1){
+                    switch (in.nextInt()){
                         case 1:
                             borrowBookMenu();
-                            int x2 = in.nextInt();
-                            switch (x2){
-                                case 1:
-                                    System.out.println("请输入你要查找的书名(尽量缺字也别错字)");
+                            while(true){
+                                int x1 = in.nextInt();
+                                in.nextLine();
+                                if(x1 == 1){
+                                    System.out.println("请输入你要查找的书名");
                                     String name = in.nextLine();
                                     ArrayList<Book> abook = a.searchBookByName(name);
-                                    for(Book book : abook){
-                                        System.out.println(book);
+                                    if(abook.isEmpty()){
+                                        System.out.println("没有找到你要的书籍,是否重新输入 是则按y");
+                                        char con = in.next().charAt(0);
+                                        if(con == 'y')
+                                            continue;
+                                        else
+                                            break;
                                     }
-                                case 2:
+                                    for(int i = 0; i < abook.size(); i++){
+                                        System.out.println((i + 1) + ": " + abook.get(i));
+                                    }
+                                    System.out.println("请输入你要借的书的编号");
 
+                                }else if(x == 2){
+                                    System.out.println("请输入你要查找的书号");
+                                    if(a.searchBookByBookNumber(in.next()) != null)
+                                        System.out.println();
+
+                                }else{
+                                    System.out.println("输入错误,请重新输入");
+                                }
                             }
+                            break;
                         case 2:
+                            lentBookMenu();
+
 
                         case 3:
 
