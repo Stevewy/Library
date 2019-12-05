@@ -5,6 +5,7 @@ import Dao.DaoUser.DaoSuper;
 import Entity.Admini.Admini;
 import Entity.Book.Book;
 import Entity.Student.Student;
+import Entity.Super.Super;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -32,9 +33,9 @@ public class Main {
     }
 
     public static void studentMenu(){
-        System.out.println("1:借书                 2:还书\n"+
+        System.out.print("1:借书                 2:还书\n"+
                             "3:修改密码             4:查看目前图书馆的书籍\n" +
-                            "5:查看借阅图书         6:查看当前账号\n" +
+                            "5:查看借阅图书         6:更换账号\n" +
                             "7:退出系统\n");
     }
 
@@ -48,7 +49,7 @@ public class Main {
 
     public static void lookBookMenu(){
         System.out.println("1:通过书名来找书      2:通过书号来找书\n" +
-                           "3:查看所有图书        4:通过类别来找书");
+                           "3:通过类别来找书      4:查看所有图书");
     }
 
     public static void adminiMenu(){
@@ -57,8 +58,16 @@ public class Main {
                             "5:查看借阅图书         6:退出系统");
     }
 
-    public static void load(){
+    public static void superMenu(){
+        System.out.println("1.开关图书馆        2.查看管理员账号\n" +
+                           "3.修改管理员密码    4.修改自己密码\n" +
+                           "5.切换账号          6.格式化\n" +
+                           "7.退出系统");
+    }
 
+    public static void stop(){
+        System.out.println("按任意键回到主菜单");
+        in.next();
     }
 
     public static void main(String[] args){
@@ -114,154 +123,224 @@ public class Main {
 
         System.out.println("欢迎来到图书馆");
 
+        if(!Super.isOpen()){
+            System.out.println("图书馆已经关闭,如果你有紧急情况或者是超级用户");
+            stop();
+        }
         int x = 0;
         boolean continu = true;
+        boolean back = false;
         Student student = null;
         Admini admini = null;
-        while(continu){
-            System.out.println("请选择你的账户类型");
-            loadMenu();
-            x = in.nextInt();
-            in.nextLine();
-            System.out.println("请输入你的账号和密码");
-            System.out.print("账号:");
-            String account = in.nextLine();
+        Super supers = null;
+        while(true) {
+            while (true) {
+                System.out.println("请选择你的账户类型");
+                loadMenu();
+                x = in.nextInt();
+                if (x < 1 || x > 3){
+                    System.out.println("输入错误,请重新输入");
+                    continue;
+                }
+                in.nextLine();
+                System.out.println("请输入你的账号和密码");
+                System.out.print("账号:");
+                String account = in.nextLine();
 
-            System.out.print("密码:");
-            String password = in.nextLine();
-            System.out.println();
+                System.out.print("密码:");
+                String password = in.nextLine();
 
-            boolean find = false;
-            switch (x){
-                case 1:
-                    ArrayList<Student> s = DaoAdministrator.viewAllStudentInfo();
-                    if(s == null){
-                        System.out.println("学生文档里面没有用户");
-                        break;
-                    }
-                    for(Student i : s){                                           //比对账号密码
-                        if(i.getAccount().equals(account)){
-                            if(i.getPassword().equals(password)){
-                                student = i;
-                                continu = false;
-                            }
-                            else {
-                                System.out.println("密码错误");
-                            }
-                            find = true;
+                boolean find = false;
+                switch (x) {
+                    case 1:
+                        ArrayList<Student> s = DaoAdministrator.viewAllStudentInfo();
+                        if (s == null) {
+                            System.out.println("学生文档里面没有用户");
                             break;
                         }
-                    }
-                    if(!find)
-                        System.out.println("没有找到该用户,请重新输入");
-                    break;
-                case 2:
-                    ArrayList<Admini> a = DaoSuper.viewAllAdministratorInfo();
-                    if(a == null){
-                        System.out.println("管理员文档里面没有用户");
+                        for (Student i : s) {                                           //比对账号密码
+                            if (i.getAccount().equals(account)) {
+                                if (i.getPassword().equals(password)) {
+                                    student = i;
+                                    continu = false;
+                                } else
+                                    System.out.println("密码错误");
+                                find = true;
+                                break;
+                            }
+                        }
+                        if (!find)
+                            System.out.println("没有找到该用户,请重新输入");
                         break;
-                    }
-                    for(Admini i : a){                                           //比对账号密码
-                        if(i.getAccount().equals(account)){
-                            if(i.getPassword().equals(password)){
-                                admini = i;
-                                continu = false;
-                            }
-                            else {
-                                System.out.println("密码错误");
-                            }
-                            find = true;
+                    case 2:
+                        ArrayList<Admini> a = DaoSuper.viewAllAdministratorInfo();
+                        if (a == null) {
+                            System.out.println("管理员文档里面没有用户");
                             break;
                         }
-                    }
-                    if(!find)
-                        System.out.println("没有找到该用户,请重新输入");
-                    break;
-                case 3:
+                        for (Admini i : a) {                                           //比对账号密码
+                            if (i.getAccount().equals(account)) {
+                                if (i.getPassword().equals(password)) {
+                                    admini = i;
+                                    continu = false;
+                                } else
+                                    System.out.println("密码错误");
+                                find = true;
+                                break;
+                            }
+                        }
+                        if (!find)
+                            System.out.println("没有找到该用户,请重新输入");
+                        break;
+                    case 3:
+//                        if(account.equals("root") && password.equals());
 
-                default:
-                    System.out.println("请输入正确选项");
+                        break;
+                    default:
+                        System.out.println("请输入正确选项");
+                }
+                if (continu) {
+                    System.out.println("是否退出系统, 是则按y");
+                    if (in.next().charAt(0) == 'y')
+                        System.exit(0);
+                }
+                else
+                    break;
             }
-            if(continu){
-                System.out.println("是否退出系统, 是则按y");
-                if(in.next().charAt(0) == 'y')
-                    System.exit(0);
-            }
-        }
-        continu = true;
-        while(continu){
-            switch (x){
-                case 1:
-                    studentMenu();
-                    switch (in.nextInt()){
-                        case 1:
-                            while(true){
-                                borrowBookMenu();
-                                int x1 = in.nextInt();
-                                in.nextLine();
-                                if(x1 == 1){
-                                    System.out.println("请输入你要查找的书名");
-                                    String name = in.nextLine();
-                                    ArrayList<Book> abook = a.searchBookByName(name);
-                                    if(abook.isEmpty()){
-                                        System.out.println("没有找到你要的书籍,是否重新输入 是则按y");
-                                        if(in.next().charAt(0) == 'y')
-                                            continue;
-                                        else
-                                            break;
+            while (true) {
+                if(back)
+                    break;
+                switch (x) {
+                    case 1:
+                        studentMenu();
+                        switch (in.nextInt()) {
+                            case 1:
+                                while (true) {
+                                    borrowBookMenu();
+                                    int x1 = in.nextInt();
+                                    in.nextLine();
+                                    if (x1 == 1) {
+                                        System.out.println("请输入你要查找的书名");
+                                        String name = in.nextLine();
+                                        ArrayList<Book> abook = a.searchBookByName(name);
+                                        if (abook.isEmpty()) {
+                                            System.out.println("没有找到你要的书籍,是否重新输入 是则按y");
+                                            if (in.next().charAt(0) == 'y')
+                                                continue;
+                                            else
+                                                break;
+                                        }
+                                        for (int i = 0; i < abook.size(); i++) {
+                                            System.out.println((i + 1) + ": " + abook.get(i));
+                                        }
+                                        System.out.print("请依次输入你要借的书的编号\n编号:");
+                                        int num = in.nextInt();
+                                        if (num <= abook.size() && num > 0) {
+                                            System.out.print("请输入你要借出的数量\n数量:");
+                                            student.borrowBook(abook.get(num - 1), in.nextInt());
+                                            System.out.println("借书成功");
+                                        } else
+                                            System.out.println("编号输入错误");
+                                        break;
+                                    } else if (x1 == 2) {
+                                        System.out.println("请输入你要借书的书号");
+                                        String number = in.next();
+                                        System.out.println("请输入你要借书的数量");
+                                        int num = in.nextInt();
+                                        if (a.searchBookByBookNumber(number) != null) {
+                                            if (student.borrowBook(a.searchBookByBookNumber(number), num)) {
+                                                System.out.println("借书成功");
+                                                break;
+                                            } else
+                                                System.out.println("你要借的数量大于图书馆有的数量,请重新输入");
+
+                                        } else {
+                                            System.out.println("你要借的书不存在,是否重新输入,是则按y");
+                                            if (in.next().charAt(0) == 'y')
+                                                continue;
+                                            else
+                                                break;
+                                        }
+                                    } else {
+                                        System.out.println("输入错误,请重新输入");
                                     }
-                                    for(int i = 0; i < abook.size(); i++){
-                                        System.out.println((i + 1) + ": " + abook.get(i));
-                                    }
-                                    System.out.println("请依次输入你要借的书的编号,与要借出的数量");
-                                    System.out.println("编号:");
-                                    System.out.print("数量:");
-                                    student.borrowBook(abook.get(in.nextInt() - 1), in.nextInt());
-                                    break;
-                                }else if(x == 2){
-                                    System.out.println("请输入你要借书的书号");
-                                    String number = in.next();
-                                    System.out.println("请输入你要借书的数量");
-                                    int num = in.nextInt();
-                                    if(a.searchBookByBookNumber(number) != null){
-                                        student.borrowBook(a.searchBookByBookNumber(number), num);
-                                        System.out.println("借书成功");
-                                    }
-                                    else {
-                                        System.out.println("你要借的书不存在,是否重新输入,是则按y");
-                                        if(in.next().charAt(0) == 'y')
-                                            continue;
-                                        else
-                                            break;
-                                    }
-                                }else{
-                                    System.out.println("输入错误,请重新输入");
                                 }
-                            }
-                            break;
-                        case 2:
-                            lentBookMenu();
-
-
-                        case 3:
-
-                        case 4:
-
-                        case 5:
-
-                        case 6:
-
-                        case 7:
-
-                    }
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                default:
-
+                                break;
+                            case 2:
+                                student.studentToString();
+                                lentBookMenu();
+                                break;
+                            case 3:
+                                in.nextLine();
+                                System.out.println("请输入原来密码");
+                                String oldPassword = in.nextLine();
+                                System.out.println("请输入你要修改的密码");
+                                String newPassword = in.nextLine();
+                                System.out.println("请再次输入新密码");
+                                if (newPassword.equals(in.nextLine())) {
+                                    student.changePassword(oldPassword, newPassword);
+                                    System.out.println("修改成功,正在关闭系统");
+                                    System.exit(0);
+                                } else
+                                    System.out.println("两次输入不一致");
+                                break;
+                            case 4:
+                                lookBookMenu();
+                                switch (in.nextInt()) {
+                                    case 1:
+                                        in.nextLine();
+                                        System.out.println("请输入书名");
+                                        if (student.lookBookByName(in.nextLine()))
+                                            stop();
+                                        else
+                                            System.out.println("没有找到包含该书名的书");
+                                        break;
+                                    case 2:
+                                        in.nextLine();
+                                        System.out.println("请输入书号");
+                                        if(student.lookBookByBookNumber(in.nextLine()))
+                                            stop();
+                                        else
+                                            System.out.println("没有找到包含该书号的书");
+                                        break;
+                                    case 3:
+                                        in.nextLine();
+                                        System.out.println("请输入你要查找的类别");
+                                        if (student.lookBookByKind(in.nextLine()))
+                                            stop();
+                                        else
+                                            System.out.println("没有找到包含该类别的书");
+                                        break;
+                                    case 4:
+                                        student.lookAllBook();
+                                        stop();
+                                }
+                                break;
+                            case 5:
+                                student.studentToString();
+                                stop();
+                                break;
+                            case 6:
+                                back = true;
+                                break;
+                            case 7:
+                                System.out.println("系统正常退出");
+                                System.exit(0);
+                                break;
+                            default:
+                                System.out.println("输入错误,请重新输入");
+                                break;
+                        }
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        System.out.println("输入错误,请重新输入");
+                }
             }
+            back = false;
         }
     }
 }

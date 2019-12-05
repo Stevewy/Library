@@ -1,8 +1,11 @@
 package Entity.Super;
 
+import Dao.DaoBook.SuperDaoBook;
 import Dao.DaoUser.DaoAdministrator;
 import Dao.DaoUser.DaoSuper;
 import Entity.Admini.Admini;
+import Entity.Student.Student;
+
 import java.io.Serializable;
 
 /**
@@ -31,7 +34,7 @@ public class Super implements SuperInterface, Serializable {
         this.password = password;
     }
 
-    private static boolean open = true;
+    private static boolean open = false;
 
     public static boolean isOpen() {
         return open;
@@ -70,4 +73,23 @@ public class Super implements SuperInterface, Serializable {
         DaoAdministrator.updateAdmini(admini);
         return true;
     }
+
+    public boolean changePassword(String oldPassword, String nowPassword){
+        if(!password.equals(oldPassword)){
+            System.out.println("密码错误");
+        }
+        else if(Student.isLegal(password)) {
+            this.password = nowPassword;
+            DaoSuper.updateSuper(this);
+            return true;
+        }
+        else
+            System.out.println("密码只能输入字母与数字");
+        return false;
+    }
+
+    public void format(){
+        SuperDaoBook.format();
+    }
+
 }
