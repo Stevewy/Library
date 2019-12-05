@@ -100,7 +100,7 @@ public class DaoSuper {
             try {
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
                 Super sup = (Super) ois.readObject();
-                return super;
+                return sup ;
 
             } catch (FileNotFoundException fe) {
                 System.out.println("找不到该文件");
