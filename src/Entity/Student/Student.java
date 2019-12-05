@@ -96,7 +96,7 @@ public class Student implements StudentInterface, Serializable {
      * @param s
      * @return
      */
-    private boolean isLegal(String s){
+    public static boolean isLegal(String s){
         char[] chars = s.toCharArray();
         for(int i = 0; i < chars.length; i++){
             if(chars[i] < '0' || (chars[i] > '9' && chars[i] < 'A') || (chars[i] > 'Z' && chars[i] < 'a') || chars[i] > 'z')
@@ -110,7 +110,7 @@ public class Student implements StudentInterface, Serializable {
     }
 
     public boolean lookBookByKind(String kind){
-        if(studentDaoBook.searchBookByKind(kind) != null){
+        if(studentDaoBook.searchBookByKind(kind).size() != 0){
             printf(studentDaoBook.searchBookByKind(kind));
             return true;
         }
@@ -118,7 +118,7 @@ public class Student implements StudentInterface, Serializable {
     }
 
     public boolean lookBookByName(String name){                                //如果找到就返回ture 否则返回false
-        if(studentDaoBook.searchBookByName(name) != null){
+        if(studentDaoBook.searchBookByName(name).size() != 0){
             printf(studentDaoBook.searchBookByName(name));
             return true;
         }
@@ -158,7 +158,7 @@ public class Student implements StudentInterface, Serializable {
             int i;
             for(i =0; i < books.size(); i++){
                 if(books.get(i).equals(book)){
-                    this.number.set(i,this.number.get(i) + number);
+                    this.number.set(i, this.number.get(i) + number);
                     break;
                 }
             }
