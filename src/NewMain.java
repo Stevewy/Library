@@ -14,8 +14,9 @@ import java.util.Scanner;
  * @date 2019/12/1
  * @function
  */
+
 public class NewMain {
-    public static void main(String[] args) {
+    public static void menu(){
         System.out.println("1.查看账户列表");
         System.out.println("2.查看所有账户信息");
         System.out.println("3.查找学生");
@@ -25,6 +26,9 @@ public class NewMain {
         System.out.println("7.添加图书");
         System.out.println("8.删除图书");
         System.out.println("9.管理员修改密码");
+    }
+    public static void main(String[] args) {
+
 
         Scanner in = new Scanner(System.in);
         String account ;
@@ -124,6 +128,11 @@ public class NewMain {
                      if (Admini.changeAdminPassword(admini, oldPassword, newPassword))
                          System.out.println("修改成功");
                  break;
+
+                 default:
+                     while (choice<1||choice>9){
+                     System.out.println("输入有误,请重新输入");
+                     choice = in.nextInt();}
         }
     }
 }
