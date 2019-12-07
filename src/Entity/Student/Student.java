@@ -19,7 +19,7 @@ public class Student implements StudentInterface, Serializable {
     private int wrongSum;
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<Integer> number = new ArrayList<>();
-    private StudentDaoBook studentDaoBook = new StudentDaoBook();
+    private transient StudentDaoBook studentDaoBook = new StudentDaoBook();
 
     public void setAccount(String account) {
         this.account = account;
@@ -35,6 +35,10 @@ public class Student implements StudentInterface, Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setStudentDaoBook(StudentDaoBook studentDaoBook) {
+        this.studentDaoBook = studentDaoBook;
     }
 
     public void setBooks(ArrayList<Book> books) {
@@ -54,6 +58,10 @@ public class Student implements StudentInterface, Serializable {
         this.password = password;
     }
 
+    public Student(){
+
+    }
+
     public String getAccount() {
         return account;
     }
@@ -67,11 +75,11 @@ public class Student implements StudentInterface, Serializable {
     }
 
     /**
-     * 将非中文的密码存到内存
-     * @param nowPassword 新的密码
+     * 将合法的密码存到内存
+     * @param newPassword 新的密码
      * @return 不合法ture 合法 false
      */
-    public boolean changePassword(String oldPassword, String nowPassword){
+    public boolean changePassword(String oldPassword, String newPassword){
         if(lock){
             System.out.println("由于错误太多次,密码被锁定");
         }
@@ -82,7 +90,7 @@ public class Student implements StudentInterface, Serializable {
                 lock = true;
         }
         else if(isLegal(password)) {
-            this.password = nowPassword;
+            this.password = newPassword;
             DaoStundent.updateStudent(this);
             return true;
         }
@@ -96,7 +104,7 @@ public class Student implements StudentInterface, Serializable {
      * @param s
      * @return
      */
-    public static boolean isLegal(String s){
+    private static boolean isLegal(String s){
         char[] chars = s.toCharArray();
         for(int i = 0; i < chars.length; i++){
             if(chars[i] < '0' || (chars[i] > '9' && chars[i] < 'A') || (chars[i] > 'Z' && chars[i] < 'a') || chars[i] > 'z')
@@ -137,7 +145,7 @@ public class Student implements StudentInterface, Serializable {
      * 打印书籍
      * @param b 书籍
      */
-    private void printf(ArrayList<Book> b ){
+    private void printf(ArrayList<Book> b ) {
         for(int i = 0;i < b.size();i++){
             System.out.print(b.get(i)+"       ");
             if((i + 1) % 3 == 0 || i == b.size() - 1) System.out.println();      // 打印3本书后换行
@@ -155,6 +163,7 @@ public class Student implements StudentInterface, Serializable {
         if(book.getNowAmount() >= number){
             book.setNowAmount(book.getNowAmount() - number);
             book.setLentAmount(book.getLentAmount() + number);
+
             int i;
             for(i =0; i < books.size(); i++){
                 if(books.get(i).equals(book)){
@@ -166,6 +175,7 @@ public class Student implements StudentInterface, Serializable {
                 this.books.add(book);
                 this.number.add(number);
             }
+
             studentDaoBook.updateBook(book);
             DaoStundent.updateStudent(this);
             return true;

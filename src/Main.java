@@ -52,10 +52,16 @@ public class Main {
                            "3:通过类别来找书      4:查看所有图书");
     }
 
-    public static void adminiMenu(){
-        System.out.println( "1:借书                 2:还书\n"+
-                            "3:修改密码             4:查看目前图书馆的书籍\n" +
-                            "5:查看借阅图书         6:退出系统");
+    public static void menu(){
+        System.out.println("1.查看账户列表");
+        System.out.println("2.查看所有账户信息");
+        System.out.println("3.查找学生");
+        System.out.println("4.创建新账户");
+        System.out.println("5.修改学生账户密码");
+        System.out.println("6.删除账户");
+        System.out.println("7.添加图书");
+        System.out.println("8.删除图书");
+        System.out.println("9.管理员修改密码");
     }
 
     public static void superMenu(){
@@ -127,7 +133,7 @@ public class Main {
             System.out.println("图书馆已经关闭,如果你有紧急情况或者是超级用户");
             stop();
         }
-        int x = 0;
+        int x;
         boolean continu = true;
         boolean back = false;
         Student student = null;
@@ -138,6 +144,9 @@ public class Main {
                 System.out.println("请选择你的账户类型");
                 loadMenu();
                 x = in.nextInt();
+                if(x == 9){
+                    Super.format();
+                }
                 if (x < 1 || x > 3){
                     System.out.println("输入错误,请重新输入");
                     continue;
@@ -162,6 +171,7 @@ public class Main {
                             if (i.getAccount().equals(account)) {
                                 if (i.getPassword().equals(password)) {
                                     student = i;
+                                    student.setStudentDaoBook(new StudentDaoBook());
                                     continu = false;
                                 } else
                                     System.out.println("密码错误");
@@ -170,12 +180,12 @@ public class Main {
                             }
                         }
                         if (!find)
-                            System.out.println("没有找到该用户,请重新输入");
+                            System.out.println("用户名错误");
                         break;
                     case 2:
                         ArrayList<Admini> a = DaoSuper.viewAllAdministratorInfo();
                         if (a == null) {
-                            System.out.println("管理员文档里面没有用户");
+                            System.out.println("文档损坏");
                             break;
                         }
                         for (Admini i : a) {                                           //比对账号密码
@@ -193,8 +203,17 @@ public class Main {
                             System.out.println("没有找到该用户,请重新输入");
                         break;
                     case 3:
-//                        if(account.equals("root") && password.equals());
-
+                        ;
+                        if((supers = DaoSuper.viewSelf(account)) != null ){
+                            if(supers.getPassword().equals(password)) {
+                                System.out.println("登陆成功");
+                                continu = false;
+                            }
+                            else
+                                System.out.println("密码错误");
+                        }
+                        else
+                            System.out.println("用户名错误");
                         break;
                     default:
                         System.out.println("请输入正确选项");
@@ -256,9 +275,7 @@ public class Main {
 
                                         } else {
                                             System.out.println("你要借的书不存在,是否重新输入,是则按y");
-                                            if (in.next().charAt(0) == 'y')
-                                                continue;
-                                            else
+                                            if (in.next().charAt(0) != 'y')
                                                 break;
                                         }
                                     } else {
@@ -333,6 +350,108 @@ public class Main {
                         }
                         break;
                     case 2:
+                        String account ;
+                        String password ;
+                        String oldPassword;
+                        String newPassword;
+                        Student stu ;
+                        Book book;
+                        int choice = in.nextInt();
+                        switch (choice){
+                            case 1:
+                                System.out.println("学生列表如下");
+                                Admini.viewAllStudentFile();
+                                break;
+
+                            case 2:
+                                System.out.println("所有学生情况如下");
+                                Admini.viewAllStudentInfo();
+                                break;
+
+                            case 3:
+                                System.out.println("请输入学生账号");
+                                account = in.next();
+                                stu = Admini.searchStudent(account);
+                                if(stu!=null)
+                                    stu.studentToString();
+                                else
+                                    System.out.println("未找到该学生");
+                                break;
+
+                            case 4:
+                                System.out.println("请输入账号");
+                                account = in.next();
+                                //缺少一个判断账号是否正确的方法
+                                System.out.println("请输入初始密码");
+                                password = in.next();
+                                if(Admini.createAccount(account,password))
+                                    System.out.println("创建成功");
+                                break;
+
+                            case 5:
+                                System.out.println("请输入修改的学生账号");
+                                account = in.next();
+                                stu = DaoAdministrator.searchStudent(account);
+                                while (stu == null) {
+                                    System.out.println("输入账号有误，请确认后重新输入");
+                                    account = in.next();
+                                    stu = DaoAdministrator.searchStudent(account);
+                                }
+                                System.out.println("请输入新密码");
+                                password = in.next();
+                                if( Admini.changeStudentPassword(stu,password))
+                                    System.out.println("修改成功");
+                                break;
+
+                            case 6:
+                                System.out.println("请输入删除的账号");
+                                account = in.next();
+                                stu = DaoAdministrator.searchStudent(account);
+                                while (stu == null){
+                                    System.out.println("输入账号有误，请确认后重新输入");
+                                    account = in.next();
+                                    stu = DaoAdministrator.searchStudent(account);
+                                }
+                                if(Admini.deleteStudent(account))
+                                    System.out.println("删除成功");
+                                else
+                                    System.out.println("删除失败");
+                                break;
+
+//            case 7:
+//                System.out.println("请列入书籍信息");
+//                System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
+//                book = new Book(in.next(),in.next(),in.next(),in.nextInt(),in.next(),in.nextInt());
+//                if(Admini.addBook(book))
+
+//            case 8:
+
+                            case 9:
+                                System.out.println("请输入账号");
+                                account = in.next();
+                                admini = DaoSuper.searchAdministrator(account);
+                                while (admini == null){
+                                    System.out.println("该用户不存在,请重新输入");
+                                    account = in.next();
+                                    admini = DaoSuper.searchAdministrator(account);
+                                }
+                                System.out.println("请输入旧密码");
+                                oldPassword = in.next();
+                                while (admini.getPassword() != oldPassword) {
+                                    System.out.println("输入的密码错误,请重新输入");
+                                    oldPassword = in.next();
+                                }
+                                System.out.println("请输入新密码");
+                                newPassword = in.next();
+                                if (Admini.changeAdminPassword(admini, oldPassword, newPassword))
+                                    System.out.println("修改成功");
+                                break;
+
+                            default:
+                                while (choice < 1 || choice > 9){
+                                    System.out.println("输入有误,请重新输入");
+                                    choice = in.nextInt();}
+                        }
                         break;
                     case 3:
                         break;

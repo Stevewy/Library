@@ -34,7 +34,7 @@ public class Super implements SuperInterface, Serializable {
         this.password = password;
     }
 
-    private static boolean open = false;
+    private static boolean open = true;
 
     public static boolean isOpen() {
         return open;
@@ -78,7 +78,7 @@ public class Super implements SuperInterface, Serializable {
         if(!password.equals(oldPassword)){
             System.out.println("密码错误");
         }
-        else if(Student.isLegal(password)) {
+        else if(isLegal(password)) {
             this.password = nowPassword;
             DaoSuper.updateSuper(this);
             return true;
@@ -88,7 +88,17 @@ public class Super implements SuperInterface, Serializable {
         return false;
     }
 
-    public void format(){
+    private static boolean isLegal(String s){
+        char[] chars = s.toCharArray();
+        for (char c: chars) {
+            if(c < '0' || ( c > '9' && c < 'A') || ( c > 'Z' && c < 'a') || c > 'z'){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void format(){
         SuperDaoBook.format();
     }
 
