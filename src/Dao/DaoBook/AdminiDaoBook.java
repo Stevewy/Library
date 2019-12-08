@@ -31,7 +31,7 @@ public class AdminiDaoBook extends StudentDaoBook {
         try{
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("Book\\copyBook.txt"));
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Book\\book.txt"));
-            out.writeObject((ArrayList<Book>)in.readObject());
+            out.writeObject(in.readObject());
             in.close();
             out.close();
             return true;

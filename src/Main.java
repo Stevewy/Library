@@ -65,10 +65,15 @@ public class Main {
     }
 
     public static void superMenu(){
-        System.out.println("1.开关图书馆        2.查看管理员账号\n" +
+        System.out.println("1.开关图书馆        2.管理 管理员\n" +
                            "3.修改管理员密码    4.修改自己密码\n" +
                            "5.切换账号          6.格式化\n" +
                            "7.退出系统");
+    }
+
+    public static void admin(){
+        System.out.println("1.增加管理员          2.删除管理员\n" +
+                           "3.查看管理员");
     }
 
     public static void stop(){
@@ -191,6 +196,7 @@ public class Main {
                         for (Admini i : a) {                                           //比对账号密码
                             if (i.getAccount().equals(account)) {
                                 if (i.getPassword().equals(password)) {
+                                    System.out.println("登陆成功");
                                     admini = i;
                                     continu = false;
                                 } else
@@ -454,6 +460,78 @@ public class Main {
                         }
                         break;
                     case 3:
+                        switch (in.nextInt()){
+                            case 1:
+                                if(Super.isOpen()){
+                                    supers.closeLibrary();
+                                    System.out.println("关闭成功");
+                                }
+                                else {
+                                    supers.openLibrary();
+                                    System.out.println("打开成功");
+                                }
+                                break;
+                            case 2:
+                                admin();
+                                switch (in.nextInt()){
+                                    case 1:
+                                        in.nextLine();
+                                        System.out.println("请输入要增加管理员的账号和密码");
+//                                        supers.addAdmini()
+                                        break;
+                                    case 2:
+                                        in.nextLine();
+                                        System.out.println("请输入要删除管理员的账号");
+                                        if(supers.deleteAdmini(DaoSuper.searchAdministrator(in.nextLine())))
+                                            System.out.println("删除成功");
+                                        else
+                                            System.out.println("删除失败");
+                                        break;
+                                    case 3:
+                                        in.nextLine();
+                                        System.out.println("请输入要查看管理员的账号");
+                                        System.out.println(DaoSuper.searchAdministrator(in.nextLine()));
+                                        break;
+                                    default:
+                                        System.out.println("输入错误,请重新输入");
+                                }
+
+                                break;
+                            case 3:
+                                in.nextLine();
+                                System.out.println("请输入要修改的账号");
+                                String acc = in.nextLine();
+                                System.out.println("请输入新的密码");
+                                String pass = in.nextLine();
+                                System.out.println("请确认");
+                                if(in.nextLine().equals(pass))
+                                    supers.changeAdminiPassword(DaoSuper.searchAdministrator(acc), pass);
+                                else
+                                    System.out.println("两次密码不一致");
+                                break;
+                            case 4:
+                                System.out.print("旧密码:");
+                                String oldpass = in.nextLine();
+                                System.out.print("新密码:");
+                                String newpass = in.nextLine();
+                                System.out.print("再次输入:");
+                                if(in.nextLine().equals(newpass))
+                                    supers.changePassword(oldpass, newpass);
+                                else
+                                    System.out.println("两次密码不一致");
+                                break;
+                            case 5:
+                                back = true;
+                                break;
+                            case 6:
+                                supers.format();
+                                break;
+                            case 7:
+                                System.exit(0);
+                                break;
+                            default:
+                                System.out.println("输入错误,请重新输入");
+                        }
                         break;
                     default:
                         System.out.println("输入错误,请重新输入");

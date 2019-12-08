@@ -43,17 +43,19 @@ public class Super implements SuperInterface, Serializable {
     public boolean closeLibrary(){                    //如果图书馆已经关闭,返回false
         if(open){
             open = false;
+            DaoSuper.updateSuper(this);
             return true;
-        }else return false;
+        }
+        return false;
     }
 
     public boolean openLibrary(){                    //如果图书馆已经关闭,返回ture
-        if(open){
-            return false;
-        }else {
+        if(!open){
             open = true;
+            DaoSuper.updateSuper(this);
             return true;
         }
+        return false;
     }
 
     public boolean addAdmini(Admini admini){
@@ -84,12 +86,14 @@ public class Super implements SuperInterface, Serializable {
             return true;
         }
         else
-            System.out.println("密码只能输入字母与数字");
+            System.out.println("密码只能输入字母与数字且长度为6到16位");
         return false;
     }
 
     private static boolean isLegal(String s){
         char[] chars = s.toCharArray();
+        if(chars.length < 6 || chars.length > 16)
+            return false;
         for (char c: chars) {
             if(c < '0' || ( c > '9' && c < 'A') || ( c > 'Z' && c < 'a') || c > 'z'){
                 return false;

@@ -106,6 +106,8 @@ public class Student implements StudentInterface, Serializable {
      */
     private static boolean isLegal(String s){
         char[] chars = s.toCharArray();
+        if(chars.length < 6 || chars.length > 16)
+            return false;
         for(int i = 0; i < chars.length; i++){
             if(chars[i] < '0' || (chars[i] > '9' && chars[i] < 'A') || (chars[i] > 'Z' && chars[i] < 'a') || chars[i] > 'z')
                 return false;
