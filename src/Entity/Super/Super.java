@@ -71,9 +71,13 @@ public class Super implements SuperInterface, Serializable {
     }
 
     public boolean changeAdminiPassword(Admini admini, String newPassword){
-        admini.setPassword(newPassword);
-        DaoAdministrator.updateAdmini(admini);
-        return true;
+        if(isLegal(newPassword)){
+            admini.setPassword(newPassword);
+            DaoAdministrator.updateAdmini(admini);
+            return true;
+        }
+        System.out.println("密码不符合规定");
+        return false;
     }
 
     public boolean changePassword(String oldPassword, String nowPassword){

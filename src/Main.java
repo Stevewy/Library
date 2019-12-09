@@ -66,14 +66,14 @@ public class Main {
 
     public static void superMenu(){
         System.out.println("1.开关图书馆        2.管理 管理员\n" +
-                           "3.修改管理员密码    4.修改自己密码\n" +
+                           "3.                  4.修改自己密码\n" +
                            "5.切换账号          6.格式化\n" +
                            "7.退出系统");
     }
 
     public static void admin(){
         System.out.println("1.增加管理员          2.删除管理员\n" +
-                           "3.查看管理员");
+                           "3.查看管理员          4.修改管理员密码");
     }
 
     public static void stop(){
@@ -133,9 +133,9 @@ public class Main {
 //        s.studentToString();
 
         System.out.println("欢迎来到图书馆");
-
-        if(!Super.isOpen()){
-            System.out.println("图书馆已经关闭,如果你有紧急情况或者是超级用户");
+        Super supers = DaoSuper.viewSelf("root");
+        if(!supers.isOpen()){
+            System.out.println("图书馆已经关闭");
             stop();
         }
         int x;
@@ -143,11 +143,12 @@ public class Main {
         boolean back = false;
         Student student = null;
         Admini admini = null;
-        Super supers = null;
         while(true) {
             while (true) {
                 System.out.println("请选择你的账户类型");
                 loadMenu();
+                System.out.println("当前最热图书:");
+                a.sortBookAndPrint();
                 x = in.nextInt();
                 if(x == 9){
                     Super.format();
@@ -262,8 +263,11 @@ public class Main {
                                         int num = in.nextInt();
                                         if (num <= abook.size() && num > 0) {
                                             System.out.print("请输入你要借出的数量\n数量:");
-                                            student.borrowBook(abook.get(num - 1), in.nextInt());
-                                            System.out.println("借书成功");
+                                            if(student.borrowBook(abook.get(num - 1), in.nextInt()))
+                                                System.out.println("借书成功");
+                                            else
+                                                System.out.println("你要借的数量大于图书馆有的数量,请重新输入");
+
                                         } else
                                             System.out.println("编号输入错误");
                                         break;
@@ -273,10 +277,9 @@ public class Main {
                                         System.out.println("请输入你要借书的数量");
                                         int num = in.nextInt();
                                         if (a.searchBookByBookNumber(number) != null) {
-                                            if (student.borrowBook(a.searchBookByBookNumber(number), num)) {
+                                            if (student.borrowBook(a.searchBookByBookNumber(number), num))
                                                 System.out.println("借书成功");
-                                                break;
-                                            } else
+                                            else
                                                 System.out.println("你要借的数量大于图书馆有的数量,请重新输入");
 
                                         } else {
@@ -460,9 +463,10 @@ public class Main {
                         }
                         break;
                     case 3:
+                        superMenu();
                         switch (in.nextInt()){
                             case 1:
-                                if(Super.isOpen()){
+                                if(supers.isOpen()){
                                     supers.closeLibrary();
                                     System.out.println("关闭成功");
                                 }
@@ -476,13 +480,16 @@ public class Main {
                                 switch (in.nextInt()){
                                     case 1:
                                         in.nextLine();
-                                        System.out.println("请输入要增加管理员的账号和密码");
-//                                        supers.addAdmini()
+                                        System.out.println("请输入要增加管理员的账号和密码,以空格分隔");
+                                        if(supers.addAdmini(new Admini(in.next(), in.next())))
+                                            System.out.println("增加成功");
+                                        else
+                                            System.out.println("增加失败");
                                         break;
                                     case 2:
                                         in.nextLine();
                                         System.out.println("请输入要删除管理员的账号");
-                                        if(supers.deleteAdmini(DaoSuper.searchAdministrator(in.nextLine())))
+                                        if(supers.deleteAdmini(supers.searchAdmini(in.nextLine())))
                                             System.out.println("删除成功");
                                         else
                                             System.out.println("删除失败");
@@ -490,24 +497,27 @@ public class Main {
                                     case 3:
                                         in.nextLine();
                                         System.out.println("请输入要查看管理员的账号");
-                                        System.out.println(DaoSuper.searchAdministrator(in.nextLine()));
+                                        System.out.println(supers.searchAdmini(in.nextLine()));
+                                        stop();
+                                        break;
+                                    case 4:
+                                        in.nextLine();
+                                        System.out.println("请输入要修改的账号");
+                                        String acc = in.nextLine();
+                                        System.out.println("请输入新的密码");
+                                        String pass = in.nextLine();
+                                        System.out.println("请确认");
+                                        if(in.nextLine().equals(pass))
+                                            supers.changeAdminiPassword(DaoSuper.searchAdministrator(acc), pass);
+                                        else
+                                            System.out.println("两次密码不一致");
                                         break;
                                     default:
                                         System.out.println("输入错误,请重新输入");
                                 }
-
                                 break;
                             case 3:
-                                in.nextLine();
-                                System.out.println("请输入要修改的账号");
-                                String acc = in.nextLine();
-                                System.out.println("请输入新的密码");
-                                String pass = in.nextLine();
-                                System.out.println("请确认");
-                                if(in.nextLine().equals(pass))
-                                    supers.changeAdminiPassword(DaoSuper.searchAdministrator(acc), pass);
-                                else
-                                    System.out.println("两次密码不一致");
+
                                 break;
                             case 4:
                                 System.out.print("旧密码:");

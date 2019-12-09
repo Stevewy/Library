@@ -1,8 +1,12 @@
 package Dao.DaoBook;
 import Entity.Book.Book;
+import Entity.Book.BookCompar;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author WangYao
@@ -10,6 +14,13 @@ import java.util.ArrayList;
  * @function
  */
 public class AdminiDaoBook extends StudentDaoBook {
+
+    public void sortBookAndPrint(){
+        Collections.sort(books, new BookCompar());
+        for(int i = 0; i < 5; i++){
+            System.out.println(books.get(i));
+        }
+    }
 
     /**
      * 管理员手动备份书库(由于自动备份,该方法是个摆设)
