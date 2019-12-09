@@ -4,7 +4,9 @@ import Dao.DaoUser.DaoSuper;
 import Entity.Admini.Admini;
 import Entity.Book.Book;
 import Entity.Student.Student;
+import Entity.Super.Super;
 
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
@@ -28,8 +30,13 @@ public class NewMain {
         System.out.println("9.管理员修改密码");
     }
     public static void main(String[] args) {
+//        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super/root.txt"));
+//        Super sup = new Super();
+//        sup.setAccount("root");
+//        sup.setPassword("123456");
+//        oos.writeObject(sup);
 
-
+        menu();
         Scanner in = new Scanner(System.in);
         String account ;
         String password ;

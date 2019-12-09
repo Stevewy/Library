@@ -19,6 +19,14 @@ public class Admini implements Serializable{
     private String account;
     private String password;
 
+    public Admini(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
+    public Admini() {
+    }
+
     /**
      * 创建新的学生账户
      * @param account
@@ -194,6 +202,12 @@ public class Admini implements Serializable{
         }
     }
 
+    /**
+     * 确认学生还书
+     * @param
+     */
+    public static void ensure(Student student, Book book, int numeber){}
+
     public void setAccount(String account) {
         this.account = account;
     }
@@ -212,7 +226,7 @@ public class Admini implements Serializable{
 
     @Override
     public String toString() {
-        return "Admini{" +
+        return "Admini" +
                 "account='" + account + '\'' +
                 ", password='" + password + '\'' +
                 '}';
