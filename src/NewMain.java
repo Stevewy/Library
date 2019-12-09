@@ -126,7 +126,7 @@ public class NewMain {
                     }
                      System.out.println("请输入旧密码");
                      oldPassword = in.next();
-                     while (admini.getPassword() != oldPassword) {
+                     while (!admini.getPassword().equals(oldPassword)) {
                          System.out.println("输入的密码错误,请重新输入");
                          oldPassword = in.next();
                      }
