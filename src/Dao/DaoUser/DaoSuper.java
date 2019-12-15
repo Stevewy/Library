@@ -45,7 +45,7 @@ public class DaoSuper {
         ArrayList<Admini> adm = new ArrayList<>();
         try {
             for (String names : info) {
-                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("naems"));
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Administrator/"+names));
                 adm.add((Admini) ois.readObject());
             }
             return adm;
