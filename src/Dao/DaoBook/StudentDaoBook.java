@@ -103,11 +103,11 @@ public class StudentDaoBook {
                 break;
             }
         }
-        if(!b){
+        if(i == books.size()){
+            if(b)
+                return false;
             books.add(book);
         }
-        else if(i == books.size())
-            return false;
 
         try {
             StorageBook(new ObjectOutputStream(new FileOutputStream("Book\\book.txt")), books);
