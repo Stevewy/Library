@@ -81,21 +81,12 @@ public class StudentDaoBook {
     }
 
     /**
-     * 在内存更新书的数量后,调用此方法来将文件的书数量改变
-     * @param book 要更改数量的书(传进来已经改好内存的书)
-     * @return 更改成功返回ture 否则返回false
-     */
-    public boolean updateBook(Book book){                                            //更新书
-        return oldUpdateBook(book, true);
-    }
-
-    /**
      *
      * @param book
      * @param b 书库存在则输入ture,不确定是否存在则输入false
      * @return
      */
-    public boolean oldUpdateBook(Book book, boolean b){
+    public boolean updateBook(Book book, boolean b){
         int i;
         for(i = 0; i < books.size(); i++){                                           //遍历书库,如果有直接放书,没有判断b,此时i = b.size()
             if(book.equals(books.get(i))){
