@@ -30,12 +30,12 @@ public class NewMain {
         System.out.println("8.删除图书");
         System.out.println("9.管理员修改密码");
     }
-    public static void main(String[] args)  {
-//        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super/root.txt"));
-//        Super sup = new Super();
-//        sup.setAccount("root");
-//        sup.setPassword("123456");
-//        oos.writeObject(sup);
+    public static void main(String[] args) throws Exception{
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super/root.txt"));
+        Super sup = new Super();
+        sup.setAccount("root");
+        sup.setPassword("123456");
+        oos.writeObject(sup);
 
         menu();
         Scanner in = new Scanner(System.in);
