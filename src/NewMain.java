@@ -133,9 +133,12 @@ public class NewMain {
                 }
                 System.out.println("请输入要删除的数量");
                 bookNumber = in.nextInt();
-                if(Admini.deleteBook(book,bookNumber))
-                    System.out.println("删除成功");
-                else System.out.println("书籍数量不足");
+                while (Admini.deleteBook(book,bookNumber) == false){
+                    System.out.println("书籍数量不足，请核实后输入");
+                    bookNumber = in.nextInt();
+                    Admini.deleteBook(book,bookNumber);
+                }
+                System.out.println("删除成功");
                 break;
 
 
