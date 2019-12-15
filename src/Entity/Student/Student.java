@@ -178,7 +178,7 @@ public class Student implements StudentInterface, Serializable {
                 this.number.add(number);
             }
 
-            studentDaoBook.updateBook(book);
+            studentDaoBook.updateBook(book, true);
             DaoStundent.updateStudent(this);
             return true;
         }
