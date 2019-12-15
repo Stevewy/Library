@@ -7,6 +7,7 @@ import Entity.Admini.Admini;
 import Entity.Student.Student;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * @author WangYao
@@ -68,6 +69,10 @@ public class Super implements SuperInterface, Serializable {
 
     public Admini searchAdmini(String Account){
         return DaoSuper.searchAdministrator(Account);
+    }
+
+    public ArrayList<Admini> lookAllAdmin(){
+        return DaoSuper.viewAllAdministratorInfo();
     }
 
     public boolean changeAdminiPassword(Admini admini, String newPassword){

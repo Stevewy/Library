@@ -65,15 +65,15 @@ public class Main {
     }
 
     public static void superMenu(){
-        System.out.println("1.开关图书馆        2.管理 管理员\n" +
-                           "3.                  4.修改自己密码\n" +
+        System.out.println("1.开关图书馆        2.修改管理员\n" +
+                           "3.查看所有管理员    4.修改自己密码\n" +
                            "5.切换账号          6.格式化\n" +
                            "7.退出系统");
     }
 
     public static void admin(){
         System.out.println("1.增加管理员          2.删除管理员\n" +
-                           "3.查看管理员          4.修改管理员密码");
+                           "3.查看管理员密码      4.修改管理员密码");
     }
 
     public static void stop(){
@@ -587,7 +587,10 @@ public class Main {
                                 }
                                 break;
                             case 3:
-
+                                ArrayList<Admini> a = supers.lookAllAdmin();
+                                for(int i = 0; i < a.size(); i++){
+                                    System.out.println(a.get(i));
+                                }
                                 break;
                             case 4:
                                 System.out.print("旧密码:");
