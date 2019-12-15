@@ -123,5 +123,39 @@ public class DaoAdministrator implements Serializable {
             return false;
         }
     }
+
+    public static void format(){
+        File file = new File("Student");
+        File toDelete ;
+        String[] fileName = file.list();
+        for(String delete:fileName){
+            toDelete = new File(delete);
+            toDelete.delete();
+        }
+
+    }
+
+//    public static void studentReturnBooks(int studentReturn) {
+//        try{
+//        FileOutputStream fos = new FileOutputStream(new File("judge.txt"));
+//        fos.write(studentReturn);
+//            }
+//        catch (Exception e){
+//            System.out.println("提交还书请求错误");
+//        }
+//    }
+//
+//    public static int getReturn(){
+//        try{
+//           FileInputStream fis = new FileInputStream(new File("judge.txt"));
+//           int num = fis.read();
+//           return  num;
+//        }
+//        catch (Exception e){
+//            System.out.println("还书请求获取失败");
+//            return 0;
+//        }
+//    }
 }
+
 
