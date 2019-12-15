@@ -107,8 +107,9 @@ public class Super implements SuperInterface, Serializable {
     }
 
     public static void format(){
-        SuperDaoBook.formatBook();
         DaoSuper.format();
+        SuperDaoBook.formatBook();
+
     }
 
 }
