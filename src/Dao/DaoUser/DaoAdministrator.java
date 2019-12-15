@@ -109,7 +109,7 @@ public class DaoAdministrator implements Serializable {
 
     public static boolean updateAdmini(Admini admini){
         try{
-            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(admini.getAccount()+".txt"));
+            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("Administrator/"+ admini.getAccount()+".txt"));
             oos.writeObject(admini);
             oos.close();
             return true;
