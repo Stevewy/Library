@@ -115,11 +115,26 @@ public class DaoSuper {
 
     public static void format(){
         File file = new File("Student");
+        File fileS = new File("Administrator");
         File toDelete ;
         String[] fileName = file.list();
-        for(String delete:fileName){
+        String[] fileNameS = fileS.list();
+        for(String delete : fileName){
             toDelete = new File(delete);
             toDelete.delete();
+        }
+        for(String deleteS : fileNameS){
+            toDelete = new File(deleteS);
+            toDelete.delete();
+        }
+        try{
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super/root.txt"));
+        Super sup = new Super();
+        sup.setAccount("root");
+        sup.setPassword("123456");
+        oos.writeObject(sup);
+        }catch (Exception e){
+            System.out.println("格式化失败");
         }
     }
 
