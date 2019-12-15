@@ -95,7 +95,7 @@ public class Student implements StudentInterface, Serializable {
             return true;
         }
         else
-            System.out.println("密码只能输入字母与数字");
+            System.out.println("密码只能输入字母与数字且长度为6到16位");
         return false;
     }
 

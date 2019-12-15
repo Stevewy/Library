@@ -342,8 +342,8 @@ public class Main {
                                 String newPassword = in.nextLine();
                                 System.out.println("请再次输入新密码");
                                 if (newPassword.equals(in.nextLine())) {
-                                    student.changePassword(oldPassword, newPassword);
-                                    System.out.println("修改成功,正在关闭系统");
+                                    if(student.changePassword(oldPassword, newPassword))
+                                        System.out.println("修改成功,正在关闭系统");
                                     System.exit(0);
                                 } else
                                     System.out.println("两次输入不一致");
@@ -398,11 +398,14 @@ public class Main {
                         break;
                     case 2:
                         String account ;
-                        String password ;
+                        String password;
                         String oldPassword;
                         String newPassword;
-                        Student stu ;
+                        Student stu;
+                        String bookName ;
+                        int bookNumber ;
                         Book book;
+                        menu();
                         int choice = in.nextInt();
                         switch (choice){
                             case 1:
@@ -418,9 +421,9 @@ public class Main {
                             case 3:
                                 System.out.println("请输入学生账号");
                                 account = in.next();
-                                stu = Admini.searchStudent(account);
-                                if(stu!=null)
-                                    stu.studentToString();
+                                student = Admini.searchStudent(account);
+                                if(student!=null)
+                                    student.studentToString();
                                 else
                                     System.out.println("未找到该学生");
                                 break;
@@ -465,13 +468,38 @@ public class Main {
                                     System.out.println("删除失败");
                                 break;
 
-//            case 7:
-//                System.out.println("请列入书籍信息");
-//                System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
-//                book = new Book(in.next(),in.next(),in.next(),in.nextInt(),in.next(),in.nextInt());
-//                if(Admini.addBook(book))
 
-//            case 8:
+                            case 7:
+                                System.out.println("请列入书籍信息");
+                                System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
+                                book = new Book(in.next(),in.next(),in.next(),in.nextInt(),in.next(),in.nextInt());
+                                if(Admini.addBook(book))
+                                    System.out.println("添加成功");
+                                else System.out.println("添加失败");
+                                break;
+
+
+                            case 8:
+                                StudentDaoBook stdb = new StudentDaoBook();
+                                System.out.println("请输入要删除的书名");
+                                bookName = in.next();
+                                book = stdb.accurateSearchBookByName(bookName);
+                                while (book == null){
+                                    System.out.println("请输入准确的书名");
+                                    bookName = in.next();
+                                    book = stdb.accurateSearchBookByName(bookName);
+                                }
+                                System.out.println("请输入要删除的数量");
+                                bookNumber = in.nextInt();
+                                while (Admini.deleteBook(book,bookNumber) == false){
+                                    System.out.println("书籍数量不足，请核实后输入");
+                                    bookNumber = in.nextInt();
+                                    Admini.deleteBook(book,bookNumber);
+                                }
+                                System.out.println("删除成功");
+                                break;
+
+
 
                             case 9:
                                 System.out.println("请输入账号");
@@ -484,7 +512,7 @@ public class Main {
                                 }
                                 System.out.println("请输入旧密码");
                                 oldPassword = in.next();
-                                while (admini.getPassword() != oldPassword) {
+                                while (!admini.getPassword().equals(oldPassword)) {
                                     System.out.println("输入的密码错误,请重新输入");
                                     oldPassword = in.next();
                                 }
@@ -495,7 +523,7 @@ public class Main {
                                 break;
 
                             default:
-                                while (choice < 1 || choice > 9){
+                                while (choice<1||choice>9){
                                     System.out.println("输入有误,请重新输入");
                                     choice = in.nextInt();}
                         }
@@ -535,7 +563,11 @@ public class Main {
                                     case 3:
                                         in.nextLine();
                                         System.out.println("请输入要查看管理员的账号");
-                                        System.out.println(supers.searchAdmini(in.nextLine()));
+                                        Admini a = supers.searchAdmini(in.nextLine());
+                                        if(a == null)
+                                            System.out.println("没有找到该管理员");
+                                        else
+                                            System.out.println(a);
                                         stop();
                                         break;
                                     case 4:
