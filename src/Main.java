@@ -91,34 +91,34 @@ public class Main {
 //        },0,10000);
 
 
-//        Book b1 = new Book("1","1","1",2,"中国",3);
-//        Book b2 = new Book("15","2","1",2,"中国",1);
-//        Book b3 = new Book("3","3","1",2,"中国",2);
-//        Book b4 = new Book("4","4","1",2,"中国",3);
-//        Book b5 = new Book("115","5","1",2,"d",4);
-//        Book b6 = new Book("6","6","1",2,"中国",8);
-//        Book b7 = new Book("7","7","1",2,"中国",9);
-//        Book b8 = new Book("8","8","1",2,"q",4);
-//        Book b9 = new Book("9","9","1",2,"中国",3);
-//        Book b10 = new Book("10","10","1",2,"n",1);
-//        ArrayList<Book> b = new ArrayList<>();
-//        b.add(b1);
-//        b.add(b2);
-//        b.add(b3);
-//        b.add(b4);
-//        b.add(b5);
-//        b.add(b6);
-//        b.add(b7);
-//        b.add(b8);
-//        b.add(b9);
-//        b.add(b10);
-//        try {
-//            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("Book\\book.txt"));
-//            o.writeObject(b);
-//        }
-//        catch (Exception e){
-//            System.out.println("1");
-//        }
+        Book b1 = new Book("1","1","1",2,"中国",3);
+        Book b2 = new Book("15","2","1",2,"中国",1);
+        Book b3 = new Book("3","3","1",2,"中国",2);
+        Book b4 = new Book("4","4","1",2,"中国",3);
+        Book b5 = new Book("115","5","1",2,"d",4);
+        Book b6 = new Book("6","6","1",2,"中国",8);
+        Book b7 = new Book("7","7","1",2,"中国",9);
+        Book b8 = new Book("8","8","1",2,"q",4);
+        Book b9 = new Book("9","9","1",2,"中国",3);
+        Book b10 = new Book("10","10","1",2,"n",1);
+        ArrayList<Book> b = new ArrayList<>();
+        b.add(b1);
+        b.add(b2);
+        b.add(b3);
+        b.add(b4);
+        b.add(b5);
+        b.add(b6);
+        b.add(b7);
+        b.add(b8);
+        b.add(b9);
+        b.add(b10);
+        try {
+            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("Book\\book.txt"));
+            o.writeObject(b);
+        }
+        catch (Exception e){
+            System.out.println("1");
+        }
 //
 //
 //        Book b01 = new Book("1","1","1",2,"中国",5);
@@ -259,14 +259,14 @@ public class Main {
                                         for (int i = 0; i < abook.size(); i++) {
                                             System.out.println((i + 1) + ": " + abook.get(i));
                                         }
-                                        System.out.print("书号:");
+                                        System.out.print("编号:");
                                         int num = in.nextInt();
                                         if (num <= abook.size() && num > 0) {
                                             System.out.print("请输入你要借出的数量\n数量:");
                                             if(student.borrowBook(abook.get(num - 1), in.nextInt()))
                                                 System.out.println("借书成功");
                                             else
-                                                System.out.println("你要借的数量大于图书馆有的数量,请重新输入");
+                                                System.out.println("你要借的数量不符合规定,请重新输入");
 
                                         } else
                                             System.out.println("编号输入错误");
@@ -297,6 +297,7 @@ public class Main {
                                     student.studentToString();
                                     lentBookMenu();
                                     int number = in.nextInt();
+                                    in.nextLine();
                                     if(number == 1){
                                         System.out.print("书名:");
                                         Book book = a.accurateSearchBookByName(in.nextLine());
@@ -327,6 +328,7 @@ public class Main {
                                             break;
                                         }
                                         student.returnBook(book, n);
+                                        System.out.println("还书成功");
                                         break;
                                     }
                                     System.out.println("请输入正确的选项");
@@ -340,8 +342,8 @@ public class Main {
                                 String newPassword = in.nextLine();
                                 System.out.println("请再次输入新密码");
                                 if (newPassword.equals(in.nextLine())) {
-                                    student.changePassword(oldPassword, newPassword);
-                                    System.out.println("修改成功,正在关闭系统");
+                                    if(student.changePassword(oldPassword, newPassword))
+                                        System.out.println("修改成功,正在关闭系统");
                                     System.exit(0);
                                 } else
                                     System.out.println("两次输入不一致");
@@ -396,11 +398,14 @@ public class Main {
                         break;
                     case 2:
                         String account ;
-                        String password ;
+                        String password;
                         String oldPassword;
                         String newPassword;
-                        Student stu ;
+                        Student stu;
+                        String bookName ;
+                        int bookNumber ;
                         Book book;
+                        menu();
                         int choice = in.nextInt();
                         switch (choice){
                             case 1:
@@ -416,9 +421,9 @@ public class Main {
                             case 3:
                                 System.out.println("请输入学生账号");
                                 account = in.next();
-                                stu = Admini.searchStudent(account);
-                                if(stu!=null)
-                                    stu.studentToString();
+                                student = Admini.searchStudent(account);
+                                if(student!=null)
+                                    student.studentToString();
                                 else
                                     System.out.println("未找到该学生");
                                 break;
@@ -463,13 +468,38 @@ public class Main {
                                     System.out.println("删除失败");
                                 break;
 
-//            case 7:
-//                System.out.println("请列入书籍信息");
-//                System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
-//                book = new Book(in.next(),in.next(),in.next(),in.nextInt(),in.next(),in.nextInt());
-//                if(Admini.addBook(book))
 
-//            case 8:
+                            case 7:
+                                System.out.println("请列入书籍信息");
+                                System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
+                                book = new Book(in.next(),in.next(),in.next(),in.nextInt(),in.next(),in.nextInt());
+                                if(Admini.addBook(book))
+                                    System.out.println("添加成功");
+                                else System.out.println("添加失败");
+                                break;
+
+
+                            case 8:
+                                StudentDaoBook stdb = new StudentDaoBook();
+                                System.out.println("请输入要删除的书名");
+                                bookName = in.next();
+                                book = stdb.accurateSearchBookByName(bookName);
+                                while (book == null){
+                                    System.out.println("请输入准确的书名");
+                                    bookName = in.next();
+                                    book = stdb.accurateSearchBookByName(bookName);
+                                }
+                                System.out.println("请输入要删除的数量");
+                                bookNumber = in.nextInt();
+                                while (Admini.deleteBook(book,bookNumber) == false){
+                                    System.out.println("书籍数量不足，请核实后输入");
+                                    bookNumber = in.nextInt();
+                                    Admini.deleteBook(book,bookNumber);
+                                }
+                                System.out.println("删除成功");
+                                break;
+
+
 
                             case 9:
                                 System.out.println("请输入账号");
@@ -482,7 +512,7 @@ public class Main {
                                 }
                                 System.out.println("请输入旧密码");
                                 oldPassword = in.next();
-                                while (admini.getPassword() != oldPassword) {
+                                while (!admini.getPassword().equals(oldPassword)) {
                                     System.out.println("输入的密码错误,请重新输入");
                                     oldPassword = in.next();
                                 }
@@ -493,7 +523,7 @@ public class Main {
                                 break;
 
                             default:
-                                while (choice < 1 || choice > 9){
+                                while (choice<1||choice>9){
                                     System.out.println("输入有误,请重新输入");
                                     choice = in.nextInt();}
                         }
@@ -533,7 +563,11 @@ public class Main {
                                     case 3:
                                         in.nextLine();
                                         System.out.println("请输入要查看管理员的账号");
-                                        System.out.println(supers.searchAdmini(in.nextLine()));
+                                        Admini a = supers.searchAdmini(in.nextLine());
+                                        if(a == null)
+                                            System.out.println("没有找到该管理员");
+                                        else
+                                            System.out.println(a);
                                         stop();
                                         break;
                                     case 4:
