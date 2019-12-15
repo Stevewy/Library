@@ -107,13 +107,20 @@ public class NewMain {
                    System.out.println("删除失败");
                break;
 
-//            case 7:
-//                System.out.println("请列入书籍信息");
-//                System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
-//                book = new Book(in.next(),in.next(),in.next(),in.nextInt(),in.next(),in.nextInt());
-//                if(Admini.addBook(book))
+            case 7:
+                System.out.println("请列入书籍信息");
+                System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
+                book = new Book(in.next(),in.next(),in.next(),in.nextInt(),in.next(),in.nextInt());
+                if(Admini.addBook(book))
+                    System.out.println("添加成功");
+                else System.out.println("添加失败");
+                break;
 
-//            case 8:
+
+            case 8:
+                System.out.println("请输入要删除的书名");
+
+
 
              case 9:
                  System.out.println("请输入账号");

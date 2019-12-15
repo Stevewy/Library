@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class Admini implements Serializable{
     private String account;
     private String password;
+   // private static int studentReturn = 1;
 
     public Admini(String account, String password) {
         this.account = account;
@@ -110,7 +111,6 @@ public class Admini implements Serializable{
          return false;
     }
 
-   // public static boolean returnBook(){}
 
     /**
      * 管理员查看所有学生的账号信息
@@ -203,10 +203,33 @@ public class Admini implements Serializable{
     }
 
     /**
-     * 确认学生还书
+     * 管理员向书库增加图书
      * @param
      */
-    public static void ensure(Student student, Book book, int numeber){}
+    public static boolean addBook(Book book){
+        StudentDaoBook stu = new StudentDaoBook();
+        if(stu.oldUpdateBook(book,false))
+             return true ;
+       else return false ;
+    }
+//
+//    /**
+//     * 确认学生还书
+//     * @param
+//     */
+//    public static void ensure(Student student, Book book, int numeber){
+//        DaoAdministrator.studentReturnBooks(studentReturn);
+//    }
+//
+//    /**
+//     * 给管理员的有同学还书的提示
+//     */
+//    public static void tips(){
+//        int returnPeople = DaoAdministrator.getReturn();
+//        if(returnPeople == 1){
+//            System.out.println("");
+//        }
+//    }
 
     public void setAccount(String account) {
         this.account = account;
