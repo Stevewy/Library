@@ -134,7 +134,7 @@ public class Main {
 
         System.out.println("欢迎来到图书馆");
         Super supers = DaoSuper.viewSelf("root");
-        if(!supers.isOpen()){
+        if(!supers.isOpen()) {
             System.out.println("图书馆已经关闭");
             stop();
         }
@@ -259,7 +259,7 @@ public class Main {
                                         for (int i = 0; i < abook.size(); i++) {
                                             System.out.println((i + 1) + ": " + abook.get(i));
                                         }
-                                        System.out.print("请依次输入你要借的书的编号\n编号:");
+                                        System.out.print("书号:");
                                         int num = in.nextInt();
                                         if (num <= abook.size() && num > 0) {
                                             System.out.print("请输入你要借出的数量\n数量:");
@@ -293,8 +293,44 @@ public class Main {
                                 }
                                 break;
                             case 2:
-                                student.studentToString();
-                                lentBookMenu();
+                                while(true){
+                                    student.studentToString();
+                                    lentBookMenu();
+                                    int number = in.nextInt();
+                                    if(number == 1){
+                                        System.out.print("书名:");
+                                        Book book = a.accurateSearchBookByName(in.nextLine());
+                                        System.out.print("数量:");
+                                        int n = in.nextInt();
+                                        if(book == null){
+                                            System.out.println("书名输入错误");
+                                            break;
+                                        }
+                                        if(n > book.getTotalAmount() - book.getNowAmount() || n < 1){
+                                            System.out.println("数量输入错误");
+                                            break;
+                                        }
+                                        student.returnBook(book, n);
+                                        break;
+                                    }
+                                    else if(number == 2){
+                                        System.out.print("书号:");
+                                        Book book = a.searchBookByBookNumber(in.nextLine());
+                                        System.out.print("数量:");
+                                        int n = in.nextInt();
+                                        if(book == null){
+                                            System.out.println("书号输入错误");
+                                            break;
+                                        }
+                                        if(n > book.getTotalAmount() - book.getNowAmount() || n < 1){
+                                            System.out.println("数量输入错误");
+                                            break;
+                                        }
+                                        student.returnBook(book, n);
+                                        break;
+                                    }
+                                    System.out.println("请输入正确的选项");
+                                }
                                 break;
                             case 3:
                                 in.nextLine();
