@@ -82,7 +82,7 @@ public class DaoSuper {
 
     public static boolean updateSuper(Super sup) {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(sup.getAccount() + ".txt"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super" + sup.getAccount() + ".txt"));
             oos.writeObject(sup);
             return true;
         } catch (FileNotFoundException fe) {
@@ -112,4 +112,15 @@ public class DaoSuper {
         } else
             return null;
     }
+
+    public static void format(){
+        File file = new File("Student");
+        File toDelete ;
+        String[] fileName = file.list();
+        for(String delete:fileName){
+            toDelete = new File(delete);
+            toDelete.delete();
+        }
+    }
+
 }

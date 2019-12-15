@@ -124,17 +124,6 @@ public class DaoAdministrator implements Serializable {
         }
     }
 
-    public static void format(){
-        File file = new File("Student");
-        File toDelete ;
-        String[] fileName = file.list();
-        for(String delete:fileName){
-            toDelete = new File(delete);
-            toDelete.delete();
-        }
-
-    }
-
 //    public static void studentReturnBooks(int studentReturn) {
 //        try{
 //        FileOutputStream fos = new FileOutputStream(new File("judge.txt"));
