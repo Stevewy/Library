@@ -145,8 +145,8 @@ public class Admini implements Serializable{
      */
     public static boolean changeAdminPassword(Admini admini,String oldPassword,String newPassword){
        if(isLegal(newPassword)){
-        if(admini.getAccount().equals(oldPassword)){
-            admini.setAccount(newPassword);
+        if(admini.getPassword().equals(oldPassword)){
+            admini.setPassword(newPassword);
             DaoAdministrator.updateAdmini(admini);
             return true;
           }
