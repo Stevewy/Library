@@ -89,7 +89,7 @@ public class Admini implements Serializable{
         book.setNowAmount(book.getNowAmount()+number);
         book.setTotalAmount(book.getTotalAmount()+number);
         StudentDaoBook sdb=new StudentDaoBook();
-       if(sdb.updateBook(book))
+       if(sdb.updateBook(book,false))
             return true;
        else return false;
     }
@@ -105,7 +105,7 @@ public class Admini implements Serializable{
             book.setTotalAmount(book.getTotalAmount()-number);
             book.setNowAmount(book.getNowAmount()-number);       //总数量和现有数量要同时减去
              StudentDaoBook sdb=new StudentDaoBook();
-             sdb.updateBook(book);
+             sdb.updateBook(book,false);
              return true;
          }
          return false;
@@ -208,7 +208,7 @@ public class Admini implements Serializable{
      */
     public static boolean addBook(Book book){
         StudentDaoBook stu = new StudentDaoBook();
-        if(stu.oldUpdateBook(book,false))
+        if(stu.updateBook(book,false))
              return true ;
        else return false ;
     }

@@ -1,3 +1,4 @@
+import Dao.DaoBook.StudentDaoBook;
 import Dao.DaoUser.DaoAdministrator;
 import Dao.DaoUser.DaoStundent;
 import Dao.DaoUser.DaoSuper;
@@ -39,11 +40,13 @@ public class NewMain {
         menu();
         Scanner in = new Scanner(System.in);
         String account ;
-        String password ;
+        String password;
         String oldPassword;
         String newPassword;
         Student stu ;
         Admini admini;
+        String bookName ;
+        int bookNumber ;
         Book book;
         int choice = in.nextInt();
         switch (choice){
@@ -107,6 +110,7 @@ public class NewMain {
                    System.out.println("删除失败");
                break;
 
+
             case 7:
                 System.out.println("请列入书籍信息");
                 System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
@@ -118,7 +122,21 @@ public class NewMain {
 
 
             case 8:
+                StudentDaoBook stdb = new StudentDaoBook();
                 System.out.println("请输入要删除的书名");
+                bookName = in.next();
+                book = stdb.accurateSearchBookByName(bookName);
+                while (book == null){
+                    System.out.println("请输入准确的书名");
+                    bookName = in.next();
+                    book = stdb.accurateSearchBookByName(bookName);
+                }
+                System.out.println("请输入要删除的数量");
+                bookNumber = in.nextInt();
+                if(Admini.deleteBook(book,bookNumber))
+                    System.out.println("删除成功");
+                else System.out.println("书籍数量不足");
+                break;
 
 
 
