@@ -82,7 +82,7 @@ public class DaoSuper {
 
     public static boolean updateSuper(Super sup) {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(sup.getAccount() + ".txt"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super" + sup.getAccount() + ".txt"));
             oos.writeObject(sup);
             return true;
         } catch (FileNotFoundException fe) {
