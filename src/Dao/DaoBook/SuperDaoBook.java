@@ -9,15 +9,16 @@ import java.io.IOException;
  * @function
  */
 public class SuperDaoBook {
-    public static void format(){
+    public static void formatBook(){
 
-//        try {
-//            FileOutputStream out = new FileOutputStream("Book\\book.txt");
-//            FileOutputStream cout = new FileOutputStream("Book\\coopBook.txt");
-//        }
-//        catch (IOException e){
-//            System.out.println("格式化失败");
-//        }
+        try {
+            FileOutputStream out = new FileOutputStream("Book\\book.txt");
+            FileOutputStream cout = new FileOutputStream("Book\\coopBook.txt");
+        }
+        catch (IOException e){
+            System.out.println("格式化书库失败");
+            return;
+        }
 
         System.out.println("格式化完成,系统即将关闭");
         System.exit(0);

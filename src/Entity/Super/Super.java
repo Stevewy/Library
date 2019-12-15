@@ -34,9 +34,9 @@ public class Super implements SuperInterface, Serializable {
         this.password = password;
     }
 
-    private static boolean open = true;
+    private boolean open = true;
 
-    public static boolean isOpen() {
+    public boolean isOpen() {
         return open;
     }
 
@@ -107,7 +107,7 @@ public class Super implements SuperInterface, Serializable {
     }
 
     public static void format(){
-        SuperDaoBook.format();
+        SuperDaoBook.formatBook();
     }
 
 }

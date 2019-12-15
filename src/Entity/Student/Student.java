@@ -169,7 +169,13 @@ public class Student implements StudentInterface, Serializable {
             int i;
             for(i =0; i < books.size(); i++){
                 if(books.get(i).equals(book)){
-                    this.number.set(i, this.number.get(i) + number);
+                    if(this.number.get(i) > number)
+                        this.number.set(i, this.number.get(i) - number);
+                    else if(this.number.get(i) == number){
+                        this.number.remove(i);
+                        this.books.remove(i);
+                    }
+
                     break;
                 }
             }
@@ -186,7 +192,29 @@ public class Student implements StudentInterface, Serializable {
     }
 
     public void returnBook(Book book, int number){
+        int i = 0;
+        for(; i < books.size(); i++){
+            if(books.get(i).equals(book)){
+                if(this.number.get(i) < number){
+                    System.out.println("你好像没有借这么多本书哦");
+                    return;
+                }
+                else if(this.number.get(i) == number){
+                    books.remove(i);
+                    this.number.remove(i);
+                }
+                else
+                    this.number.set(i, this.number.get(i) - number);
+            }
+        }
+        if(i == books.size()){
+            System.out.println("你好像没有借这本书哦");
+            return;
+        }
 
+        book.setNowAmount(book.getNowAmount() + number);
+        studentDaoBook.updateBook(book, true);
+        DaoStundent.updateStudent(this);
     }
 
     /**

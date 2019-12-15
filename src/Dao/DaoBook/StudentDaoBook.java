@@ -51,6 +51,14 @@ public class StudentDaoBook {
         return bookName;
     }
 
+    public Book accurateSearchBookByName(String name){
+        for(Book i : books){
+            if(i.getName().equals(name))
+                return i;
+        }
+        return null;
+    }
+
     /**
      * 得到指定书号的书
      * @param number 书号
@@ -90,7 +98,10 @@ public class StudentDaoBook {
         int i;
         for(i = 0; i < books.size(); i++){                                           //遍历书库,如果有直接放书,没有判断b,此时i = b.size()
             if(book.equals(books.get(i))){
-                books.set(i,book);
+                if(book.getTotalAmount() == 0)
+                    books.remove(i);
+                else
+                    books.set(i,book);
                 break;
             }
         }
