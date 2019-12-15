@@ -259,14 +259,14 @@ public class Main {
                                         for (int i = 0; i < abook.size(); i++) {
                                             System.out.println((i + 1) + ": " + abook.get(i));
                                         }
-                                        System.out.print("书号:");
+                                        System.out.print("编号:");
                                         int num = in.nextInt();
                                         if (num <= abook.size() && num > 0) {
                                             System.out.print("请输入你要借出的数量\n数量:");
                                             if(student.borrowBook(abook.get(num - 1), in.nextInt()))
                                                 System.out.println("借书成功");
                                             else
-                                                System.out.println("你要借的数量大于图书馆有的数量,请重新输入");
+                                                System.out.println("你要借的数量不符合规定,请重新输入");
 
                                         } else
                                             System.out.println("编号输入错误");
@@ -297,6 +297,7 @@ public class Main {
                                     student.studentToString();
                                     lentBookMenu();
                                     int number = in.nextInt();
+                                    in.nextLine();
                                     if(number == 1){
                                         System.out.print("书名:");
                                         Book book = a.accurateSearchBookByName(in.nextLine());
@@ -327,6 +328,7 @@ public class Main {
                                             break;
                                         }
                                         student.returnBook(book, n);
+                                        System.out.println("还书成功");
                                         break;
                                     }
                                     System.out.println("请输入正确的选项");
