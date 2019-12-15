@@ -205,6 +205,7 @@ public class Student implements StudentInterface, Serializable {
                 }
                 else
                     this.number.set(i, this.number.get(i) - number);
+                break;
             }
         }
         if(i == books.size()){
