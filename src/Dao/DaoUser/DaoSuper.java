@@ -112,4 +112,15 @@ public class DaoSuper {
         } else
             return null;
     }
+
+    public static void format(){
+        File file = new File("Student");
+        File toDelete ;
+        String[] fileName = file.list();
+        for(String delete:fileName){
+            toDelete = new File(delete);
+            toDelete.delete();
+        }
+    }
+
 }
