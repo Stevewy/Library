@@ -114,19 +114,23 @@ public class DaoSuper {
     }
 
     public static void format(){
-        File file = new File("Students");
-        File fileS = new File("Administrator");
+        File file = new File("Administrator");
+        File fileS = new File("Students");
         File toDelete ;
         String[] fileName = file.list();
         String[] fileNameS = fileS.list();
+        if(fileName.length != 0){
         for(String delete : fileName){
             toDelete = new File("Administrator/"+delete);
             toDelete.delete();
         }
+    }
+        if(fileNameS.length != 0){
         for(String deleteS : fileNameS){
             toDelete = new File("Students/"+deleteS);
             toDelete.delete();
         }
+     }
         try{
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super/root.txt"));
         Super sup = new Super();
