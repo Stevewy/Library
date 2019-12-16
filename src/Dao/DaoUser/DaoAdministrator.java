@@ -1,11 +1,12 @@
 package Dao.DaoUser;
 
+import Dao.DaoBook.AdminiDaoBook;
 import Entity.Admini.Admini;
 import Entity.Book.Book;
 import Entity.Student.Student;
-
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 /**
  * @author Zengfanyu
@@ -71,6 +72,9 @@ public class DaoAdministrator implements Serializable {
     }
 
     public static boolean creatStudent(Student student){
+        File file = new File("Students");
+        if(!file.exists())
+            file.mkdir();
         try{
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students/" + student.getAccount() + ".txt"));
         oos.writeObject(student);
@@ -144,6 +148,15 @@ public class DaoAdministrator implements Serializable {
         catch (ClassNotFoundException cle){
             System.out.println("备存时出现错误");
         }
+    }
+    /**
+     *用于还原备份的信息
+     */
+    public static boolean revese(){
+        AdminiDaoBook adb= new AdminiDaoBook();
+        if (adb.revese())
+            return  true;
+        else return  false;
     }
 
 //    public static void studentReturnBooks(int studentReturn) {

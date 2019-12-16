@@ -14,6 +14,9 @@ import java.util.ArrayList;
  */
 public class DaoSuper {
     public static boolean createAdministrator(Admini admini) {
+        File file = new File("Administrator");
+        if(!file.exists())
+            file.mkdir();
         File administrator = new File("Administrator/" + admini.getAccount() + ".txt");
         if (administrator.exists()) {
             return false;
@@ -82,7 +85,7 @@ public class DaoSuper {
 
     public static boolean updateSuper(Super sup) {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super" + sup.getAccount() + ".txt"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super/" + sup.getAccount() + ".txt"));
             oos.writeObject(sup);
             return true;
         } catch (FileNotFoundException fe) {
@@ -114,19 +117,23 @@ public class DaoSuper {
     }
 
     public static void format(){
-        File file = new File("Students");
-        File fileS = new File("Administrator");
+        File file = new File("Administrator");
+        File fileS = new File("Students");
         File toDelete ;
         String[] fileName = file.list();
         String[] fileNameS = fileS.list();
+        if(fileName.length != 0){
         for(String delete : fileName){
             toDelete = new File("Administrator/"+delete);
             toDelete.delete();
         }
+    }
+        if(fileNameS.length != 0){
         for(String deleteS : fileNameS){
             toDelete = new File("Students/"+deleteS);
             toDelete.delete();
         }
+     }
         try{
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Super/root.txt"));
         Super sup = new Super();
