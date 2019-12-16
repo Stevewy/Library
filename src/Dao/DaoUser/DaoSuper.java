@@ -14,6 +14,9 @@ import java.util.ArrayList;
  */
 public class DaoSuper {
     public static boolean createAdministrator(Admini admini) {
+        File file = new File("Administrator");
+        if(!file.exists())
+            file.mkdir();
         File administrator = new File("Administrator/" + admini.getAccount() + ".txt");
         if (administrator.exists()) {
             return false;

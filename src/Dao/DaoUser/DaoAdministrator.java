@@ -4,9 +4,9 @@ import Dao.DaoBook.AdminiDaoBook;
 import Entity.Admini.Admini;
 import Entity.Book.Book;
 import Entity.Student.Student;
-
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 /**
  * @author Zengfanyu
@@ -72,6 +72,9 @@ public class DaoAdministrator implements Serializable {
     }
 
     public static boolean creatStudent(Student student){
+        File file = new File("Students");
+        if(!file.exists())
+            file.mkdir();
         try{
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students/" + student.getAccount() + ".txt"));
         oos.writeObject(student);
