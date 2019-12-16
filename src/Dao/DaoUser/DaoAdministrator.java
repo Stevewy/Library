@@ -1,5 +1,6 @@
 package Dao.DaoUser;
 
+import Dao.DaoBook.AdminiDaoBook;
 import Entity.Admini.Admini;
 import Entity.Book.Book;
 import Entity.Student.Student;
@@ -144,6 +145,15 @@ public class DaoAdministrator implements Serializable {
         catch (ClassNotFoundException cle){
             System.out.println("备存时出现错误");
         }
+    }
+    /**
+     *用于还原备份的信息
+     */
+    public static boolean revese(){
+        AdminiDaoBook adb= new AdminiDaoBook();
+        if (adb.revese())
+            return  true;
+        else return  false;
     }
 
 //    public static void studentReturnBooks(int studentReturn) {
