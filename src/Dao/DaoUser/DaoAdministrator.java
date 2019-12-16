@@ -124,6 +124,28 @@ public class DaoAdministrator implements Serializable {
         }
     }
 
+    /**
+     * 用于备份学生账户信息
+     */
+    public static void copyAccount(){
+        File file = new File("StudentsCopy");
+        try{
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students"));
+        ObjectOutputStream oos = new ObjectOutputStream((new FileOutputStream("StudentsCopy")));
+        Student student ;
+        String fileName[] = file.list();
+        for(String path : fileName){
+            student = (Student)ois.readObject();
+            oos.writeObject(student);
+        }
+        }catch (IOException ioe){
+            System.out.println("打开文件异常");
+        }
+        catch (ClassNotFoundException cle){
+            System.out.println("备存时出现错误");
+        }
+    }
+
 //    public static void studentReturnBooks(int studentReturn) {
 //        try{
 //        FileOutputStream fos = new FileOutputStream(new File("judge.txt"));
