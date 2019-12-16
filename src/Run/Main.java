@@ -284,7 +284,7 @@ public class Main {
                                                 break;
                                             }
                                             else
-                                                System.out.println("你要借的数量大于图书馆有的数量,请重新输入");
+                                                System.out.println("你要借的数量不合法");
 
                                         } else {
                                             System.out.println("你要借的书不存在,是否重新输入,是则按y");
