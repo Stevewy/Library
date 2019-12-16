@@ -89,7 +89,7 @@ public class Student implements StudentInterface, Serializable {
             if(wrongSum == 5)
                 lock = true;
         }
-        else if(isLegal(password)) {
+        else if(isLegal(newPassword)) {
             this.password = newPassword;
             DaoStundent.updateStudent(this);
             return true;

@@ -338,13 +338,15 @@ public class Main {
                                 in.nextLine();
                                 System.out.println("请输入原来密码");
                                 String oldPassword = in.nextLine();
-                                System.out.println("请输入你要修改的密码");
+                                System.out.println("请输入新密码");
                                 String newPassword = in.nextLine();
                                 System.out.println("请再次输入新密码");
                                 if (newPassword.equals(in.nextLine())) {
-                                    if(student.changePassword(oldPassword, newPassword))
+                                    if(student.changePassword(oldPassword, newPassword)){
                                         System.out.println("修改成功,正在关闭系统");
-                                    System.exit(0);
+                                        System.exit(0);
+                                    }
+
                                 } else
                                     System.out.println("两次输入不一致");
                                 break;

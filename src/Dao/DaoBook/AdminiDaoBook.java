@@ -17,13 +17,13 @@ public class AdminiDaoBook extends StudentDaoBook {
 
     public void sortBookAndPrint(){
         Collections.sort(books, new BookCompar());
-        for(int i = 0; i < 5; i++){
-            System.out.println(books.get(i));
-        }
+        for(int i = 0; i < 5; i++)
+            System.out.println(books.get(i) + "  总共借出:" + books.get(i).getLentAmount() + "次");
+
     }
 
     /**
-     * 管理员手动备份书库(由于自动备份,该方法是个摆设)
+     * 管理员手动备份书库
      * @return 复制成功则ture
      */
     public boolean copyBook(){
