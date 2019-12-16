@@ -1,6 +1,7 @@
 package Dao.DaoBook;
 
 import Entity.Book.Book;
+import Run.Main;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,7 +18,12 @@ public class StudentDaoBook {
         try{
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("Book\\book.txt"));
             books = (ArrayList<Book>) in.readObject();
+
             in.close();
+        }
+        catch (EOFException e){
+            System.out.println("书库里似乎没有书,非管理员请退出");
+            Main.stop();
         }
         catch (IOException e){
             System.out.println("没有找到书库");

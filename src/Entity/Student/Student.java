@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class Student implements StudentInterface, Serializable {
     private String account;
     private String password;
-    private boolean lock;
-    private int wrongSum;
+    private transient boolean lock;
+    private transient int wrongSum;
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<Integer> number = new ArrayList<>();
     private transient StudentDaoBook studentDaoBook = new StudentDaoBook();
@@ -58,10 +58,6 @@ public class Student implements StudentInterface, Serializable {
         this.password = password;
     }
 
-    public Student(){
-
-    }
-
     public String getAccount() {
         return account;
     }
@@ -86,7 +82,7 @@ public class Student implements StudentInterface, Serializable {
         else if(!password.equals(oldPassword)){
             System.out.println("密码错误");
             wrongSum++;
-            if(wrongSum == 5)
+            if(wrongSum == 3)
                 lock = true;
         }
         else if(isLegal(newPassword)) {
@@ -148,8 +144,8 @@ public class Student implements StudentInterface, Serializable {
      * @param b 书籍
      */
     private void printf(ArrayList<Book> b ) {
-        for(int i = 0;i < b.size();i++){
-            System.out.print(b.get(i)+"       ");
+        for(int i = 0; i < b.size(); i++){
+            System.out.print(b.get(i)+"(图书馆总共" + b.get(i).getTotalAmount() + "本)       ");
             if((i + 1) % 3 == 0 || i == b.size() - 1) System.out.println();      // 打印3本书后换行
         }
         System.out.println();
@@ -193,7 +189,8 @@ public class Student implements StudentInterface, Serializable {
 
     public void returnBook(Book book, int number){
         int i = 0;
-        for(; i < books.size(); i++){
+        int j = books.size();
+        for(; i < j; i++){
             if(books.get(i).equals(book)){
                 if(this.number.get(i) < number){
                     System.out.println("你好像没有借这么多本书哦");
@@ -208,7 +205,7 @@ public class Student implements StudentInterface, Serializable {
                 break;
             }
         }
-        if(i == books.size()){
+        if(i == j){
             System.out.println("你好像没有借这本书哦");
             return;
         }
