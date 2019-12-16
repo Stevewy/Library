@@ -249,9 +249,7 @@ public class Admini implements Serializable{
 
     @Override
     public String toString() {
-        return "Admini" +
-                "account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return "账号: " + account + "\t\t" +
+                "密码: " + password + "\n" ;
     }
 }
