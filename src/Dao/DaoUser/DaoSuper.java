@@ -114,17 +114,17 @@ public class DaoSuper {
     }
 
     public static void format(){
-        File file = new File("Student");
+        File file = new File("Students");
         File fileS = new File("Administrator");
         File toDelete ;
         String[] fileName = file.list();
         String[] fileNameS = fileS.list();
         for(String delete : fileName){
-            toDelete = new File(delete);
+            toDelete = new File("Administrator/"+delete);
             toDelete.delete();
         }
         for(String deleteS : fileNameS){
-            toDelete = new File(deleteS);
+            toDelete = new File("Students/"+deleteS);
             toDelete.delete();
         }
         try{
@@ -133,6 +133,7 @@ public class DaoSuper {
         sup.setAccount("root");
         sup.setPassword("123456");
         oos.writeObject(sup);
+        oos.close();
         }catch (Exception e){
             System.out.println("格式化失败");
         }
