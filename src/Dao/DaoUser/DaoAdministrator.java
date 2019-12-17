@@ -131,33 +131,73 @@ public class DaoAdministrator implements Serializable {
     /**
      * 用于备份学生账户信息
      */
-    public static void copyAccount(){
+    public static boolean copyAccount(){
         File file = new File("StudentsCopy");
         try{
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students"));
         ObjectOutputStream oos = new ObjectOutputStream((new FileOutputStream("StudentsCopy")));
         Student student ;
         String fileName[] = file.list();
+        if(fileName.length != 0){
         for(String path : fileName){
             student = (Student)ois.readObject();
             oos.writeObject(student);
+        }return true;
         }
+        else {
+            System.out.println("没有账户可备份");
+            return false;}
         }catch (IOException ioe){
-            System.out.println("打开文件异常");
+            System.out.println("读取文件信息文件异常");
+            return false ;
         }
         catch (ClassNotFoundException cle){
-            System.out.println("备存时出现错误");
+            System.out.println("备存时找不到指定文件，出现错误");
+            return false ;
         }
     }
+
+    public static boolean copyBook(){
+        AdminiDaoBook adb = new AdminiDaoBook();
+        if(adb.copyBook())
+            return true;
+        else return false ;
+    }
+
     /**
      *用于还原备份的信息
      */
-    public static boolean revese(){
-        AdminiDaoBook adb= new AdminiDaoBook();
-        if (adb.revese())
-            return  true;
-        else return  false;
+    public static boolean reveseAccount() {
+        File file = new File("Students");
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("StudentsCopy"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students"));
+            Student student;
+            String names[] = file.list();
+            if (names.length != 0) {
+                for (String path : names) {
+                    student = (Student) ois.readObject();
+                    oos.writeObject(student);
+                }return true ;
+            } else {
+                System.out.println("您还没备份过用户文件");
+                return false;
+            }
+        } catch (IOException ioe) {
+            System.out.println("读取文件信息文件异常");
+            return false;
+        } catch (ClassNotFoundException cle) {
+            System.out.println("还原时找不到指定文件，出现错误");
+            return false;
+        }
     }
+    public static boolean reveseBook(){
+         AdminiDaoBook adb = new AdminiDaoBook();
+         if (adb.revese())
+             return true;
+         else
+             return false;
+        }
 
 //    public static void studentReturnBooks(int studentReturn) {
 //        try{
