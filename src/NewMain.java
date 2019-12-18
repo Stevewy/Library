@@ -222,6 +222,8 @@ public class NewMain {
                                         Admini.deleteBook(book, bookNumber);
                                     }
                                     System.out.println("删除成功");
+                                    System.out.println("按Y/y返回主菜单或其余键继续删除");
+                                    inChoice = in.next();
                                 }
                                 if (inChoice.equals("y") || inChoice.equals("Y"))
                                     menu();
