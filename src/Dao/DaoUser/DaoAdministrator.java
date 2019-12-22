@@ -133,6 +133,14 @@ public class DaoAdministrator implements Serializable {
      */
     public static boolean copyAccount(){
         File file = new File("Students");
+        File toDelete = new File("StudentsCopy");
+        String delete[] = toDelete.list();
+        if(delete.length != 0)
+        {
+            for(String name : delete){
+                new File("StudentsCopy/"+name).delete();
+            }
+        }
         try{
         Student student ;
         String fileName[] = file.list();
@@ -172,6 +180,14 @@ public class DaoAdministrator implements Serializable {
      */
     public static boolean reveseAccount() {
         File file = new File("StudentsCopy");
+        File toDelete = new File("Students");
+        String delete[] = toDelete.list();
+        if(delete.length != 0)
+        {
+            for(String name : delete){
+                new File("Students/"+name).delete();
+            }
+        }
         try {
             Student student;
             String names[] = file.list();
