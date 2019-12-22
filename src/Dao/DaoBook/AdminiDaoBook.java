@@ -15,6 +15,10 @@ import java.util.List;
  */
 public class AdminiDaoBook extends StudentDaoBook {
 
+    public ArrayList<Book> getBooks(){
+        return super.books;
+    }
+
     public void sortBookAndPrint(){
         Collections.sort(books, new BookCompar());
         for(int i = 0; i < 5; i++)

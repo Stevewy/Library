@@ -23,8 +23,8 @@ import java.util.TimerTask;
  */
 
 public class Main {
-    private static AdminiDaoBook a = new AdminiDaoBook();
     private static Scanner in = new Scanner(System.in);
+    private static AdminiDaoBook a = new AdminiDaoBook();
 
     private static void loadMenu(){
         System.out.println("******************");
@@ -155,12 +155,16 @@ public class Main {
                 boolean continu = true;
                 System.out.println("请选择你的账户类型");
                 loadMenu();
-                System.out.println("当前最热图书:");
-                a.sortBookAndPrint();
-                x = in.nextInt();
-                if(x == 9){
-                    Super.format();
+                if(a.getBooks() != null){
+                    System.out.println("当前最热图书:");
+                    a.sortBookAndPrint();
                 }
+                else
+                    System.out.println("真的没有书,出问题后果自负");
+                x = in.nextInt();
+                if(x == 9)
+                    Super.format();
+
                 if (x < 1 || x > 3){
                     System.out.println("输入错误,请重新输入");
                     continue;
