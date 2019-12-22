@@ -569,7 +569,7 @@ public class Main {
                                                     book = books.get(deleteChoice - 1) ;
                                                     System.out.println("请输入要删除的数量");
                                                     bookNumber = in.nextInt();
-                                                    while (Admini.deleteBook(book, bookNumber, a) == false && bookNumber < 0){
+                                                    while (Admini.deleteBook(book, bookNumber, a) == false || bookNumber < 0){
                                                         System.out.println("请输入正确的数量");
                                                         bookNumber = in.nextInt() ;
                                                     }
