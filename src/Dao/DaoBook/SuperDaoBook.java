@@ -13,7 +13,7 @@ public class SuperDaoBook {
 
         try {
             FileOutputStream out = new FileOutputStream("Book\\book.txt");
-            FileOutputStream cout = new FileOutputStream("Book\\copyBook.txt");
+//            FileOutputStream cout = new FileOutputStream("Book\\copyBook.txt");
         }
         catch (IOException e){
             System.out.println("格式化书库失败");
