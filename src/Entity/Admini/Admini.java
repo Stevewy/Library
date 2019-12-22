@@ -119,7 +119,7 @@ public class Admini implements Serializable{
         ArrayList<Student>student=DaoAdministrator.viewAllStudentInfo();
         if(student!=null){
             for(Student stu:student){
-              stu.studentToString();
+              stu.superToString();
             }
         }
 }
@@ -211,6 +211,20 @@ public class Admini implements Serializable{
         if(stu.updateBook(book,false))
              return true ;
        else return false ;
+    }
+
+    public static boolean ensure(Book book){
+        Scanner in = new Scanner(System.in) ;
+        System.out.println("您添加的图书为："+book);
+        System.out.println("确认请输入Y/y");
+        String judge = in.next() ;
+        if(judge.equals("Y")||judge.equals("y")){
+            return  true ;
+        }
+        else  {
+            System.out.println("已取消");
+            return  false ;
+        }
     }
 //
 //    /**

@@ -132,23 +132,34 @@ public class DaoAdministrator implements Serializable {
      * 用于备份学生账户信息
      */
     public static boolean copyAccount(){
-        File file = new File("StudentsCopy");
+        File file = new File("Students");
+        File toDelete = new File("StudentsCopy");
+        String delete[] = toDelete.list();
+        if(delete.length != 0)
+        {
+            for(String name : delete){
+                new File("StudentsCopy/"+name).delete();
+            }
+        }
         try{
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students"));
-        ObjectOutputStream oos = new ObjectOutputStream((new FileOutputStream("StudentsCopy")));
         Student student ;
         String fileName[] = file.list();
         if(fileName.length != 0){
         for(String path : fileName){
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students/"+path));
+            ObjectOutputStream oos = new ObjectOutputStream((new FileOutputStream("StudentsCopy/"+path)));
             student = (Student)ois.readObject();
             oos.writeObject(student);
+            ois.close();
+            oos.close();
         }return true;
-        }
+   }
         else {
             System.out.println("没有账户可备份");
-            return false;}
+            return false;
+        }
         }catch (IOException ioe){
-            System.out.println("读取文件信息文件异常");
+            System.out.println("读取文件信息异常");
             return false ;
         }
         catch (ClassNotFoundException cle){
@@ -168,16 +179,26 @@ public class DaoAdministrator implements Serializable {
      *用于还原备份的信息
      */
     public static boolean reveseAccount() {
-        File file = new File("Students");
+        File file = new File("StudentsCopy");
+        File toDelete = new File("Students");
+        String delete[] = toDelete.list();
+        if(delete.length != 0)
+        {
+            for(String name : delete){
+                new File("Students/"+name).delete();
+            }
+        }
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("StudentsCopy"));
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students"));
             Student student;
             String names[] = file.list();
             if (names.length != 0) {
                 for (String path : names) {
+                    ObjectInputStream ois = new ObjectInputStream(new FileInputStream("StudentsCopy/"+path));
+                    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Students/"+path));
                     student = (Student) ois.readObject();
                     oos.writeObject(student);
+                    ois.close();
+                    oos.close();
                 }return true ;
             } else {
                 System.out.println("您还没备份过用户文件");

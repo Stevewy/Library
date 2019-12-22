@@ -89,7 +89,7 @@ public class NewMain {
                 account = in.next();
                 Student student = Admini.searchStudent(account);
                 if(student!=null)
-                    student.studentToString();
+                    student.superToString();
                 else
                     System.out.println("未找到该学生");
                 System.out.println("按任意键返回主菜单");
@@ -100,88 +100,96 @@ public class NewMain {
             case 4:
                 accountMenu();
                 boolean accountStatus = true;
-                int choosing ;
-                    choosing = in.nextInt();
-                    switch (choosing) {
-                        case 1:
-                            System.out.println("请输入账号");
-                            account = in.next();
-                            System.out.println("请输入初始密码");
-                            password = in.next();
-                            if (Admini.createAccount(account, password))
-                                System.out.println("创建成功");
-                            System.out.println("按任意键返回主菜单");
-                            indirect = in.next();
-                            menu();
-                            break;
+                    int choosing;
+                    while (accountStatus) {
+                        choosing = in.nextInt();
+                        switch (choosing) {
+                            case 1:
+                                System.out.println("请输入账号");
+                                account = in.next();
+                                System.out.println("请输入初始密码");
+                                password = in.next();
+                                if (Admini.createAccount(account, password))
+                                    System.out.println("创建成功");
+                                System.out.println("按任意键返回主菜单");
+                                indirect = in.next();
+                                menu();
+                                accountStatus = false ;
+                                break;
 
-                        case 2:
-                            System.out.println("请输入修改的学生账号");
-                            account = in.next();
-                            stu = DaoAdministrator.searchStudent(account);
-                            while (stu == null) {
-                                System.out.println("输入账号有误，请确认后重新输入");
+                            case 2:
+                                System.out.println("请输入修改的学生账号");
                                 account = in.next();
                                 stu = DaoAdministrator.searchStudent(account);
-                            }
-                            System.out.println("请输入新密码");
-                            password = in.next();
-                            if (Admini.changeStudentPassword(stu, password))
-                                System.out.println("修改成功");
-                            System.out.println("按任意键返回主菜单");
-                            indirect = in.next();
-                            menu();
-                            break;
+                                while (stu == null) {
+                                    System.out.println("输入账号有误，请确认后重新输入");
+                                    account = in.next();
+                                    stu = DaoAdministrator.searchStudent(account);
+                                }
+                                System.out.println("请输入新密码");
+                                password = in.next();
+                                if (Admini.changeStudentPassword(stu, password))
+                                    System.out.println("修改成功");
+                                System.out.println("按任意键返回主菜单");
+                                indirect = in.next();
+                                menu();
+                                accountStatus = false ;
+                                break;
 
-                        case 3:
-                            System.out.println("请输入删除的账号");
-                            account = in.next();
-                            stu = DaoAdministrator.searchStudent(account);
-                            while (stu == null) {
-                                System.out.println("输入账号有误，请确认后重新输入");
+                            case 3:
+                                System.out.println("请输入删除的账号");
                                 account = in.next();
                                 stu = DaoAdministrator.searchStudent(account);
-                            }
-                            if (Admini.deleteStudent(account))
-                                System.out.println("删除成功");
-                            else
-                                System.out.println("删除失败");
-                            System.out.println("按任意键返回主菜单");
-                            indirect = in.next();
-                            menu();
-                            break;
+                                while (stu == null) {
+                                    System.out.println("输入账号有误，请确认后重新输入");
+                                    account = in.next();
+                                    stu = DaoAdministrator.searchStudent(account);
+                                }
+                                if (Admini.deleteStudent(account))
+                                    System.out.println("删除成功");
+                                else
+                                    System.out.println("删除失败");
+                                System.out.println("按任意键返回主菜单");
+                                indirect = in.next();
+                                menu();
+                                accountStatus = false ;
+                                break;
 
-                        default:
-                            System.out.println("输入有误，请重新选择");
-                    }
-                    break;
-
+                            default:
+                                System.out.println("输入有误，请重新选择");
+                        }
+                    }   break;
 
                     case 5:
                         bookMenu();
+                        boolean bookStatus = true ;
+                        while (bookStatus){
                         int bookChoose = in.nextInt();
                         switch (bookChoose) {
                             case 1:
                                 System.out.println("请列入书籍信息");
                                 System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
                                 book = new Book(in.next(), in.next(), in.next(), in.nextInt(), in.next(), in.nextInt());
+                                if(Admini.ensure(book)){
                                 if (Admini.addBook(book))
                                     System.out.println("添加成功");
                                 else
-                                    System.out.println("添加失败");
+                                    System.out.println("添加失败");}
                                 System.out.println("按Y/y返回主菜单或按其余键继续添加");
                                 inChoice = in.next();
                                 while (!inChoice.equals("y") && !inChoice.equals("Y")) {
                                     System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
                                     book = new Book(in.next(), in.next(), in.next(), in.nextInt(), in.next(), in.nextInt());
+                                    if(Admini.ensure(book)){
                                     if (Admini.addBook(book))
                                         System.out.println("添加成功");
                                     else
-                                        System.out.println("添加失败");
+                                        System.out.println("添加失败");}
                                     System.out.println("按Y/y返回主菜单或按其余键继续添加");
                                     inChoice = in.next();
                                 }
                                 if (inChoice.equals("y") || inChoice.equals("Y"))
+                                    bookStatus = false ;
                                     menu();
                                 break;
 
@@ -227,8 +235,13 @@ public class NewMain {
                                 }
                                 if (inChoice.equals("y") || inChoice.equals("Y"))
                                     menu();
+                                bookStatus = false ;
                                 break;
+
+                                default:
+                                    System.out.println("输入有误，请重新选择");
                         }
+                     }
                         break;
 
              case 6:
@@ -258,36 +271,41 @@ public class NewMain {
 
             case 7:
                 reveseMenu();
+                boolean reveseStatus = true ;
+                while (reveseStatus){
                 int reveseChoice = in.nextInt() ;
-                switch (reveseChoice){
+                switch (reveseChoice) {
                     case 1:
-                        if(DaoAdministrator.copyAccount() &&
+                        if (DaoAdministrator.copyAccount() &&
                                 DaoAdministrator.copyBook())
                             System.out.println("备份成功");
                         System.out.println("按任意键返回主菜单");
                         indirect = in.next();
+                        reveseStatus = false ;
                         menu();
                         break;
 
                     case 2:
-                        if(DaoAdministrator.reveseAccount() &&
-                        DaoAdministrator.reveseBook())
+                        if (DaoAdministrator.reveseAccount() &&
+                                DaoAdministrator.reveseBook())
                             System.out.println("还原成功");
                         System.out.println("按任意键返回主菜单");
                         indirect = in.next();
+                        reveseStatus = false ;
                         menu();
                         break;
 
+                        default:
+                            System.out.println("输入有误，请重新选择");
                 }
+          }  break;
 
             case 8:
                 System.exit(0);
 
             default:
-                while (choice<1||choice>9){
                     System.out.println("输入有误,请重新输入");
-                    choice = in.nextInt();
-                }
+
             }
         }
     }
