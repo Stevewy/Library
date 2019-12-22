@@ -116,7 +116,6 @@ public class StudentDaoBook {
                 return false;
             books.add(book);
         }
-
         try {
             StorageBook(new ObjectOutputStream(new FileOutputStream("Book\\book.txt")), books);
 //        StorageBook(new ObjectOutputStream(new FileOutputStream("copyBook.txt")), b);         //实时更新

@@ -29,10 +29,11 @@ public class DaoAdministrator implements Serializable {
         File student = new File("Students/" + account + ".txt");
         if (student.exists()){
             try {
+                Student s ;
                 ObjectInputStream in = new ObjectInputStream(new FileInputStream(student));
-                Student stu = (Student) in.readObject();
+                s = (Student) in.readObject();
                 in.close();
-                return stu;
+                return s;
 
             }
             catch (FileNotFoundException  fe) {
@@ -131,7 +132,7 @@ public class DaoAdministrator implements Serializable {
     /**
      * 用于备份学生账户信息
      */
-    public static boolean copyAccount(){
+    public static boolean copyAccount(Student student){
         File file = new File("Students");
         File toDelete = new File("StudentsCopy");
         String delete[] = toDelete.list();
@@ -142,7 +143,6 @@ public class DaoAdministrator implements Serializable {
             }
         }
         try{
-        Student student ;
         String fileName[] = file.list();
         if(fileName.length != 0){
         for(String path : fileName){
@@ -178,7 +178,7 @@ public class DaoAdministrator implements Serializable {
     /**
      *用于还原备份的信息
      */
-    public static boolean reveseAccount() {
+    public static boolean reveseAccount(Student student) {
         File file = new File("StudentsCopy");
         File toDelete = new File("Students");
         String delete[] = toDelete.list();
@@ -189,7 +189,6 @@ public class DaoAdministrator implements Serializable {
             }
         }
         try {
-            Student student;
             String names[] = file.list();
             if (names.length != 0) {
                 for (String path : names) {

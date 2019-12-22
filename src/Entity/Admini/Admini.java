@@ -55,7 +55,7 @@ public class Admini implements Serializable{
      */
     public static boolean deleteStudent(String account) {
         if(DaoAdministrator.studentExist(account)){
-            if( DaoAdministrator.deleteStudent(account)){
+            if(DaoAdministrator.deleteStudent(account)){
                 return true;
             }
             else
@@ -71,9 +71,9 @@ public class Admini implements Serializable{
      * @return
      */
     public static Student searchStudent(String account){
-        Student student= DaoAdministrator.searchStudent(account);
+       Student student= DaoAdministrator.searchStudent(account);
         if(student!=null){
-       return student;
+        return student;
     }
         else
            return  null;
@@ -85,10 +85,9 @@ public class Admini implements Serializable{
      * @param number
      * @return
      */
-    public static boolean addBook(Book book, int number){
+    public static boolean addBook(Book book, int number, StudentDaoBook sdb){
         book.setNowAmount(book.getNowAmount()+number);
         book.setTotalAmount(book.getTotalAmount()+number);
-        StudentDaoBook sdb=new StudentDaoBook();
        if(sdb.updateBook(book,false))
             return true;
        else return false;
@@ -205,8 +204,8 @@ public class Admini implements Serializable{
      * 管理员向书库增加图书
      * @param
      */
-    public static boolean addBook(Book book){
-        StudentDaoBook stu = new StudentDaoBook();
+    public static boolean addBook(Book book, StudentDaoBook stu){
+        stu = new StudentDaoBook();
         if(stu.updateBook(book,false))
              return true ;
        else return false ;

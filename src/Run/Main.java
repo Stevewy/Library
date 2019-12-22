@@ -23,8 +23,8 @@ import java.util.TimerTask;
  */
 
 public class Main {
-    private static AdminiDaoBook a = new AdminiDaoBook();
     private static Scanner in = new Scanner(System.in);
+    private static AdminiDaoBook a = new AdminiDaoBook();
 
     private static void loadMenu(){
         System.out.println("******************");
@@ -155,12 +155,16 @@ public class Main {
                 boolean continu = true;
                 System.out.println("请选择你的账户类型");
                 loadMenu();
-                System.out.println("当前最热图书:");
-                a.sortBookAndPrint();
-                x = in.nextInt();
-                if(x == 9){
-                    Super.format();
+                if(a.getBooks() != null){
+                    System.out.println("当前最热图书:");
+                    a.sortBookAndPrint();
                 }
+                else
+                    System.out.println("真的没有书,出问题后果自负");
+                x = in.nextInt();
+                if(x == 9)
+                    Super.format();
+
                 if (x < 1 || x > 3){
                     System.out.println("输入错误,请重新输入");
                     continue;
@@ -412,7 +416,6 @@ public class Main {
                         String password;
                         String oldPassword;
                         String newPassword;
-                        Student stu ;
                         String bookName ;
                         String inChoice ;
                         String indirect ;
@@ -475,15 +478,15 @@ public class Main {
                                             case 2:
                                                 System.out.println("请输入修改的学生账号");
                                                 account = in.next();
-                                                stu = DaoAdministrator.searchStudent(account);
-                                                while (stu == null) {
+                                                student = DaoAdministrator.searchStudent(account);
+                                                while (student == null) {
                                                     System.out.println("输入账号有误，请确认后重新输入");
                                                     account = in.next();
-                                                    stu = DaoAdministrator.searchStudent(account);
+                                                    student = DaoAdministrator.searchStudent(account);
                                                 }
                                                 System.out.println("请输入新密码");
                                                 password = in.next();
-                                                if (Admini.changeStudentPassword(stu, password))
+                                                if (Admini.changeStudentPassword(student , password))
                                                     System.out.println("修改成功");
                                                 System.out.println("按任意键返回主菜单");
                                                 indirect = in.next();
@@ -494,11 +497,11 @@ public class Main {
                                             case 3:
                                                 System.out.println("请输入删除的账号");
                                                 account = in.next();
-                                                stu = DaoAdministrator.searchStudent(account);
-                                                while (stu == null) {
+                                                student = DaoAdministrator.searchStudent(account);
+                                                while (student == null) {
                                                     System.out.println("输入账号有误，请确认后重新输入");
                                                     account = in.next();
-                                                    stu = DaoAdministrator.searchStudent(account);
+                                                    student = DaoAdministrator.searchStudent(account);
                                                 }
                                                 if (Admini.deleteStudent(account))
                                                     System.out.println("删除成功");
@@ -526,7 +529,7 @@ public class Main {
                                                 System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
                                                 book = new Book(in.next(), in.next(), in.next(), in.nextInt(), in.next(), in.nextInt());
                                                 if(Admini.ensure(book)){
-                                                    if (Admini.addBook(book))
+                                                    if (Admini.addBook(book,a))
                                                         System.out.println("添加成功");
                                                     else
                                                         System.out.println("添加失败");}
@@ -536,7 +539,7 @@ public class Main {
                                                     System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
                                                     book = new Book(in.next(), in.next(), in.next(), in.nextInt(), in.next(), in.nextInt());
                                                     if(Admini.ensure(book)){
-                                                        if (Admini.addBook(book))
+                                                        if (Admini.addBook(book,a))
                                                             System.out.println("添加成功");
                                                         else
                                                             System.out.println("添加失败");}
@@ -640,7 +643,7 @@ public class Main {
                                         int reveseChoice = in.nextInt() ;
                                         switch (reveseChoice) {
                                             case 1:
-                                                if (DaoAdministrator.copyAccount() &&
+                                                if (DaoAdministrator.copyAccount(student) &&
                                                         DaoAdministrator.copyBook())
                                                     System.out.println("备份成功");
                                                 System.out.println("按任意键返回主菜单");
@@ -650,7 +653,7 @@ public class Main {
                                                 break;
 
                                             case 2:
-                                                if (DaoAdministrator.reveseAccount() &&
+                                                if (DaoAdministrator.reveseAccount(student) &&
                                                         DaoAdministrator.reveseBook())
                                                     System.out.println("还原成功");
                                                 System.out.println("按任意键返回主菜单");
