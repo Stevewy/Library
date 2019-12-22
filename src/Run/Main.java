@@ -78,8 +78,8 @@ public class Main {
     }
 
     public static void reveseMenu(){
-        System.out.println("1.书籍备份");
-        System.out.println("2.书籍还原");
+        System.out.println("1.备份");
+        System.out.println("2.还原");
     }
 
     private static void superMenu(){
@@ -663,12 +663,9 @@ public class Main {
 
                                             case 2:
                                                 if (DaoAdministrator.reveseAccount(student) &&
-                                                        DaoAdministrator.reveseBook())
+                                                        DaoAdministrator.reveseBook(a))
                                                     System.out.println("还原成功");
-                                                System.out.println("按任意键返回主菜单");
-                                                indirect = in.next();
-                                                reveseStatus = false ;
-                                                menu();
+                                                stop();
                                                 break;
 
                                             default:

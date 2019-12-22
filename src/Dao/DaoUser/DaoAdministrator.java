@@ -211,9 +211,8 @@ public class DaoAdministrator implements Serializable {
             return false;
         }
     }
-    public static boolean reveseBook(){
-         AdminiDaoBook adb = new AdminiDaoBook();
-         if (adb.revese())
+    public static boolean reveseBook(AdminiDaoBook a){
+         if (a.revese())
              return true;
          else
              return false;
