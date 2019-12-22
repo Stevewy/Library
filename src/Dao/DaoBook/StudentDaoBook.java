@@ -102,6 +102,17 @@ public class StudentDaoBook {
      */
     public boolean updateBook(Book book, boolean b){
         int i;
+        if(books == null && b){
+            ArrayList<Book> newb = new ArrayList<>();
+            newb.add(book);
+            books = newb;
+            System.out.println("书库里添加了一本书");
+            return true;
+        }
+        if(books == null){
+            System.out.println("书库里没有书,已退出");
+            return false;
+        }
         for(i = 0; i < books.size(); i++){                                           //遍历书库,如果有直接放书,没有判断b,此时i = b.size()
             if(book.equals(books.get(i))){
                 if(book.getTotalAmount() == 0)
