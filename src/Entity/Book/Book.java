@@ -115,9 +115,9 @@ public class Book implements Serializable {
     @Override
     public String toString() {
         return "书名:" + name +
-                "   书号:" + bookNumber +
-                "   出版社:" + press +
-                "   种类" + kind +
-                "   目前剩余数量" + nowAmount;
+                "\t\t   书号:" + bookNumber +
+                "\t   出版社:" + press +
+                "\t   种类:" + kind +
+                "\t\t   目前剩余数量" + nowAmount + "\t本";
     }
 }

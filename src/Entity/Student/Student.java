@@ -224,10 +224,10 @@ public class Student implements StudentInterface, Serializable {
             System.out.println("学生:" + account + "  密码是:" + password + "     借了以下书籍");
             for (int i = 0;i < books.size();i++){
                 System.out.println("书名:" + books.get(i).getName() +
-                        "   书号:" + books.get(i).getBookNumber() +
-                        "   出版社:" + books.get(i).getPress() +
-                        "   种类" + books.get(i).getKind() +
-                        "   借了" + number.get(i) + "本");
+                        "\t   书号:" + books.get(i).getBookNumber() +
+                        "\t   出版社:" + books.get(i).getPress() +
+                        "\t   种类" + books.get(i).getKind() +
+                        "\t   借了" + number.get(i) + "本");
                 if((i + 1) % 3 == 0 || i == books.size() - 1) System.out.println();              // 打印3本书后换行
             }
         }
@@ -242,10 +242,10 @@ public class Student implements StudentInterface, Serializable {
             System.out.println("您是:" + account + "     借了以下书籍");
             for (int i = 0;i < books.size();i++){
                 System.out.print("书名:" + books.get(i).getName() +
-                        "   书号:" + books.get(i).getBookNumber() +
-                        "   出版社:" + books.get(i).getPress() +
-                        "   种类" + books.get(i).getKind() +
-                        "   借了" + number.get(i) + "本");
+                        "\t   书号:" + books.get(i).getBookNumber() +
+                        "\t   出版社:" + books.get(i).getPress() +
+                        "\t   种类" + books.get(i).getKind() +
+                        "\t   借了" + number.get(i) + "本");
                 if((i + 1) % 3 == 0 || i == books.size() - 1) System.out.println();              // 打印3本书后换行
                 else System.out.print("          ");
             }
