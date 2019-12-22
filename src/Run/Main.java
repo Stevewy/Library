@@ -746,6 +746,7 @@ public class Main {
 
                                 break;
                             case 4:
+                                in.nextLine();
                                 System.out.print("旧密码:");
                                 String oldpass = in.nextLine();
                                 System.out.print("新密码:");

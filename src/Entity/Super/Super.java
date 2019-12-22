@@ -89,7 +89,7 @@ public class Super implements SuperInterface, Serializable {
         if(!password.equals(oldPassword)){
             System.out.println("密码错误");
         }
-        else if(isLegal(password)) {
+        else if(isLegal(nowPassword)) {
             this.password = nowPassword;
             DaoSuper.updateSuper(this);
             return true;
