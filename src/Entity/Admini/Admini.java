@@ -100,12 +100,11 @@ public class Admini implements Serializable{
      * @param number
      * @return
      */
-    public static boolean deleteBook(Book book,int number){//book是删除的书，number是数量
+    public static boolean deleteBook(Book book, int number, StudentDaoBook a){//book是删除的书，number是数量
          if(book.getNowAmount()>=number){                        //删除的书数量不嫩超过现有的数量
-            book.setTotalAmount(book.getTotalAmount()-number);
-            book.setNowAmount(book.getNowAmount()-number);       //总数量和现有数量要同时减去
-             StudentDaoBook sdb=new StudentDaoBook();
-             sdb.updateBook(book,false);
+             book.setTotalAmount(book.getTotalAmount()-number);
+             book.setNowAmount(book.getNowAmount()-number);       //总数量和现有数量要同时减去
+             a.updateBook(book,false);
              return true;
          }
          return false;
