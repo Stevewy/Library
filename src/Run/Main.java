@@ -93,7 +93,7 @@ public class Main {
 //        },0,10000);
 
 
-//        Book b1 = new Book("1","1","1",2,"中国",3);
+//        Book b1 = new Book("1","1","1",2,"中国",3);//手动加书
 //        Book b2 = new Book("15","2","1",2,"中国",1);
 //        Book b3 = new Book("3","3","1",2,"中国",2);
 //        Book b4 = new Book("4","4","1",2,"中国",3);
@@ -122,18 +122,6 @@ public class Main {
 //        catch (Exception e){
 //            System.out.println("1");
 //        }
-
-//
-//        Book b01 = new Book("1","1","1",2,"中国",5);
-//        Book b02 = new Book("2","2","1",2,"中国",6);
-//        Student s1 = new Student("456","456");
-//        System.out.println(s1);
-//        s.lookAllBook();
-//        if(s.borrowBook(b01,1)) System.out.println("借书成功");
-//        s.studentToString();
-//        s.lookBookByName("1");
-//        s.borrowBook(b01, 1);
-//        s.studentToString();
 
         System.out.println("欢迎来到图书馆");
         Super supers = DaoSuper.viewSelf("root");
@@ -583,10 +571,12 @@ public class Main {
                                         System.out.println("请输入新的密码");
                                         String pass = in.nextLine();
                                         System.out.println("请确认");
-                                        if(in.nextLine().equals(pass))
-                                            supers.changeAdminiPassword(DaoSuper.searchAdministrator(acc), pass);
+                                        if(in.nextLine().equals(pass)){
+                                            if(supers.changeAdminiPassword(DaoSuper.searchAdministrator(acc), pass))
+                                                System.out.println("修改成功");
+                                        }
                                         else
-                                            System.out.println("两次密码不一致");
+                                            System.out.println("两次密码不一致,修改失败");
                                         break;
                                     default:
                                         System.out.println("输入错误,请重新输入");
@@ -594,9 +584,9 @@ public class Main {
                                 break;
                             case 3:
                                 ArrayList<Admini> a = supers.lookAllAdmin();
-                                for(int i = 0; i < a.size(); i++){
+                                for(int i = 0; i < a.size(); i++)
                                     System.out.println(a.get(i));
-                                }
+
                                 break;
                             case 4:
                                 System.out.print("旧密码:");
@@ -604,8 +594,10 @@ public class Main {
                                 System.out.print("新密码:");
                                 String newpass = in.nextLine();
                                 System.out.print("再次输入:");
-                                if(in.nextLine().equals(newpass))
-                                    supers.changePassword(oldpass, newpass);
+                                if(in.nextLine().equals(newpass)) {
+                                    if (supers.changePassword(oldpass, newpass))
+                                        System.out.println("修改成功");
+                                }
                                 else
                                     System.out.println("两次密码不一致");
                                 break;
@@ -613,7 +605,7 @@ public class Main {
                                 back = true;
                                 break;
                             case 6:
-                                supers.format();
+                                Super.format();
                                 break;
                             case 7:
                                 System.exit(0);
