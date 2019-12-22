@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @date 2019/11/4
  * @function
  */
-public class Admini implements Serializable{
+public class  Admini implements Serializable{
     private String account;
     private String password;
    // private static int studentReturn = 1;
