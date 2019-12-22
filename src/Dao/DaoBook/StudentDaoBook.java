@@ -48,6 +48,10 @@ public class StudentDaoBook {
      * @return 一个书的集合
      */
     public ArrayList<Book> searchBookByName(String name){       //用书名得到书
+        if(books == null){
+            System.out.println("书库里没有书,强制退出");
+            System.exit(0);
+        }
         ArrayList<Book> bookName = new ArrayList<>();
         for(int i = 0; i < books.size(); i++){             //遍历查找书名相同
             if(books.get(i).getName().matches(".*" + name + ".*")){
@@ -58,6 +62,10 @@ public class StudentDaoBook {
     }
 
     public Book accurateSearchBookByName(String name){
+        if(books == null){
+            System.out.println("书库里没有书,强制退出");
+            System.exit(0);
+        }
         for(Book i : books){
             if(i.getName().equals(name))
                 return i;
@@ -71,6 +79,10 @@ public class StudentDaoBook {
      * @return 一本书 或者null
      */
     public Book searchBookByBookNumber(String number){                     //用书号得到书
+        if(books == null){
+            System.out.println("书库里没有书,强制退出");
+            System.exit(0);
+        }
         for(int i = 0; i < books.size(); i++){
             if(number.equals(books.get(i).getBookNumber())){                  //遍历查找书号相同的
                 return books.get(i);
@@ -85,6 +97,10 @@ public class StudentDaoBook {
      * @return 一个书的集合
      */
     public ArrayList<Book> searchBookByKind(String kind){             //查找某一种类所有书
+        if(books == null){
+            System.out.println("书库里没有书,强制退出");
+            System.exit(0);
+        }
         ArrayList<Book> bookKind = new ArrayList<>();
         for(int i = 0; i < books.size(); i++){
             if(kind.equals(books.get(i).getKind())){                         //遍历查找书种类相同的
