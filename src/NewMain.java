@@ -10,6 +10,7 @@ import Entity.Super.Super;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -195,39 +196,55 @@ public class NewMain {
 
                             case 2:
                                 StudentDaoBook stdb = new StudentDaoBook();
+                                ArrayList <Book> books = new ArrayList<>();
                                 System.out.println("请输入要删除的书名");
                                 bookName = in.next();
-                                book = stdb.accurateSearchBookByName(bookName);
-                                while (book == null) {
-                                    System.out.println("请输入准确的书名");
-                                    bookName = in.next();
-                                    book = stdb.accurateSearchBookByName(bookName);
-                                }
-                                System.out.println("请输入要删除的数量");
-                                bookNumber = in.nextInt();
-                                while (Admini.deleteBook(book, bookNumber) == false) {
-                                    System.out.println("书籍数量不足，请核实后输入");
+                                books = stdb.searchBookByName(bookName);
+                                if (books != null) {
+                                    System.out.println("请选择要删除的图书");
+                                    for(int i = 1 ; i <= books.size() ; i++ ){
+                                        System.out.println(i+"."+books.get(i-1));
+                                    }
+                                    int deleteChoice = in.nextInt() ;
+                                    book = books.get(deleteChoice - 1) ;
+                                    System.out.println("请输入要删除的数量");
                                     bookNumber = in.nextInt();
-                                    Admini.deleteBook(book, bookNumber);
+                                    while (bookNumber < 0){
+                                        System.out.println("请输入正确的数量");
+                                        bookNumber = in.nextInt() ;
+                                    }
+                                    while (Admini.deleteBook(book, bookNumber) == false) {
+                                        System.out.println("书籍数量不足，请核实后输入");
+                                        bookNumber = in.nextInt();
+                                        Admini.deleteBook(book, bookNumber);
+                                    }
+                                    System.out.println("删除成功");
                                 }
-                                System.out.println("删除成功");
                                 System.out.println("按Y/y返回主菜单或其余键继续删除");
                                 inChoice = in.next();
                                 while (!inChoice.equals("y") && !inChoice.equals("Y")) {
                                     System.out.println("请输入要删除的书名");
                                     bookName = in.next();
-                                    book = stdb.accurateSearchBookByName(bookName);
-                                    while (book == null) {
-                                        System.out.println("请输入准确的书名");
-                                        bookName = in.next();
-                                        book = stdb.accurateSearchBookByName(bookName);
-                                    }
-                                    System.out.println("请输入要删除的数量");
-                                    bookNumber = in.nextInt();
-                                    while (Admini.deleteBook(book, bookNumber) == false) {
-                                        System.out.println("书籍数量不足，请核实后输入");
+                                    books = stdb.searchBookByName(bookName);
+                                    if (books != null) {
+                                        System.out.println("请选择要删除的图书");
+                                        for(int i = 1 ; i <= books.size() ; i++ ){
+                                            System.out.println(i+"."+books.get(i-1));
+                                        }
+                                        int deleteChoice = in.nextInt() ;
+                                        book = books.get(deleteChoice - 1) ;
+                                        System.out.println("请输入要删除的数量");
                                         bookNumber = in.nextInt();
-                                        Admini.deleteBook(book, bookNumber);
+                                        while (bookNumber < 0){
+                                            System.out.println("请输入正确的数量");
+                                            bookNumber = in.nextInt() ;
+                                        }
+                                        while (Admini.deleteBook(book, bookNumber) == false) {
+                                            System.out.println("书籍数量不足，请核实后输入");
+                                            bookNumber = in.nextInt();
+                                            Admini.deleteBook(book, bookNumber);
+                                        }
+                                        System.out.println("删除成功");
                                     }
                                     System.out.println("删除成功");
                                     System.out.println("按Y/y返回主菜单或其余键继续删除");
