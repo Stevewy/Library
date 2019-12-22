@@ -205,7 +205,6 @@ public class Admini implements Serializable{
      * @param
      */
     public static boolean addBook(Book book, StudentDaoBook stu){
-        stu = new StudentDaoBook();
         if(stu.updateBook(book,false))
              return true ;
        else return false ;
