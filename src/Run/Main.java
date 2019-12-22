@@ -26,7 +26,7 @@ public class Main {
     private static AdminiDaoBook a = new AdminiDaoBook();
     private static Scanner in = new Scanner(System.in);
 
-    public static void loadMenu(){
+    private static void loadMenu(){
         System.out.println("******************");
         System.out.println("*1:我是学生      *");
         System.out.println("*2:我是管理员    *");
@@ -34,22 +34,22 @@ public class Main {
         System.out.println("******************");
     }
 
-    public static void studentMenu(){
+    private static void studentMenu(){
         System.out.print("1:借书                 2:还书\n"+
                             "3:修改密码             4:查看目前图书馆的书籍\n" +
                             "5:查看借阅图书         6:更换账号\n" +
                             "7:退出系统\n");
     }
 
-    public static void borrowBookMenu(){
+    private static void borrowBookMenu(){
         System.out.println("1:通过书名来借书      2:通过书号来借书");
     }
 
-    public static void lentBookMenu(){
+    private static void lentBookMenu(){
         System.out.println("1:通过书名来还书      2:通过书号来还书");
     }
 
-    public static void lookBookMenu(){
+    private static void lookBookMenu(){
         System.out.println("1:通过书名来找书      2:通过书号来找书\n" +
                            "3:通过类别来找书      4:查看所有图书");
     }
@@ -82,14 +82,14 @@ public class Main {
         System.out.println("2.书籍还原");
     }
 
-    public static void superMenu(){
+    private static void superMenu(){
         System.out.println("1.开关图书馆        2.修改管理员\n" +
                            "3.查看所有管理员    4.修改自己密码\n" +
                            "5.切换账号          6.格式化\n" +
                            "7.退出系统");
     }
 
-    public static void admin(){
+    private static void admin(){
         System.out.println("1.增加管理员          2.删除管理员\n" +
                            "3.查看管理员密码      4.修改管理员密码");
     }
