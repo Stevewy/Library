@@ -118,7 +118,7 @@ public class StudentDaoBook {
      */
     public boolean updateBook(Book book, boolean b){
         int i;
-        if(books == null && b){
+        if(books == null && !b){
             ArrayList<Book> newb = new ArrayList<>();
             newb.add(book);
             books = newb;
