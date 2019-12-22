@@ -1,3 +1,4 @@
+import Dao.DaoBook.AdminiDaoBook;
 import Dao.DaoBook.StudentDaoBook;
 import Dao.DaoUser.DaoAdministrator;
 import Dao.DaoUser.DaoStundent;
@@ -20,6 +21,7 @@ import java.util.Scanner;
  */
 
 public class NewMain {
+    private static AdminiDaoBook a = new AdminiDaoBook();
     public static void menu(){
         System.out.println("1.查看账户列表");
         System.out.println("2.查看所有账户信息");
@@ -209,14 +211,9 @@ public class NewMain {
                                     book = books.get(deleteChoice - 1) ;
                                     System.out.println("请输入要删除的数量");
                                     bookNumber = in.nextInt();
-                                    while (bookNumber < 0){
+                                    while (Admini.deleteBook(book, bookNumber, a) == false && bookNumber < 0){
                                         System.out.println("请输入正确的数量");
                                         bookNumber = in.nextInt() ;
-                                    }
-                                    while (Admini.deleteBook(book, bookNumber) == false) {
-                                        System.out.println("书籍数量不足，请核实后输入");
-                                        bookNumber = in.nextInt();
-                                        Admini.deleteBook(book, bookNumber);
                                     }
                                     System.out.println("删除成功");
                                 }
@@ -239,10 +236,10 @@ public class NewMain {
                                             System.out.println("请输入正确的数量");
                                             bookNumber = in.nextInt() ;
                                         }
-                                        while (Admini.deleteBook(book, bookNumber) == false) {
+                                        while (Admini.deleteBook(book, bookNumber, a) == false) {
                                             System.out.println("书籍数量不足，请核实后输入");
                                             bookNumber = in.nextInt();
-                                            Admini.deleteBook(book, bookNumber);
+                                            Admini.deleteBook(book, bookNumber, a);
                                         }
                                         System.out.println("删除成功");
                                     }
