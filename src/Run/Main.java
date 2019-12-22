@@ -556,12 +556,16 @@ public class Main {
                                                 System.out.println("请输入要删除的书名");
                                                 bookName = in.next();
                                                 books = a.searchBookByName(bookName);
-                                                if (books != null) {
+                                                if (books.size() != 0) {
                                                     System.out.println("请选择要删除的图书");
                                                     for(int i = 1 ; i <= books.size() ; i++ ){
                                                         System.out.println(i+"."+books.get(i-1));
                                                     }
                                                     int deleteChoice = in.nextInt() ;
+                                                    while( deleteChoice > books.size() || deleteChoice <= 0 ){
+                                                        System.out.println("输入有误，请重新选择");
+                                                        deleteChoice = in.nextInt() ;
+                                                    }
                                                     book = books.get(deleteChoice - 1) ;
                                                     System.out.println("请输入要删除的数量");
                                                     bookNumber = in.nextInt();
@@ -571,18 +575,23 @@ public class Main {
                                                     }
                                                     System.out.println("删除成功");
                                                 }
+                                                if (books.size() == 0) System.out.println("找不到该图书");
                                                 System.out.println("按Y/y返回主菜单或其余键继续删除");
                                                 inChoice = in.next();
                                                 while (!inChoice.equals("y") && !inChoice.equals("Y")) {
                                                     System.out.println("请输入要删除的书名");
                                                     bookName = in.next();
                                                     books = a.searchBookByName(bookName);
-                                                    if (books != null) {
+                                                    if (books.size() != 0) {
                                                         System.out.println("请选择要删除的图书");
                                                         for(int i = 1 ; i <= books.size() ; i++ ){
                                                             System.out.println(i+"."+books.get(i-1));
                                                         }
                                                         int deleteChoice = in.nextInt() ;
+                                                        while( deleteChoice > books.size() || deleteChoice <= 0 ){
+                                                            System.out.println("输入有误，请重新选择");
+                                                            deleteChoice = in.nextInt() ;
+                                                        }
                                                         book = books.get(deleteChoice - 1) ;
                                                         System.out.println("请输入要删除的数量");
                                                         bookNumber = in.nextInt();
@@ -596,7 +605,7 @@ public class Main {
                                                             Admini.deleteBook(book, bookNumber,a);
                                                         }
                                                         System.out.println("删除成功");
-                                                    }
+                                                    }if (books.size() == 0) System.out.println("找不到该图书");
                                                     System.out.println("按Y/y返回主菜单或其余键继续删除");
                                                     inChoice = in.next();
                                                 }
