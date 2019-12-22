@@ -21,7 +21,7 @@ public class AdminiDaoBook extends StudentDaoBook {
 
     public void sortBookAndPrint(){
         Collections.sort(books, new BookCompar());
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 5 && i < books.size(); i++)
             System.out.println("\t" + books.get(i) + "\t   总共借出:" + books.get(i).getLentAmount() + "次");
 
     }
