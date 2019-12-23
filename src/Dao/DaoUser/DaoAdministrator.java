@@ -67,8 +67,8 @@ public class DaoAdministrator implements Serializable {
             return null;
         }
         catch (Exception e){
-            System.out.println("文件读取错误");
-            return null;
+            System.out.println("找不到相应文件");
+            return null ;
         }
     }
 
@@ -135,6 +135,8 @@ public class DaoAdministrator implements Serializable {
     public static boolean copyAccount(Student student){
         File file = new File("Students");
         File toDelete = new File("StudentsCopy");
+        if (!toDelete.exists())
+            toDelete.mkdir() ;
         String delete[] = toDelete.list();
         if(delete.length != 0)
         {
@@ -142,22 +144,18 @@ public class DaoAdministrator implements Serializable {
                 new File("StudentsCopy/"+name).delete();
             }
         }
-        try{
         String fileName[] = file.list();
         if(fileName.length != 0){
-        for(String path : fileName){
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students/"+path));
-            ObjectOutputStream oos = new ObjectOutputStream((new FileOutputStream("StudentsCopy/"+path)));
-            student = (Student)ois.readObject();
-            oos.writeObject(student);
-            ois.close();
-            oos.close();
-        }return true;
-   }
-        else {
-            System.out.println("没有账户可备份");
-            return false;
-        }
+        try {
+            for (String path : fileName) {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Students/" + path));
+                ObjectOutputStream oos = new ObjectOutputStream((new FileOutputStream("StudentsCopy/" + path)));
+                student = (Student) ois.readObject();
+                oos.writeObject(student);
+                ois.close();
+                oos.close();
+            }
+            return true;
         }catch (IOException ioe){
             System.out.println("读取文件信息异常");
             return false ;
@@ -166,7 +164,11 @@ public class DaoAdministrator implements Serializable {
             System.out.println("备存时找不到指定文件，出现错误");
             return false ;
         }
-    }
+     }else {
+            System.out.println("没有账户可备份");
+            return  false ;
+        }
+}
 
     public static boolean copyBook(){
         AdminiDaoBook adb = new AdminiDaoBook();
@@ -181,6 +183,9 @@ public class DaoAdministrator implements Serializable {
     public static boolean reveseAccount(Student student) {
         File file = new File("StudentsCopy");
         File toDelete = new File("Students");
+        if (!toDelete.exists()){
+            toDelete.mkdir() ;
+        }
         String delete[] = toDelete.list();
         if(delete.length != 0)
         {

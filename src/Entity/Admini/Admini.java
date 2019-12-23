@@ -129,7 +129,7 @@ public class  Admini implements Serializable{
        ArrayList<Student>student=DaoAdministrator.viewAllStudentInfo();
         if(student!=null){
             for(Student stu:student){
-                System.out.println(stu.getAccount());
+                System.out.println("账号："+stu.getAccount());
             }
         }
     }
