@@ -21,18 +21,6 @@ public class Student implements StudentInterface, Serializable {
     private ArrayList<Integer> number = new ArrayList<>();
     private transient StudentDaoBook studentDaoBook;
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public void setLock(boolean lock) {
-        this.lock = lock;
-    }
-
-    public void setWrongSum(int wrongSum) {
-        this.wrongSum = wrongSum;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -41,16 +29,8 @@ public class Student implements StudentInterface, Serializable {
         this.studentDaoBook = studentDaoBook;
     }
 
-    public void setBooks(ArrayList<Book> books) {
-        this.books = books;
-    }
-
     public ArrayList<Integer> getNumber() {
         return number;
-    }
-
-    public void setNumber(ArrayList<Integer> number) {
-        this.number = number;
     }
 
     public Student(String account, String password) {

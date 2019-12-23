@@ -57,32 +57,12 @@ public class Book implements Serializable {
         return lentAmount;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
     public String getKind() {
         return kind;
     }
 
     public int getNowAmount() {
         return nowAmount;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBookNumber(String bookNumber) {
-        this.bookNumber = bookNumber;
-    }
-
-    public void setPress(String press) {
-        this.press = press;
-    }
-
-    public void setKind(String kind) {
-        this.kind = kind;
     }
 
     public void setTotalAmount(int totalAmount) {
@@ -95,10 +75,6 @@ public class Book implements Serializable {
 
     public void setLentAmount(int lentAmount) {
         this.lentAmount = lentAmount;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     @Override
@@ -118,6 +94,7 @@ public class Book implements Serializable {
                 "\t\t   书号:" + bookNumber +
                 "\t   出版社:" + press +
                 "\t   种类:" + kind +
-                "\t\t   目前剩余数量" + nowAmount + "\t本";
+                "\t\t   价格:" + price +
+                "\t   目前剩余数量" + nowAmount + "\t本";
     }
 }
