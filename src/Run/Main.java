@@ -9,6 +9,7 @@ import Entity.Book.Book;
 import Entity.Student.Student;
 import Entity.Super.Super;
 
+import java.io.Console;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -27,11 +28,13 @@ public class Main {
     private static AdminiDaoBook a = new AdminiDaoBook();
 
     private static void loadMenu(){
-        System.out.println("******************");
-        System.out.println("*1:我是学生      *");
-        System.out.println("*2:我是管理员    *");
-        System.out.println("*3:我是图书馆馆长*");
-        System.out.println("******************");
+        System.out.println();
+        System.out.println("          ******************");
+        System.out.println("          *1:我是   学生   *");
+        System.out.println("          *2:我是  管理员  *");
+        System.out.println("          *3:我是图书馆馆长*");
+        System.out.println("          ******************");
+        System.out.println();
     }
 
     private static void studentMenu(){
@@ -100,7 +103,7 @@ public class Main {
 
     public static void stop(){
         System.out.println("按任意键回到主菜单");
-        in.next();
+        in.nextLine();
     }
 
     public static void main(String[] args){
@@ -139,6 +142,11 @@ public class Main {
                     Super.format();
                 x = sx.charAt(0) - 48;
 
+                if((x < 2 || x > 3) && !supers.isOpen()){
+                    System.out.println("图书馆已关闭,学生不允许进入");
+                    stop();
+                    continue;
+                }
                 if (x < 1 || x > 3 || sx.length() > 1){
                     System.out.println("输入错误,请重新输入");
                     continue;
@@ -146,10 +154,11 @@ public class Main {
                 in.nextLine();
                 System.out.println("请输入你的账号和密码");
                 System.out.print("账号:");
-                String account = in.nextLine();
-
+                String account = in.next();
+                in.nextLine();
                 System.out.print("密码:");
-                String password = in.nextLine();
+                Console con = System.console();
+                String password = new String(con.readPassword());
 
                 boolean find = false;
                 switch (x) {

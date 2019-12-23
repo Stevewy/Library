@@ -125,7 +125,7 @@ public class Student implements StudentInterface, Serializable {
      */
     private void printf(ArrayList<Book> b ) {
         for(int i = 0; i < b.size(); i++)
-            System.out.print(b.get(i)+"(图书馆总共" + b.get(i).getTotalAmount() + "本)       ");
+            System.out.println(b.get(i)+"(图书馆总共" + b.get(i).getTotalAmount() + "本)");
 
         System.out.println();
     }
@@ -197,7 +197,7 @@ public class Student implements StudentInterface, Serializable {
         else{
             System.out.println("学生:" + account + "  密码是:" + password + "     借了以下书籍");
             for (int i = 0;i < books.size();i++)
-                System.out.println(books.get(i) + String.format("    借了%2d  本", number.get(i)));
+                System.out.println(books.get(i) + "     " + String.format("借了%2d  本", number.get(i)));
         }
     }
 //"书名:" + books.get(i).getName() +
@@ -213,7 +213,7 @@ public class Student implements StudentInterface, Serializable {
         else{
             System.out.println("您是:" + account + "     借了以下书籍");
             for (int i = 0;i < books.size();i++)
-                System.out.println(books.get(i) + String.format("借了%2d  本", number.get(i)));
+                System.out.println(books.get(i) + "     " + String.format("借了%2d  本", number.get(i)));
 
         }
     }
