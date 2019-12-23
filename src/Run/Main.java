@@ -443,15 +443,13 @@ public class Main {
                             choice = in.nextInt();
                             switch (choice){
                                 case 1:
-                                    System.out.println("学生列表如下");
-                                    Admini.viewAllStudentFile();
+                                    Admini.viewAllStudentFile() ;
                                     System.out.println("按任意键返回主菜单");
                                     indirect = in.next();
                                     menu();
                                     break;
 
                                 case 2:
-                                    System.out.println("所有学生情况如下");
                                     Admini.viewAllStudentInfo();
                                     System.out.println("按任意键返回主菜单");
                                     indirect = in.next();
@@ -540,6 +538,7 @@ public class Main {
                                     while (bookStatus){
                                         int bookChoose = in.nextInt();
                                         switch (bookChoose) {
+
                                             case 1:
                                                 System.out.println("请列入书籍信息");
                                                 System.out.println("书名      ISBN号       出版社     总数量     类别      价格");
@@ -696,7 +695,7 @@ public class Main {
                                     back = true;
                                     break;
                                 default:
-                                    System.out.println("输入有误,请重新输入");
+                                    System.out.println("输入有误,请重新选择");
 
                             }
                         }

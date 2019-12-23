@@ -44,6 +44,7 @@ public class DaoSuper {
 
     public static ArrayList<Admini> viewAllAdministratorInfo() {
         File file = new File("Administrator");
+        if(!file.exists()){return null;}
         String info[] = file.list();
         ArrayList<Admini> adm = new ArrayList<>();
         try {
