@@ -94,6 +94,6 @@ public class Book implements Serializable {
 //            return String.format("书名:%-15s\t\t\t书号:%-15s     出版社:%-10s     种类:%-10s\t价格:%-5d     目前剩余数量%-5d本", name, bookNumber, press, kind, price, nowAmount);
 //        else if(name.length() <= 9)
 //            return String.format("书名:%-15s\t\t书号:%-15s     出版社:%-10s     种类:%-10s\t价格:%-5d     目前剩余数量%-5d本", name, bookNumber, press, kind, price, nowAmount);
-        return String.format("书名:%-15s\t书号:%-15s     出版社:%-15s    种类:%-8s    价格:%-5d     目前剩余数量%5d", name, bookNumber, press, kind, price, nowAmount);
+        return String.format("书名:%-15s\t书号:%-15s     出版社:%-15s\t种类:%-5s  \t价格:%-5d     目前剩余数量%5d", name, bookNumber, press, kind, price, nowAmount);
     }
 }
