@@ -358,7 +358,7 @@ public class Main {
                                 }
                                 break;
                             case 3:
-                                in.nextLine();
+                                in.nextLine(); //
                                 System.out.println("请输入原来密码");
                                 String oldPassword = in.nextLine();
                                 System.out.println("请输入新密码");
