@@ -42,16 +42,19 @@ public class Main {
     }
 
     private static void borrowBookMenu(){
-        System.out.println("1:通过书名来借书      2:通过书号来借书");
+        System.out.println("1:通过书名来借书      2:通过书号来借书\n" +
+                "3.返回上一级");
     }
 
     private static void lentBookMenu(){
-        System.out.println("1:通过书名来还书      2:通过书号来还书");
+        System.out.println("1:通过书名来还书      2:通过书号来还书\n" +
+                "3.返回上一级");
     }
 
     private static void lookBookMenu(){
         System.out.println("1:通过书名来找书      2:通过书号来找书\n" +
-                           "3:通过类别来找书      4:查看所有图书");
+                           "3:通过类别来找书      4:查看所有图书\n" +
+                "5.返回上一级");
     }
 
     public static void menu(){
@@ -91,7 +94,8 @@ public class Main {
 
     private static void admin(){
         System.out.println("1.增加管理员          2.删除管理员\n" +
-                           "3.查看管理员密码      4.修改管理员密码");
+                           "3.查看管理员密码      4.修改管理员密码\n" +
+                "5.返回上一级");
     }
 
     public static void stop(){
@@ -300,8 +304,11 @@ public class Main {
                                             if (in.next().charAt(0) != 'y')
                                                 break;
                                         }
-                                    } else
-                                        System.out.println("输入错误,请重新输入");
+                                    } else if(x1 == 3){
+                                        System.out.println("已返回上一级");
+                                        break;
+                                    }
+                                    System.out.println("请输入正确的选项");
                                 }
                                 break;
                             case 2:
@@ -342,6 +349,9 @@ public class Main {
                                         }
                                         student.returnBook(book, n);
                                         System.out.println("还书成功");
+                                        break;
+                                    }else if(number == 3){
+                                        System.out.println("已返回上一级");
                                         break;
                                     }
                                     System.out.println("请输入正确的选项");
@@ -393,6 +403,12 @@ public class Main {
                                     case 4:
                                         student.lookAllBook();
                                         stop();
+                                        break;
+                                    case 5:
+                                        System.out.println("已返回上一级");
+                                        break;
+                                    default:
+                                        System.out.println("请输入正确的选项");
                                 }
                                 break;
                             case 5:
@@ -740,6 +756,9 @@ public class Main {
                                         }
                                         else
                                             System.out.println("两次密码不一致,修改失败");
+                                        break;
+                                    case 5:
+                                        System.out.println("已返回上一级");
                                         break;
                                     default:
                                         System.out.println("输入错误,请重新输入");
