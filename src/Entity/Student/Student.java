@@ -165,12 +165,7 @@ public class Student implements StudentInterface, Serializable {
             int i;
             for(i =0; i < books.size(); i++){
                 if(books.get(i).equals(book)){
-                    if(this.number.get(i) > number)
-                        this.number.set(i, this.number.get(i) - number);
-                    else if(this.number.get(i) == number){
-                        this.number.remove(i);
-                        this.books.remove(i);
-                    }
+                    this.number.set(i, this.number.get(i) + number);
 
                     break;
                 }

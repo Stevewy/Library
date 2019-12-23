@@ -766,9 +766,11 @@ public class Main {
                                 break;
                             case 3:
                                 ArrayList<Admini> a = supers.lookAllAdmin();
-                                for(int i = 0; i < a.size(); i++)
-                                    System.out.println(a.get(i));
-
+                                if (a != null)
+                                    for(int i = 0; i < a.size(); i++)
+                                        System.out.println(a.get(i));
+                                else
+                                    System.out.println("没有管理员");
                                 break;
                             case 4:
                                 in.nextLine();
