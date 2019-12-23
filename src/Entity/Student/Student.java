@@ -19,7 +19,7 @@ public class Student implements StudentInterface, Serializable {
     private transient int wrongSum;
     private ArrayList<Book> books = new ArrayList<>();
     private ArrayList<Integer> number = new ArrayList<>();
-    private transient StudentDaoBook studentDaoBook = new StudentDaoBook();
+    private transient StudentDaoBook studentDaoBook;
 
     public void setAccount(String account) {
         this.account = account;
