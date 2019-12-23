@@ -90,11 +90,6 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "书名:" + name +
-                "\t\t   书号:" + bookNumber +
-                "\t   出版社:" + press +
-                "\t   种类:" + kind +
-                "\t\t   价格:" + price +
-                "\t   目前剩余数量" + nowAmount + "\t本";
+        return String.format("书名:%15s\t\t书号:%15s\t\t出版社:%10s\t\t种类:%10s\t\t价格:%5d\t\t目前剩余数量%5d\t\t本", name, bookNumber, press, kind, price, nowAmount);
     }
 }

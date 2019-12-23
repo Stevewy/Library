@@ -126,7 +126,7 @@ public class Student implements StudentInterface, Serializable {
     private void printf(ArrayList<Book> b ) {
         for(int i = 0; i < b.size(); i++){
             System.out.print(b.get(i)+"(图书馆总共" + b.get(i).getTotalAmount() + "本)       ");
-            if((i + 1) % 3 == 0 || i == b.size() - 1) System.out.println();      // 打印3本书后换行
+            if((i + 1) % 2 == 0 || i == b.size() - 1) System.out.println();      // 打印3本书后换行
         }
         System.out.println();
     }
