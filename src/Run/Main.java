@@ -719,8 +719,9 @@ public class Main {
                                     case 2:
                                         in.nextLine();
                                         System.out.println("请输入要删除管理员的账号");
-                                        if(supers.deleteAdmini(supers.searchAdmini(in.nextLine())))
-                                            System.out.println("删除成功");
+                                        admini = supers.searchAdmini(in.nextLine());
+                                        if (admini != null && supers.deleteAdmini(admini))
+                                                System.out.println("删除成功");
                                         else
                                             System.out.println("删除失败");
                                         break;
