@@ -134,11 +134,12 @@ public class Main {
                 }
                 else
                     System.out.println("真的没有书,出问题后果自负");
-                x = in.nextInt();
-                if(x == 9)
+                String sx = in.next();
+                if(sx.compareTo("$lib-init") == 0)
                     Super.format();
+                x = sx.charAt(0) - 48;
 
-                if (x < 1 || x > 3){
+                if (x < 1 || x > 3 || sx.length() > 1){
                     System.out.println("输入错误,请重新输入");
                     continue;
                 }
