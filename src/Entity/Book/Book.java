@@ -90,6 +90,10 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("书名:%15s\t\t书号:%15s\t\t出版社:%10s\t\t种类:%10s\t\t价格:%5d\t\t目前剩余数量%5d\t\t本", name, bookNumber, press, kind, price, nowAmount);
+        if(name.length() <= 4)
+            return String.format("书名:%-15s\t\t\t书号:%-15s     出版社:%-10s     种类:%-10s\t价格:%-5d     目前剩余数量%-5d本", name, bookNumber, press, kind, price, nowAmount);
+        else if(name.length() <= 9)
+            return String.format("书名:%-15s\t\t书号:%-15s     出版社:%-10s     种类:%-10s\t价格:%-5d     目前剩余数量%-5d本", name, bookNumber, press, kind, price, nowAmount);
+        return String.format("书名:%-15s\t书号:%-15s     出版社:%-10s     种类:%-10s\t价格:%-5d     目前剩余数量%-5d本", name, bookNumber, press, kind, price, nowAmount);
     }
 }
