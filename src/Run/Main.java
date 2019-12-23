@@ -444,15 +444,13 @@ public class Main {
                             switch (choice){
                                 case 1:
                                     Admini.viewAllStudentFile() ;
-                                    System.out.println("按任意键返回主菜单");
-                                    indirect = in.next();
+                                    stop();
                                     menu();
                                     break;
 
                                 case 2:
                                     Admini.viewAllStudentInfo();
-                                    System.out.println("按任意键返回主菜单");
-                                    indirect = in.next();
+                                    stop();
                                     menu();
                                     break;
 
@@ -464,8 +462,7 @@ public class Main {
                                         student.superToString();
                                     else
                                         System.out.println("未找到该学生");
-                                    System.out.println("按任意键返回主菜单");
-                                    indirect = in.next();
+                                    stop();
                                     menu();
                                     break;
 
@@ -483,8 +480,7 @@ public class Main {
                                                 password = in.next();
                                                 if (Admini.createAccount(account, password))
                                                     System.out.println("创建成功");
-                                                System.out.println("按任意键返回主菜单");
-                                                indirect = in.next();
+                                                stop();
                                                 menu();
                                                 accountStatus = false ;
                                                 break;
@@ -502,8 +498,7 @@ public class Main {
                                                 password = in.next();
                                                 if (Admini.changeStudentPassword(student , password))
                                                     System.out.println("修改成功");
-                                                System.out.println("按任意键返回主菜单");
-                                                indirect = in.next();
+                                                stop();
                                                 menu();
                                                 accountStatus = false ;
                                                 break;
@@ -521,8 +516,7 @@ public class Main {
                                                     System.out.println("删除成功");
                                                 else
                                                     System.out.println("删除失败");
-                                                System.out.println("按任意键返回主菜单");
-                                                indirect = in.next();
+                                                stop();
                                                 menu();
                                                 accountStatus = false ;
                                                 break;
@@ -654,8 +648,7 @@ public class Main {
                                     newPassword = in.next();
                                     if (Admini.changeAdminPassword(admini, oldPassword, newPassword)){
                                         System.out.println("修改成功");
-                                        System.out.println("按任意键返回主菜单");
-                                        indirect = in.next();
+                                        stop();
                                         menu();
                                     }
                                     break;
@@ -670,8 +663,7 @@ public class Main {
                                                 if (DaoAdministrator.copyAccount(student) &&
                                                         DaoAdministrator.copyBook())
                                                     System.out.println("备份成功");
-                                                System.out.println("按任意键返回主菜单");
-                                                indirect = in.next();
+                                                stop();
                                                 reveseStatus = false ;
                                                 menu();
                                                 break;

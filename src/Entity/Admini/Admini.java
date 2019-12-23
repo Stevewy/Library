@@ -120,6 +120,7 @@ public class  Admini implements Serializable{
               stu.superToString();
             }
         }
+        else System.out.println("目前没有用户");
 }
 
     /**
@@ -132,6 +133,7 @@ public class  Admini implements Serializable{
                 System.out.println("账号："+stu.getAccount());
             }
         }
+        else System.out.println("目前没有用户");
     }
 
     /**
