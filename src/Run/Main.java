@@ -100,7 +100,7 @@ public class Main {
     }
 
     public static void stop(){
-        System.out.println("按任意键回到主菜单");
+        System.out.println("按回车返回主菜单");
         in.nextLine();
         in.nextLine();
     }
