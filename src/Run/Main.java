@@ -10,8 +10,6 @@ import Entity.Student.Student;
 import Entity.Super.Super;
 
 import java.io.Console;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
@@ -28,13 +26,13 @@ public class Main {
     private static AdminiDaoBook a = new AdminiDaoBook();
 
     private static void loadMenu(){
-        System.out.println();
-        System.out.println("          ******************");
-        System.out.println("          *1:我是   学生   *");
-        System.out.println("          *2:我是  管理员  *");
-        System.out.println("          *3:我是图书馆馆长*");
-        System.out.println("          ******************");
-        System.out.println();
+        System.out.println("       *   ******************   *");
+        System.out.println("       *   ******************   *");
+        System.out.println("       *   *1:我是   学生   *   *");
+        System.out.println("       *   *2:我是  管理员  *   *");
+        System.out.println("       *   *3:我是图书馆馆长*   *");
+        System.out.println("       *   ******************   *");
+        System.out.println("       *   ******************   *");
     }
 
     private static void studentMenu(){
@@ -61,13 +59,13 @@ public class Main {
     }
 
     public static void menu(){
-        System.out.println("1.查看账户列表");
+        System.out.print("1.查看账户列表    ");
         System.out.println("2.查看所有账户信息");
-        System.out.println("3.查找学生");
+        System.out.print("3.查找学生        ");
         System.out.println("4.管理账户");
-        System.out.println("5.管理图书");
+        System.out.print("5.管理图书        ");
         System.out.println("6.修改密码");
-        System.out.println("7.备份和还原");
+        System.out.print("7.备份和还原      ");
         System.out.println("8.退出系统");
         System.out.println("9.切换账号");
     }
@@ -103,6 +101,7 @@ public class Main {
 
     public static void stop(){
         System.out.println("按任意键回到主菜单");
+        in.nextLine();
         in.nextLine();
     }
 
@@ -154,9 +153,9 @@ public class Main {
                 in.nextLine();
                 System.out.println("请输入你的账号和密码");
                 System.out.print("账号:");
-                String account = in.next();
-                in.nextLine();
+                String account = in.nextLine();
                 System.out.print("密码:");
+//                String password = in.nextLine();
                 Console con = System.console();
                 String password = new String(con.readPassword());
 
