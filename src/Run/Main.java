@@ -10,6 +10,7 @@ import Entity.Student.Student;
 import Entity.Super.Super;
 
 import java.io.Console;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
@@ -39,7 +40,7 @@ public class Main {
         System.out.print("1:借书                 2:还书\n"+
                             "3:修改密码             4:查看目前图书馆的书籍\n" +
                             "5:查看借阅图书         6:更换账号\n" +
-                            "7:退出系统\n");
+                            "7:退出系统             8.清屏\n");
     }
 
     private static void borrowBookMenu(){
@@ -67,7 +68,7 @@ public class Main {
         System.out.println("6.修改密码");
         System.out.print("7.备份和还原      ");
         System.out.println("8.退出系统");
-        System.out.println("9.切换账号");
+        System.out.println("9.切换账号        10.清屏");
     }
 
     public static void accountMenu(){
@@ -90,7 +91,7 @@ public class Main {
         System.out.println("1.开关图书馆        2.修改管理员\n" +
                            "3.查看所有管理员    4.修改自己密码\n" +
                            "5.切换账号          6.格式化\n" +
-                           "7.退出系统");
+                           "7.退出系统          8.清屏\n");
     }
 
     private static void admin(){
@@ -103,6 +104,27 @@ public class Main {
         System.out.println("按回车返回主菜单");
         in.nextLine();
         in.nextLine();
+    }
+
+
+    public static void cls()
+    {
+        try {
+            new ProcessBuilder("cmd", "/c", "cls")
+                    //将 ProcessBuilder 对象的输出管道和 Java 的进程进行关联，这个函数的返回值也是一个 ProcessBuilder
+                    .inheritIO()
+                    //开始执行 ProcessBuilder 中的命令
+                    .start()
+                    //等待 ProcessBuilder 中的清屏命令执行完毕
+                    //如果不等待则会出现清屏代码后面的输出被清掉的情况
+                    .waitFor(); // 清屏命令
+        }////新建一个 ProcessBuilder，其要执行的命令是 cmd.exe，参数是 /c 和 cls
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args){
@@ -400,6 +422,9 @@ public class Main {
                                 System.out.println("系统正常退出");
                                 System.exit(0);
                                 break;
+                            case 8:
+                                cls();
+                                break;
                             default:
                                 System.out.println("输入错误,请重新输入");
                                 break;
@@ -664,6 +689,9 @@ public class Main {
                                 case 9:
                                     back = true;
                                     break;
+                                case 10:
+                                    cls();
+                                    break;
                                 default:
                                     System.out.println("输入有误,请重新选择");
 
@@ -764,6 +792,9 @@ public class Main {
                                 break;
                             case 7:
                                 System.exit(0);
+                                break;
+                            case 8:
+                                cls();
                                 break;
                             default:
                                 System.out.println("输入错误,请重新输入");
