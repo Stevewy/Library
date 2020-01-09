@@ -16,7 +16,7 @@ public class StudentDaoBook {
 
     public StudentDaoBook(){
         try{
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("Book\\book.txt"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("Book//book.txt"));
             books = (ArrayList<Book>) in.readObject();
 
             in.close();

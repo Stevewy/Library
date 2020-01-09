@@ -138,12 +138,14 @@ public class Main {
 
         System.out.println("欢迎来到图书馆");
         Super supers = DaoSuper.viewSelf("root");
-        if(!supers.isOpen()) {
-            System.out.println("图书馆已经关闭");
-            stop();
+        if(supers != null){
+            if(!supers.isOpen()) {
+                System.out.println("图书馆已经关闭");
+                stop();
+            }
         }
-        int x;
 
+        int x;
         boolean back = false;
         Student student = null;
         Admini admini = null;
@@ -177,9 +179,9 @@ public class Main {
                 System.out.print("账号:");
                 String account = in.nextLine();
                 System.out.print("密码:");
-                String password = in.nextLine();
-//                Console con = System.console();
-//                String password = new String(con.readPassword());
+//                String password = in.nextLine();
+                Console con = System.console();
+                String password = new String(con.readPassword());
 
                 boolean find = false;
                 switch (x) {
