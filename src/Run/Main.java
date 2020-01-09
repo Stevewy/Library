@@ -691,6 +691,7 @@ public class Main {
                                     break;
                                 case 10:
                                     cls();
+                                    menu();
                                     break;
                                 default:
                                     System.out.println("输入有误,请重新选择");
