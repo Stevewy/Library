@@ -88,7 +88,7 @@ public class Main {
     }
 
     private static void superMenu(){
-        System.out.println("1.开关图书馆        2.修改管理员\n" +
+        System.out.print("1.开关图书馆        2.修改管理员\n" +
                            "3.查看所有管理员    4.修改自己密码\n" +
                            "5.切换账号          6.格式化\n" +
                            "7.退出系统          8.清屏\n");
@@ -177,9 +177,9 @@ public class Main {
                 System.out.print("账号:");
                 String account = in.nextLine();
                 System.out.print("密码:");
-//                String password = in.nextLine();
-                Console con = System.console();
-                String password = new String(con.readPassword());
+                String password = in.nextLine();
+//                Console con = System.console();
+//                String password = new String(con.readPassword());
 
                 boolean find = false;
                 switch (x) {
