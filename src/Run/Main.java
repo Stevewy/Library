@@ -143,7 +143,8 @@ public class Main {
                 System.out.println("图书馆已经关闭");
                 stop();
             }
-        }
+        }else
+            System.out.println("文件损坏,部分文件丢失,建议格式化");
 
         int x;
         boolean back = false;
@@ -165,7 +166,7 @@ public class Main {
                     Super.format();
                 x = sx.charAt(0) - 48;
 
-                if((x < 2 || x > 3) && !supers.isOpen()){
+                if((x < 2 || x > 3) && supers!= null && !supers.isOpen()){
                     System.out.println("图书馆已关闭,学生不允许进入");
                     stop();
                     continue;
